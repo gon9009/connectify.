@@ -1,0 +1,16 @@
+@use "../abstracts/variables" as v;
+
+body {
+  background-color: v.$dark-2;
+  color: v.$light-1;
+  min-height: 100vh;
+  font-family: v.$font-inter;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 1440px; // 1440px 제한
+  padding: 0 2rem; 
+  margin: 0 auto;
+}
