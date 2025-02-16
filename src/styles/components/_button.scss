@@ -1,0 +1,6 @@
+@use "../abstracts/mixins" as m;
+@use "../abstracts/variables" as v;
+
+.btn {
+  @include m.base-button(v.$light-1, v.$dark-1);
+}

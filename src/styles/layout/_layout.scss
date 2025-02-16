@@ -1,0 +1,23 @@
+@use "../abstracts/mixins" as m;
+
+// 기본 레이아웃
+.main {
+  @include m.flex-center;
+  min-height: 100vh;
+
+  // 인증 페이지 레이아웃
+  .auth-container {
+    @include m.flex-column;
+    width: 440px;
+    padding: 1rem;
+    
+    &__logo {
+      display: block;
+      width: 160px;
+      height: 100%;
+      margin-bottom: 1.2rem;
+      border-bottom: 3px dotted #4a4a4a; // 점선 스타일의 회색 밑줄
+      padding-bottom: 10px; // 로고와 점선 사이 간격
+    }
+  }
+}
