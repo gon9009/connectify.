@@ -1,10 +1,12 @@
-import AuthForm from "../../components/features/auth/AuthForm";
+import SignupForm from "../../components/features/auth/SignupForm";
+import { SignupFormData } from "../../lib/validation/auth";
 
-// 회원가입 페이지
 const Signup = () => {
-  return (
-    <AuthForm />
-  );
+  const handleSubmit = (data: SignupFormData) => {
+    console.log(data);
+  };
+
+  return <SignupForm onSubmit={handleSubmit} />;
 };
 
 export default Signup;

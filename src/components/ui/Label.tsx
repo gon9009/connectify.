@@ -1,12 +1,15 @@
 interface LabelProps {
-  children: React.ReactNode,
+  htmlFor: string;
+  children: React.ReactNode;
+  className?: string;
 }
 
-// props 에 대한 정의 
-const Label = ({children}:LabelProps) => {
+const Label = ({ htmlFor, children, className }: LabelProps) => {
   return (
-    <label>{children}</label>
-  )
-}
+    <label htmlFor={htmlFor} className={`label ${className || ""}`}>
+      {children}
+    </label>
+  );
+};
 
-export default Label
+export default Label;

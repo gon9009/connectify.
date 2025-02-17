@@ -1,18 +1,12 @@
-import AuthForm from "../../components/features/auth/AuthForm";
-import logo from "../../assets/logo.png";
+import SigninForm from "../../components/features/auth/SigninForm";
+import { SigninFormData } from "../../lib/validation/auth";
 
-// 로그인 페이지
 const Signin = () => {
-  return (
-    <>
-      <img
-        src={logo}
-        alt="Connectify 로고"
-        className="logo auth-container__logo"
-      />
-      <AuthForm />
-    </>
-  );
+  const handleSubmit = (data: SigninFormData) => {
+    console.log(data);
+  };
+
+  return <SigninForm onSubmit={handleSubmit} />;
 };
 
 export default Signin;
