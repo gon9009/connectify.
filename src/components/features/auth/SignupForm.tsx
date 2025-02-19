@@ -6,13 +6,13 @@ import Input from "../../ui/Input";
 import Label from "../../ui/Label";
 import Button from "../../ui/Button";
 import logo from "../../../assets/logo.png";
-import { REGISTER_FIELDS, REGISTER_META } from "../../../constants/auth";
+import { REGISTER_FIELDS, REGISTER_META } from "../../../constants/formField";
 
 interface SignupFormProps {
   onSubmit: (data: SignupFormData) => void;
 }
 
-const SignupForm = ({ onSubmit}: SignupFormProps) => {
+const SignupForm = ({ onSubmit }: SignupFormProps) => {
   const {
     register,
     handleSubmit,
@@ -34,7 +34,9 @@ const SignupForm = ({ onSubmit}: SignupFormProps) => {
               id={field.name}
               type={field.type}
               placeholder={`${field.label}을 입력해주세요`}
-              className={`auth-form__input ${errors[field.name] ? "error" : ""}`}
+              className={`auth-form__input ${
+                errors[field.name] ? "error" : ""
+              }`}
               {...register(field.name)}
               error={errors[field.name]?.message}
             />

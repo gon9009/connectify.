@@ -6,7 +6,7 @@ import Input from "../../ui/Input";
 import Label from "../../ui/Label";
 import Button from "../../ui/Button";
 import logo from "../../../assets/logo.png";
-import { LOGIN_FIELDS, LOGIN_META } from "../../../constants/auth";
+import { LOGIN_FIELDS, LOGIN_META } from "../../../constants/formField";
 
 interface SigninFormProps {
   onSubmit: (data: SigninFormData) => void;

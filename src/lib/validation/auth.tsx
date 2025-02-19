@@ -2,11 +2,18 @@ import z from "zod";
 
 // 회원가입 유효성 검증
 export const SignupValidation = z.object({
+  username: z
+    .string()
+    .min(3, { message: "Username은 최소 3글자 이상이어야 합니다." })
+    .max(20, { message: "Username은 20글자를 넘을 수 없습니다." })
+    .regex(/^[a-zA-Z0-9_]+$/, {
+      message: "Username은 영문, 숫자, 그리고 밑줄(_)만 허용합니다.",
+    }),
   name: z
     .string()
     .min(3, { message: "이름은 최소 3글자 이상이어야 합니다" })
     .max(50, { message: "이름이 너무 깁니다" })
-    .regex(/^[가-힣a-zA-Z\s]+$/, {
+    .regex(/^[가-힣a-zA-Z0-9\s]+$/, {
       message: "이름에 특수문자를 포함할 수 없습니다",
     }),
   email: z
@@ -29,7 +36,6 @@ export const SigninValidation = z.object({
     .string()
     .min(8, { message: "비밀번호는 최소 8글자 이상이어야 합니다." }),
 });
-
 
 export type SignupFormData = z.infer<typeof SignupValidation>;
 export type SigninFormData = z.infer<typeof SigninValidation>;

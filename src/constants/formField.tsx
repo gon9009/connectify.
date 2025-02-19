@@ -1,12 +1,16 @@
-import { Field, AuthMeta } from "../types/auth";
+import { SigninField, SignupField,AuthMeta } from "../types/types";
 
-// 회원가입 필드
-// Field[] 타입은 Field 인터페이스의 배열을 의미
-export const REGISTER_FIELDS: Field[] = [
+// 회원가입 필드 Field 타입의 요소만 포함 가능
+export const REGISTER_FIELDS: SignupField[] = [
   {
     name: "name",
     label: "Name",
     type: "text",
+  },
+  {
+    name:"username",
+    label:"Username",
+    type:"text"
   },
   {
     name: "email",
@@ -28,8 +32,8 @@ export const REGISTER_META: AuthMeta = {
   linkText: "로그인",
 };
 
-// 로그인 필드
-export const LOGIN_FIELDS: Field[] = [
+// 로그인 필드, Field 타입의 요소만 포함 가능능
+export const LOGIN_FIELDS: SigninField[] = [
   {
     name: "email",
     label: "Email",
