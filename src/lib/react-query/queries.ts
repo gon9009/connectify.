@@ -26,8 +26,9 @@ export const useSignInAccount = () => {
 };
 
 // 로그아웃 mutation
-export const useSignOutAccount = () => {
+export const useSignOutAccount = (options = {}) => {
   return useMutation({
     mutationFn: signOutAccount,
+    ...options,
   });
 };

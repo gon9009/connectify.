@@ -11,7 +11,7 @@ const PublicLayout = () => {
   }
 
   return (
-    <main className="main">
+    <main className="auth-main">
       <div className="auth-container">
         <Outlet />
       </div>

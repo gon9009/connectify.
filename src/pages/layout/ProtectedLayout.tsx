@@ -1,9 +1,12 @@
 import { useUserContext } from "../../context/AuthContext";
 import { Outlet, Navigate } from "react-router-dom";
 import Loader from "../../components/ui/Loader";
+import Sidebar from "../../components/layout/Sidebar";
+import MobileHeader from "../../components/layout/MobileHeader";
+import MobileMenu from "../../components/layout/MobileMenu";
 
 const ProtectedLayout = () => {
-  const { user, isLoading } = useUserContext(); // isAuthenticated 제거
+  const { user, isLoading } = useUserContext();
 
   // 1. 로딩 상태 처리
   if (isLoading) {
@@ -21,9 +24,16 @@ const ProtectedLayout = () => {
 
   // 3. 인증된 상태
   return (
-    <main className="main">
-      <Outlet />
-    </main>
+    <div className="main">
+      <MobileHeader />
+      <div className="content-wrapper">
+        <Sidebar />
+        <main className="main-content">
+          {/* <Outlet /> */}
+        </main>
+        {/* <MobileMenu /> */}
+      </div>
+    </div>
   );
 };
 

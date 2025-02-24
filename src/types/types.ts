@@ -1,7 +1,7 @@
 import { SignupFormData,SigninFormData } from "../lib/validation/auth";
 
 // ============== 인증 관련 타입 =============================================
-export type NavLink = {
+export type SidebarNavLink = {
   imgURL: string;
   route: string;
   label: string;

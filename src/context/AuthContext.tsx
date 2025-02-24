@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     checkAuth();
   }, []);
 
+
   // 사용자 인증 체크 함수 (T / F) 를 반환하도록
   const checkAuth = async () => {
     setIsLoading(true);

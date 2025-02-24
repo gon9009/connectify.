@@ -23,7 +23,7 @@ const SigninForm = ({ onSubmit }: SigninFormProps) => {
 
   return (
     <>
-      <img src={logo} alt="Connectify 로고" className="auth-container__logo" />
+      <img src={logo} alt="Connectify 로고" className="logo auth-container__logo" />
       <form className="auth-form" onSubmit={handleSubmit(onSubmit)}>
         {LOGIN_FIELDS.map((field) => (
           <div key={field.name} className="auth-form__container">

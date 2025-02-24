@@ -8,7 +8,6 @@ import {
 import { NewUser } from "../../types/types";
 
 // 회원가입 프로세스 
-// 회원가입 체크 !!!!
 export async function createUserAccount(user: NewUser) {
   try {
     // 1. Appwrite 계정 생성
@@ -19,7 +18,7 @@ export async function createUserAccount(user: NewUser) {
       user.name
     );
 
-    if (!newAccount) throw Error ("계정 생성 실패패");
+    if (!newAccount) throw Error ("계정 생성 실패");
 
     // 2. 사용자 아바타 URL 생성, string 을 반환한다다
     const avatarUrl = avatars.getInitials(user.name);
@@ -82,6 +81,7 @@ export async function signOutAccount() {
     return session;
   } catch (error) {
     console.log(error);
+    throw error; 
   }
 }
 
