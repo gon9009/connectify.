@@ -5,7 +5,6 @@ import { SigninFormData, SigninValidation } from "../../../lib/validation/auth";
 import Input from "../../ui/Input";
 import Label from "../../ui/Label";
 import Button from "../../ui/Button";
-import logo from "../../../assets/logo.png";
 import { LOGIN_FIELDS, LOGIN_META } from "../../../constants/formField";
 
 interface SigninFormProps {
@@ -23,7 +22,7 @@ const SigninForm = ({ onSubmit }: SigninFormProps) => {
 
   return (
     <>
-      <img src={logo} alt="Connectify 로고" className="logo auth-container__logo" />
+      <img src="/assets/logo.png" alt="Connectify 로고" className="logo auth-container__logo" />
       <form className="auth-form" onSubmit={handleSubmit(onSubmit)}>
         {LOGIN_FIELDS.map((field) => (
           <div key={field.name} className="auth-form__container">

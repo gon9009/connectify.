@@ -4,27 +4,27 @@ export const sidebarLinks:SidebarNavLink[]= [
   {
     imgURL: "/assets/home.svg",
     route: "/",
-    label: "Home",
+    label: "홈",
   },
   {
     imgURL: "/assets/wallpaper.svg",
     route: "/explore",
-    label: "Explore",
+    label: "검색",
   },
   {
     imgURL: "/assets/people.svg",
     route: "/all-users",
-    label: "People",
+    label: "사용자",
   },
   {
     imgURL: "/assets/saved.svg",
     route: "/saved",
-    label: "Saved",
+    label: "저장된 게시물",
   },
   {
-    imgURL: "/assets/create",
+    imgURL: "/assets/create.svg",
     route: "/create-post",
-    label: "Create Post",
+    label: "만들기",
   },
 ];
 

@@ -25,7 +25,7 @@ const ProtectedLayout = () => {
   // 3. 인증된 상태
   return (
     <div className="main">
-      <MobileHeader />
+      {/* <MobileHeader /> */}
       <div className="content-wrapper">
         <Sidebar />
         <main className="main-content">

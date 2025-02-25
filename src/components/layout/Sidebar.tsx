@@ -4,16 +4,13 @@ import { sidebarLinks } from "../../constants/sidebar";
 import Loader from "../ui/Loader";
 import { useUserContext } from "../../context/AuthContext";
 import { INITIAL_USER } from "../../constants/authState";
-import logo from "../../assets/images/logo.svg";
 import Button from "../ui/Button";
-import logout from "../../assets/logout.svg";
-import placeholder from "../../assets/placeholder.svg";
 import { useSignOutAccount } from "../../lib/react-query/queries";
 
 // 사이드바 로고 컴포넌트
 const SidebarLogo = () => (
   <Link to="/" className="sidebar__logo">
-    <img src={logo} alt="logo" />
+    <img src="/assets/logo.png" alt="logo" />
   </Link>
 );
 
@@ -28,11 +25,12 @@ const SidebarUserProfile = ({
   if (isLoading || !user.id) {
     return <Loader />;
   }
+  console.log(`${user.imageUrl} 이미지`);
 
   return (
     <Link to={`/profile/${user.id}`} className="sidebar__profile">
       <img
-        src={user.imageUrl || placeholder}
+        src={user.imageUrl || "/assets/placeholder.svg"}
         alt="프로필"
         className="sidebar__profile-img"
       />
@@ -55,13 +53,16 @@ const SidebarNavItem = ({
   const isActive = pathname === link.route;
   return (
     <li key={link.label} className="sidebar__menu-item">
-      <NavLink to={link.route} className="sidebar__menu-item-link">
+      <NavLink
+        to={link.route}
+        className={`sidebar__menu-item-link ${isActive ? "active" : ""}`}
+      >
         <img
           src={link.imgURL}
           alt={link.label}
-          className={`sidebar__menu-item-icon ${isActive ? "active" : ""}`}
+          className={`sidebar__menu-item-icon `}
         />
-        {link.label}
+        <p className="sidebar__menu-itme-description">{link.label}</p>
       </NavLink>
     </li>
   );
@@ -75,8 +76,8 @@ const SidebarLogoutButton = ({
 }) => {
   return (
     <Button className="sidebar__logout-btn" onClick={handleSignout}>
-      <img src={logout} alt="로그아웃" />
-      <p className="sidebar__logout-btn-description">Logout</p>
+      <img src="/assets/logout.svg" alt="로그아웃" />
+      <p className="sidebar__logout-btn-description">로그아웃</p>
     </Button>
   );
 };

@@ -7,6 +7,7 @@ import {
 } from "../appwrite/appwriteConfig";
 import { NewUser } from "../../types/types";
 
+
 // 회원가입 프로세스 
 export async function createUserAccount(user: NewUser) {
   try {
