@@ -1,4 +1,5 @@
 import { SignupFormData,SigninFormData } from "../lib/validation/auth";
+import { Models } from "appwrite";
 
 // ============== 인증 관련 타입 =============================================
 export type SidebarNavLink = {
@@ -82,3 +83,23 @@ export interface AuthMeta {
   link: string;
   linkText: string;
 }
+
+// ----- 포스트 관련 타입 ------------------
+
+export type Post = Models.Document & {
+  $id: string;
+  creator: {
+    $id: string; // 유저 고유 ID (Users 컬렉션과 연결)
+    name: string; // 유저 이름
+    imageUrl?: string; // 유저 프로필 이미지 (선택적)
+  };
+  likes: string[]; // 좋아요를 누른 유저 ID 배열
+  caption: string; // 게시물 내용
+  tags: string[]; // 태그 리스트
+  imageUrl: string; // 게시물 이미지 URL
+  imageId: string; // 이미지 파일의 고유 ID
+  location?: string; // 위치 정보 (선택적)
+  save: string; // 저장한 유저 ID (Save 컬렉션과 연결)
+};
+
+
