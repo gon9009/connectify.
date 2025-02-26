@@ -9,9 +9,11 @@ const MobileHeaderLogo = () => {
   return (
     <Link to="/">
       <img
+        width={130}
+        height={325}
         src="/assets/logo.png"
         alt="logo"
-        className="logo mobile-header__logo"
+        className="mobile-header__logo"
       />
     </Link>
   );
@@ -25,7 +27,7 @@ const MobileLogoutButton = ({
 }) => {
   return (
     <Button className="mobile-header__logout" onClick={handleSignout}>
-      <img src="/assets/logout.svg" alt="로그아웃" />
+      <img width={10} height={15} src="/assets/logout.svg" alt="로그아웃" />
     </Button>
   );
 };
@@ -35,9 +37,11 @@ const MobileUserProfile = ({ user }: { user: typeof INITIAL_USER }) => {
   return (
     <Link to={`/profile/${user.id}`} className="mobile-header__profile">
       <img
+        width={32}
+        height={32}
         src={user.imageUrl || "/assets/placeholder.svg"}
         alt="프로필"
-        className="sidebar__profile-img"
+        className="mobile-header__profile-img"
       />
     </Link>
   );
@@ -60,10 +64,10 @@ const MobileHeader = () => {
 
   return (
     <section className="mobile-header">
-      <div className="mobile-header-container">
+      <div className="mobile-header__wrapper">
         <MobileHeaderLogo />
-        <div className="mobile-hedaer__actions">
-          <MobileLogoutButton handleSignout={handleSignout} />
+        <div className="mobile-header__actions">
+          {/* <MobileLogoutButton handleSignout={handleSignout} /> */}
           <MobileUserProfile user={user} />
         </div>
       </div>

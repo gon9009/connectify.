@@ -5,6 +5,7 @@ interface ButtonProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
+// base 버튼 참조 
 const Button = ({
   children,
   type = "submit",
