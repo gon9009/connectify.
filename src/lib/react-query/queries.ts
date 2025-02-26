@@ -4,7 +4,7 @@ import {
   signOutAccount,
 } from "../appwrite/api";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation,useQuery } from "@tanstack/react-query";
 import { NewUser } from "../../types/types";
 
 // 회원가입 mutation
@@ -32,3 +32,5 @@ export const useSignOutAccount = (options = {}) => {
     ...options,
   });
 };
+
+

@@ -13,8 +13,6 @@ const SidebarLogo = () => (
     <img src="/assets/logo.png" alt="logo" />
   </Link>
 );
-
-// 사이드바 사용자 프로필 컴포넌트
 const SidebarUserProfile = ({
   user,
   isLoading,
@@ -25,7 +23,6 @@ const SidebarUserProfile = ({
   if (isLoading || !user.id) {
     return <Loader />;
   }
-  console.log(`${user.imageUrl} 이미지`);
 
   return (
     <Link to={`/profile/${user.id}`} className="sidebar__profile">
