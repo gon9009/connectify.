@@ -31,8 +31,8 @@ const ProtectedLayout = () => {
         <main className="main-content">
           {/* <Outlet /> */}
         </main>
-        {/* <MobileMenu /> */}
       </div>
+      <MobileMenu />
     </div>
   );
 };
