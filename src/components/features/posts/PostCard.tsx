@@ -4,6 +4,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";
 import { useUserContext } from "../../../context/AuthContext";
 import { Post } from "../../../types/types";
+import PostStats from "./PostStats";
 
 dayjs.locale("ko");
 dayjs.extend(relativeTime);
@@ -87,6 +88,7 @@ const PostCard = ({ post }: { post: Post }) => {
         caption={post.caption}
         tags={post.tags}
       />
+      <PostStats post={post} userId={user.id} />
     </div>
   );
 };

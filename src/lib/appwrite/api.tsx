@@ -7,6 +7,7 @@ import {
 } from "../appwrite/appwriteConfig";
 import { NewUser } from "../../types/types";
 
+// ========================================================== 인증 / 보안 API ==========================================================================================
 
 // 회원가입 프로세스 
 export async function createUserAccount(user: NewUser) {
@@ -108,4 +109,81 @@ export async function getCurrentUser() {
   }
 }
 
+// ===================================================== 게시물 (Post)/ 유저 (User) API ================================================================================
+// 좋아요 상태 업데이트 (postId에 해당하는 게시물의 likes 배열을 업데이트)
+export async function likePost(postId: string, likesArray: string[]) {
+  try {
+    const updatedPost = await databases.updateDocument(
+      appwriteConfig.databaseId, // 데이터베이스 ID 지정
+      appwriteConfig.postCollectionId, // 게시물 컬렉션 ID 지정
+      postId, // 업데이트할 게시물 ID
+      {
+        likes: likesArray, // 좋아요를 누른 사용자 ID 배열을 업데이트
+      }
+    );
 
+    if (!updatedPost) throw Error; // 업데이트 실패 시 예외 발생
+
+    return updatedPost; // 업데이트된 게시물 반환
+  } catch (error) {
+    console.log(error); // 에러 로깅
+  }
+}
+
+// 게시물 저장 (사용자가 특정 게시물을 저장할 때 실행)
+export async function savePost(userId: string, postId: string) {
+  try {
+    const updatedPost = await databases.createDocument(
+      appwriteConfig.databaseId, // 데이터베이스 ID 지정
+      appwriteConfig.savesCollectionId, // 저장된 게시물 컬렉션 ID 지정
+      ID.unique(), // 새로운 문서 ID 생성
+      {
+        user: userId, // 저장한 사용자 ID
+        post: postId, // 저장된 게시물 ID
+      }
+    );
+
+    if (!updatedPost) throw Error; // 저장 실패 시 예외 발생
+
+    return updatedPost; // 생성된 저장 문서 반환
+  } catch (error) {
+    console.log(error); // 에러 로깅
+  }
+}
+
+// 저장된 게시물 삭제 (사용자가 저장한 게시물을 제거할 때 실행)
+export async function deleteSavedPost(savedRecordId: string) {
+  try {
+    const statusCode = await databases.deleteDocument(
+      appwriteConfig.databaseId, // 데이터베이스 ID 지정
+      appwriteConfig.savesCollectionId, // 저장된 게시물 컬렉션 ID 지정
+      savedRecordId // 삭제할 저장 문서의 ID
+    );
+
+    if (!statusCode) throw Error; // 삭제 실패 시 예외 발생
+
+    return { status: "Ok" }; // 삭제 성공 시 상태 반환
+  } catch (error) {
+    console.log(error); // 에러 로깅
+  }
+}
+
+
+//===========
+
+
+export async function getRecentPosts() {
+  try {
+    const posts = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      [Query.orderDesc("$createdAt"), Query.limit(20)]
+    );
+
+    if (!posts) throw Error;
+
+    return posts;
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -93,13 +93,13 @@ export type Post = Models.Document & {
     name: string; // 유저 이름
     imageUrl?: string; // 유저 프로필 이미지 (선택적)
   };
-  likes: string[]; // 좋아요를 누른 유저 ID 배열
+  likes: { $id: string }[]; // 🔥 관계(Relationship) 필드이므로 객체 배열!
   caption: string; // 게시물 내용
   tags: string[]; // 태그 리스트
   imageUrl: string; // 게시물 이미지 URL
   imageId: string; // 이미지 파일의 고유 ID
   location?: string; // 위치 정보 (선택적)
-  save: string; // 저장한 유저 ID (Save 컬렉션과 연결)
+  save?: { $id: string }; // 🔥 관계(Relationship) 데이터이므로 객체 형태
 };
 
 

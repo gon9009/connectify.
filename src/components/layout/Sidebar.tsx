@@ -13,6 +13,8 @@ const SidebarLogo = () => (
     <img src="/assets/logo.png" alt="logo" />
   </Link>
 );
+
+
 const SidebarUserProfile = ({
   user,
   isLoading,
