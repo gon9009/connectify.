@@ -14,12 +14,10 @@ const PostList = ({
   if (isLoading) {
     return <Loader />;
   }
-  if (!posts || posts.length === 0) {
-    return <p>No posts found.</p>;
-  }
+
   return (
     <ul>
-      {posts.map((post) => (
+      {posts?.map((post) => (
         <li key={post.$id}>
           <PostCard post={post} />
         </li>
@@ -66,21 +64,21 @@ const Home = () => {
   } = useGetUsers(10);
 
   // 에러 처리
-  if (isErrorPosts || isErrorCreators) {
-    return <p>에러발생 ! </p>;
+  if (isErrorCreators || isErrorPosts) {
+    return <p>Error</p>;
   }
 
   return (
     <div className="home">
       <div className="home__container">
         <div className="home__posts">
-          <h2 className="home__post-title">Home Feed</h2>
-          {/* <PostList posts={postsData?.documents} isLoading={isPostLoading} /> */}
+          <h2 className="home__post-title">홈</h2>
+          <PostList posts={postsData?.documents} isLoading={isPostLoading} />
         </div>
       </div>
 
       <div className="home__creators">
-        <h3 className="home__creators-title">Top Creators</h3>
+        <h3 className="home__creators-title">사용자</h3>
         <UserList users={creatorsData?.documents} isLoading={isUserLoading} />
       </div>
     </div>

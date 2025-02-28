@@ -16,7 +16,6 @@ type PostImageProps = Pick<Post, "$id" | "imageUrl" | "caption" | "tags">;
 // ✅ 사용자 정보 (프로필 이미지, 이름, 날짜, 위치)
 // createdAt 은 Models.Docuemnt 에 잇을텐데 ?
 const PostUser = ({ creator, $createdAt, location }: PostUserProps) => {
- 
   return (
     <div className="post-card__user">
       <Link to={creator.$id} className="post-card__user-link">
@@ -70,6 +69,7 @@ const PostCard = ({ post }: { post: Post }) => {
   const { user } = useUserContext(); // 현재 로그인한 사용자 정보 가져오기
   const isEditable = user.id === post.creator.$id; // 게시물 수정 가능 여부
 
+  
   return (
     <div className="post-card">
       <div className="post-card__header">
