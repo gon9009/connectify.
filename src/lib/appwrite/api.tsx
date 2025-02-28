@@ -9,7 +9,7 @@ import { NewUser } from "../../types/types";
 
 // ========================================================== 인증 / 보안 API ==========================================================================================
 
-// 회원가입 프로세스 
+// 회원가입 프로세스
 export async function createUserAccount(user: NewUser) {
   try {
     // 1. Appwrite 계정 생성
@@ -20,7 +20,7 @@ export async function createUserAccount(user: NewUser) {
       user.name
     );
 
-    if (!newAccount) throw Error ("계정 생성 실패");
+    if (!newAccount) throw Error("계정 생성 실패");
 
     // 2. 사용자 아바타 URL 생성, string 을 반환한다다
     const avatarUrl = avatars.getInitials(user.name);
@@ -65,12 +65,12 @@ export async function saveUserToDB(user: {
 // 로그인:이메일 세션 생성 (Query)
 export async function signInAccount(user: { email: string; password: string }) {
   try {
-    // 이메일 + 비밀번호를 통한 세션 생성 
+    // 이메일 + 비밀번호를 통한 세션 생성
     const session = await account.createEmailPasswordSession(
       user.email,
       user.password
     );
-    return session;   // Appwrite 세션 객체 반환 
+    return session; // Appwrite 세션 객체 반환
   } catch (error) {
     console.log(error);
   }
@@ -83,7 +83,7 @@ export async function signOutAccount() {
     return session;
   } catch (error) {
     console.log(error);
-    throw error; 
+    throw error;
   }
 }
 
@@ -109,7 +109,7 @@ export async function getCurrentUser() {
   }
 }
 
-// ===================================================== 게시물 (Post)/ 유저 (User) API ================================================================================
+// ===================================================== 게시물 (Post) ================================================================================
 // 좋아요 상태 업데이트 (postId에 해당하는 게시물의 likes 배열을 업데이트)
 export async function likePost(postId: string, likesArray: string[]) {
   try {
@@ -168,10 +168,6 @@ export async function deleteSavedPost(savedRecordId: string) {
   }
 }
 
-
-//===========
-
-
 export async function getRecentPosts() {
   try {
     const posts = await databases.listDocuments(
@@ -183,6 +179,30 @@ export async function getRecentPosts() {
     if (!posts) throw Error;
 
     return posts;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// ==================================================== 유저 =======================================================
+
+export async function getUsers(limit?: number) {
+  const queries: any[] = [Query.orderDesc("$createdAt")];
+
+  if (limit) {
+    queries.push(Query.limit(limit));
+  }
+
+  try {
+    const users = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      queries
+    );
+
+    if (!users) throw Error;
+
+    return users;
   } catch (error) {
     console.log(error);
   }

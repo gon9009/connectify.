@@ -6,7 +6,8 @@ import {
   savePost,
   deleteSavedPost,
   getCurrentUser,
-  getRecentPosts
+  getRecentPosts,
+  getUsers
 } from "../appwrite/api";
 
 import { useMutation ,useQueryClient,useQuery} from "@tanstack/react-query";
@@ -45,6 +46,14 @@ export const useGetCurrentUser = () => {
   return useQuery({
     queryKey: ["getCurrentUser"],
     queryFn: getCurrentUser,
+  });
+};
+
+
+export const useGetUsers = (limit?: number) => {
+  return useQuery({
+    queryKey: ["getUsers"],
+    queryFn: () => getUsers(limit),
   });
 };
 
