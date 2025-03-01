@@ -1,4 +1,4 @@
-import { SignupFormData,SigninFormData } from "../lib/validation/auth";
+import { SignupFormData,SigninFormData, PostFormData } from "../lib/validation/auth";
 import { Models } from "appwrite";
 
 // ============== 인증 관련 타입 =============================================
@@ -86,7 +86,7 @@ export interface AuthMeta {
 }
 
 export interface PostFormField {
-  name:string;
+  name: keyof PostFormData;
   label:string;
   type:"text" | "textarea" | "file"; 
 }
