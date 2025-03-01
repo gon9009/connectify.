@@ -1,0 +1,42 @@
+// 📌 중앙 정렬 (가로 + 세로)
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// 📌 가로 정렬 (좌우 정렬)
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// 📌 세로 정렬 (컬럼 방향, 중앙 정렬)
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+// 버튼 믹스인
+@mixin base-button($bg-color, $text-color) {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-weight: 700; // 기본 폰트 두께
+  border-radius: 4px;
+  background-color: $bg-color;
+  color: $text-color;
+  border: none;
+  cursor: pointer;
+}
+
+// 인풋 믹스인
+@mixin base-input($bg-color, $text-color) {
+  width: 100%;
+  background-color: $bg-color;
+  color: $text-color;
+  border-radius: 4px;
+  outline: none;
+}

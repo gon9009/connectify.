@@ -1,0 +1,93 @@
+@use "../abstracts/variables" as v;
+
+.sidebar {
+  @media (max-width: 768px) {
+    display: none;
+  }
+  display: flex;
+  width: 270px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.5rem 1.5rem;
+  background-color: v.$dark-3;
+  &__wrapper {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__profile {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    &-img {
+      max-width: 30%;
+      border-radius: 60%;
+    }
+
+    &-name {
+      font-size: 1.2rem;
+      font-weight: 800;
+      line-height: 130%;
+    }
+
+    &-username {
+      font-weight: 200;
+      font-size: 0.9rem;
+    }
+  }
+
+  // 메뉴 (ul)
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    &-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      // 리스트 링크 (NavLink)
+      &-link {
+        width: 100%;
+        padding: 0.8rem 0.5rem;
+        display: flex;
+        align-items: center;
+        border-radius: 8px;
+        gap: 1rem;
+        &:hover {
+          background: v.$dark-4; // 호버 시 색상 변경
+        }
+        &.active {
+          background: rgb(75, 77, 80); // 기존보다 살짝 밝은 톤
+        }
+      }
+      &-icon {
+        width: 24x;
+        height: 24px;
+      }
+    }
+  }
+  &__logout {
+    display: flex;
+    justify-content: center; // 중앙 정렬
+
+    &-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      transition: background 0.2s ease-in-out;
+      img {
+        width: 20px;
+        height: 20px;
+      }
+      &-description {
+        font-size: 1rem;
+      }
+    }
+  }
+}

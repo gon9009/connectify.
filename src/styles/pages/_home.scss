@@ -1,0 +1,43 @@
+// Home 도 Flex 의 아이템
+
+.home {
+  display: flex;
+  // 아래 속성을 주면
+  flex: 1 1 0%;
+
+  &__container {
+    display: flex;
+    flex: 1 1 0%;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__post-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__posts {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 640px;
+    gap: 1rem;
+  }
+
+  &__user-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  &__users {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+  }
+}
+
+// 홈 -> 홈 컨테이너 -> Post + Creator
