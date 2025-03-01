@@ -59,6 +59,7 @@ export type NewUser = {
 };
 
 // ==== 폼(form) 관련 타입 =======================================
+
 export interface Field {
   name: string;
   label: string;
@@ -82,6 +83,12 @@ export interface AuthMeta {
   description: string;
   link: string;
   linkText: string;
+}
+
+export interface PostFormField {
+  name:string;
+  label:string;
+  type:"text" | "textarea" | "file"; 
 }
 
 // ----- 포스트 관련 타입 ------------------

@@ -1,4 +1,4 @@
-import { SigninField, SignupField,AuthMeta } from "../types/types";
+import { SigninField, SignupField, AuthMeta, PostFormField } from "../types/types";
 
 // 회원가입 필드 Field 타입의 요소만 포함 가능
 export const REGISTER_FIELDS: SignupField[] = [
@@ -8,9 +8,9 @@ export const REGISTER_FIELDS: SignupField[] = [
     type: "text",
   },
   {
-    name:"username",
-    label:"Username",
-    type:"text"
+    name: "username",
+    label: "Username",
+    type: "text",
   },
   {
     name: "email",
@@ -53,3 +53,27 @@ export const LOGIN_META: AuthMeta = {
   link: "/sign-up",
   linkText: "회원가입",
 };
+
+// 포스트 폼 필드 정의
+export const POST_FIELDS:PostFormField[] = [
+  {
+    name: "caption",
+    label: "무슨 일이 있었나요?",
+    type: "textarea",
+  },
+  {
+    name: "file",
+    label: "사진 올리기",
+    type: "file",
+  },
+  {
+    name: "location",
+    label: "위치 추가하기",
+    type: "text",
+  },
+  {
+    name: "tags",
+    label: "태그 입력하기",
+    type: "text",
+  },
+];
