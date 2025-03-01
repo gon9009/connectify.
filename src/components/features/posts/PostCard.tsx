@@ -20,6 +20,8 @@ const PostUser = ({ creator, $createdAt, location }: PostUserProps) => {
     <div className="post-card__user">
       <Link to={creator.$id} className="post-card__user-link">
         <img
+        width={48}
+        height={48}
           src={creator.imageUrl || "/assets/placeholder.svg"}
           className="post-card__avatar"
         />

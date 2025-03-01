@@ -14,6 +14,8 @@ const UserCard = ({ user }: UserCardProps) => {
   return (
     <Link to={`/profile/${user.$id}`} className="user-card">
       <img
+      width={56}
+      height={56}
         src={user.imageUrl || "/assets/icons/profile-placeholder.svg"}
         className="user-card__avatar"
       />

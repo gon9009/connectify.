@@ -16,7 +16,7 @@ const PostList = ({
   }
 
   return (
-    <ul>
+    <ul className="home__post-list">
       {posts?.map((post) => (
         <li key={post.$id}>
           <PostCard post={post} />
@@ -37,12 +37,10 @@ const UserList = ({
   if (isLoading) {
     return <Loader />;
   }
-  if (!users || users.length === 0) {
-    return <p>No users found.</p>;
-  }
+
   return (
-    <ul>
-      {users.map((user) => (
+    <ul className="home__user-list">
+      {users?.map((user) => (
         <li key={user?.$id}>
           <UserCard user={user} />
         </li>
@@ -72,13 +70,11 @@ const Home = () => {
     <div className="home">
       <div className="home__container">
         <div className="home__posts">
-          <h2 className="home__post-title">홈</h2>
           <PostList posts={postsData?.documents} isLoading={isPostLoading} />
         </div>
       </div>
 
-      <div className="home__creators">
-        <h3 className="home__creators-title">사용자</h3>
+      <div className="home__users">
         <UserList users={creatorsData?.documents} isLoading={isUserLoading} />
       </div>
     </div>

@@ -93,7 +93,7 @@ const SaveButton = ({ isSaved, handleSavePost }) => {
   return (
     <div className="post__stats-save">
       <img
-        src={isSaved ? "/assets/icons/saved.svg" : "/assets/icons/save.svg"}
+        src={isSaved ? "/assets/saved.svg" : "/assets/save.svg"}
         alt="share"
         width={24}
         height={24}
@@ -110,8 +110,8 @@ const LikeButton = ({ likes, userId, handleLikePost, checkIsLiked }) => {
       <img
         src={`${
           checkIsLiked(likes, userId)
-            ? "/assets/icons/liked.svg"
-            : "/assets/icons/like.svg"
+            ? "/assets/liked.svg"
+            : "/assets/like.svg"
         }`}
         alt="like"
         width={24}

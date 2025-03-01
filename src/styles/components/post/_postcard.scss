@@ -1,0 +1,52 @@
+.post-card {
+  border: 2px solid blue;
+  display: flex;
+  margin: 1rem;
+  padding: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 5%;
+  margin-bottom: 2rem;
+  &__header {
+  }
+
+  &__user {
+  }
+
+  &__user-link {
+  }
+
+  &__avatar {
+  }
+
+  &__user-details {
+  }
+
+  &__username {
+  }
+
+  &__meta {
+  }
+
+  &__date {
+  }
+
+  &__location {
+  }
+
+  &__edit-button {
+  }
+
+  &__content {
+  }
+
+  &__tags {
+    li {
+    }
+  }
+
+  &__img {
+    width: 450px;
+    height: 500px;
+  }
+}
