@@ -15,7 +15,7 @@ type PostImageProps = Pick<Post, "$id" | "imageUrl" | "caption" | "tags">;
 
 // ✅ 사용자 정보 (프로필 이미지, 이름, 날짜, 위치)
 // createdAt 은 Models.Docuemnt 에 잇을텐데 ?
-const PostUser = ({ creator, $createdAt, location }: PostUserProps) => {
+const PostUser = ({ creator, $createdAt }: PostUserProps) => {
   return (
     <div className="post-card__user">
       <Link to={creator.$id} className="post-card__user-link">
@@ -30,7 +30,6 @@ const PostUser = ({ creator, $createdAt, location }: PostUserProps) => {
         <p className="post-card__username">{creator.name}</p>
         <div className="post-card__meta">
           <p className="post-card__date">{dayjs($createdAt).fromNow()}</p>
-          <p className="post-card__location">{location}</p>
         </div>
       </div>
     </div>
@@ -41,7 +40,10 @@ const PostUser = ({ creator, $createdAt, location }: PostUserProps) => {
 const PostEditButton = ({ $id, isEditable }: PostEditButtonProps) => {
   return isEditable ? (
     <Link to={`/edit/${$id}`} className="post-card__edit-button">
-      <img src="/assets/edit.svg" alt="Edit Post" />
+      <img 
+      width={24}
+      height={24}
+      src="/assets/edit.svg" alt="Edit Post" />
     </Link>
   ) : null;
 };
@@ -78,7 +80,6 @@ const PostCard = ({ post }: { post: Post }) => {
         <PostUser
           creator={post.creator} // ✅ 이제 creator 전체를 전달해야 함!
           $createdAt={post.$createdAt}
-          location={post.location}
         />
         {isEditable && (
           <PostEditButton $id={post.$id} isEditable={isEditable} />

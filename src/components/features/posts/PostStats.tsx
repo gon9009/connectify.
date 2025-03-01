@@ -17,7 +17,7 @@ type PostStats = {
 
 // 개별 PostCard + 개별 PostStats
 const PostStats = ({ post, userId }: PostStats) => {
-  const likesList = post.likes.map((user) => user.$id); 
+  const likesList = post.likes.map((user) => user.$id);
   const location = useLocation();
   const [likes, setLikes] = useState<string[]>(likesList);
   const [isSaved, setIsSaved] = useState(false);
@@ -78,13 +78,13 @@ const PostStats = ({ post, userId }: PostStats) => {
 
   return (
     <div className={`post__stats ${isProfilePage}`}>
-      <SaveButton isSaved={isSaved} handleSavePost={handleSavePost} />
       <LikeButton
         likes={likes}
         userId={userId}
         handleLikePost={handleLikePost}
         checkIsLiked={checkIsLiked}
       />
+      <SaveButton isSaved={isSaved} handleSavePost={handleSavePost} />
     </div>
   );
 };
@@ -95,8 +95,8 @@ const SaveButton = ({ isSaved, handleSavePost }) => {
       <img
         src={isSaved ? "/assets/saved.svg" : "/assets/save.svg"}
         alt="share"
-        width={24}
-        height={24}
+        width={20}
+        height={20}
         className="post__stats-save-icon"
         onClick={(e) => handleSavePost(e)}
       />
@@ -106,20 +106,18 @@ const SaveButton = ({ isSaved, handleSavePost }) => {
 
 const LikeButton = ({ likes, userId, handleLikePost, checkIsLiked }) => {
   return (
-    <div className="post-stats__like">
+    <div className="post__stats-like">
       <img
         src={`${
-          checkIsLiked(likes, userId)
-            ? "/assets/liked.svg"
-            : "/assets/like.svg"
+          checkIsLiked(likes, userId) ? "/assets/liked.svg" : "/assets/like.svg"
         }`}
         alt="like"
         width={24}
         height={24}
         onClick={(e) => handleLikePost(e)}
-        className="post-stats__like-icon"
+        className="post__stats-like-icon"
       />
-      <p className="post-stats__like-count">{likes.length}</p>
+      <p className="post__stats-like-count">{likes.length}</p>
     </div>
   );
 };

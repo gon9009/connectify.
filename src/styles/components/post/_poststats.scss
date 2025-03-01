@@ -1,15 +1,23 @@
+@use "../../abstracts/variables" as v;
+
 .post__stats {
-    &-save {
-      &-icon {
-      }
-    }
-  
-    &-like {
-      &-icon {
-      }
-  
-      &-count {
-      }
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  &-save {
+    &-icon {
     }
   }
-  
+
+  &-like {
+    display: flex;
+    &-icon {
+      margin-right: 0.3rem;
+    }
+
+    &-count {
+      color: v.$light-2;
+    }
+  }
+}
