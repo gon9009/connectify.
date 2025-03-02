@@ -2,6 +2,8 @@ import Label from "../../ui/Label";
 import Button from "../../ui/Button";
 import Input from "../../ui/Input";
 import Textarea from "../../ui/Textarea";
+import { useCreatePost, useUpdatePost } from "../../../lib/react-query/queries";
+
 
 // 포스트 폼 필드 
 const PostForm = ({ post, action, onCreate, onUpdate }) => {
@@ -34,7 +36,7 @@ const PostForm = ({ post, action, onCreate, onUpdate }) => {
   
         {/* Tags 필드 */}
         <div>
-          <Label htmlFor="tags">태그 추가하기기</Label>
+          <Label htmlFor="tags">태그 추가하기</Label>
           <Input id="tags" />
         </div>
   
