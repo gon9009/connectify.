@@ -7,11 +7,14 @@ import {
   deleteSavedPost,
   getCurrentUser,
   getRecentPosts,
-  getUsers
+  getUsers,
+  createPost,
+  updatePost,
+  getPostById
 } from "../appwrite/api";
 
-import { useMutation ,useQueryClient,useQuery} from "@tanstack/react-query";
-import { NewUser } from "../../types/types";
+import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
+import { CreatePostType, NewUser, UpdatePostType } from "../../types/types";
 
 // ============================================ 가입 / 인증 쿼리 ==================================================================
 
@@ -20,8 +23,8 @@ export const useCreateUserAccount = () => {
   return useMutation({
     mutationFn: (user: NewUser) => createUserAccount(user),
     onSuccess: () => {
-      console.log("회원가입 성공!")
-    }
+      console.log("회원가입 성공!");
+    },
   });
 };
 
@@ -49,7 +52,6 @@ export const useGetCurrentUser = () => {
   });
 };
 
-
 export const useGetUsers = (limit?: number) => {
   return useQuery({
     queryKey: ["getUsers"],
@@ -64,8 +66,6 @@ export const useGetRecentPosts = () => {
     queryFn: getRecentPosts,
   });
 };
-
-//===================================================================================
 
 export const useLikePost = () => {
   const queryClient = useQueryClient();
@@ -131,3 +131,38 @@ export const useDeleteSavedPost = () => {
   });
 };
 
+export const useGetPostById = (postId?: string) => {
+  return useQuery({
+    queryKey: ["getPostById", postId],
+    queryFn: () => getPostById(postId),
+    enabled: !!postId,
+  });
+};
+
+// ========================================= 포스트 폼 (PostForm) 쿼리 ===============================================================
+
+// 포스트 폼 게시물 생성시
+export const useCreatePost = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (post: CreatePostType) => createPost(post),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["getRecentPosts"],
+      });
+    },
+  });
+};
+
+// 포스트 폼 게시물 수정시
+export const useUpdatePost = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (post: UpdatePostType) => updatePost(post),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: ["getPostById", data?.$id],
+      });
+    },
+  });
+};

@@ -2,6 +2,7 @@ import Loader from "../../components/ui/Loader";
 import PostCard from "../../components/features/posts/PostCard";
 import UserCard from "../../components/features/user/UserCard";
 import { useGetRecentPosts, useGetUsers } from "../../lib/react-query/queries";
+import { useUserContext } from "../../context/AuthContext";
 
 // 포스트 목록 컴포넌트
 const PostList = ({
@@ -60,6 +61,12 @@ const Home = () => {
     isLoading: isUserLoading,
     isError: isErrorCreators,
   } = useGetUsers(10);
+
+  const { user } = useUserContext();
+
+  // Post 구조 확인
+  console.log(postsData);
+  console.log(user);
 
   // 에러 처리
   if (isErrorCreators || isErrorPosts) {

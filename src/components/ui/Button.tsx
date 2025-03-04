@@ -1,6 +1,8 @@
-interface ButtonProps {
+import { ButtonHTMLAttributes } from "react";
+
+// 버튼 속성 타입 
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  type?: "submit" | "reset";
   className: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
