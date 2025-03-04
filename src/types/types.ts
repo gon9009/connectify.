@@ -59,7 +59,6 @@ export type NewUser = {
 };
 
 // ==== 폼(form) 관련 타입 =======================================
-
 export interface Field {
   name: string;
   label: string;
@@ -92,7 +91,6 @@ export interface PostFormField {
 }
 
 //  ============================= 포스트 관련 타입 ======================================================================
-
 export type Post = Models.Document & {
   $id: string;
   creator: {

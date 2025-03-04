@@ -7,7 +7,7 @@ type FileUploaderProps = {
   mediaUrl: string;
 };
 
-const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
+export const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
   const [file, setFile] = useState<File[]>([]);
   const [fileUrl, setFileUrl] = useState<string>(mediaUrl);
 
@@ -22,9 +22,10 @@ const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
       fieldChange(acceptedFiles);
       setFileUrl(convertFileToUrl(acceptedFiles[0]));
     },
-    [file]
+    [fieldChange]
   );
 
+  // file (blob 형태) -> convertFileToUrl -> fileUrl (이미지 URL) 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: {

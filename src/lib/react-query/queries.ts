@@ -10,6 +10,7 @@ import {
   getUsers,
   createPost,
   updatePost,
+  getPostById
 } from "../appwrite/api";
 
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
@@ -127,6 +128,14 @@ export const useDeleteSavedPost = () => {
         queryKey: ["getCurrentUser"],
       });
     },
+  });
+};
+
+export const useGetPostById = (postId?: string) => {
+  return useQuery({
+    queryKey: ["getPostById", postId],
+    queryFn: () => getPostById(postId),
+    enabled: !!postId,
   });
 };
 
