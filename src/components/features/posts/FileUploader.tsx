@@ -7,7 +7,7 @@ type FileUploaderProps = {
   mediaUrl: string;
 };
 
-const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
+export const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
   const [file, setFile] = useState<File[]>([]);
   const [fileUrl, setFileUrl] = useState<string>(mediaUrl);
 
@@ -22,9 +22,10 @@ const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
       fieldChange(acceptedFiles);
       setFileUrl(convertFileToUrl(acceptedFiles[0]));
     },
-    [file]
+    [fieldChange]
   );
 
+  // file (blob 형태) -> convertFileToUrl -> fileUrl (이미지 URL) 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: {
@@ -38,7 +39,7 @@ const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
 
       {fileUrl ? (
         <>
-          <div className="file-uploader__preview">
+          <div className="file-uploader__container">
             <img
               src={fileUrl}
               alt="업로드 이미지"
@@ -50,7 +51,7 @@ const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
           </p>
         </>
       ) : (
-        <div className="file-uploader__box">
+        <div className="file-uploader__container">
           <img
             src="/assets/file-upload.svg"
             width={96}
@@ -58,10 +59,10 @@ const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
             alt="file upload"
           />
 
-          <h3 className="file-uploader__title">여기에 사진을 끌어놓으세요</h3>
-          <p className="file-uploader__description">SVG, PNG, JPG</p>
+          <h3 className="file-uploader__title">여기에 사진을 끌어놓으세요!</h3>
+          <p className="file-uploader__description">사진 형식만 가능합니다</p>
 
-          <Button className="file-uploader__button">컴퓨터에서 선택하기</Button>
+          <Button className="btn file-uploader__btn">컴퓨터에서 선택하기</Button>
         </div>
       )}
     </div>

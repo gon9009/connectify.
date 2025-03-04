@@ -1,4 +1,4 @@
-import { SignupFormData,SigninFormData } from "../lib/validation/auth";
+import { SignupFormData,SigninFormData, PostFormData } from "../lib/validation/auth";
 import { Models } from "appwrite";
 
 // ============== 인증 관련 타입 =============================================
@@ -84,8 +84,13 @@ export interface AuthMeta {
   linkText: string;
 }
 
-// ----- 포스트 관련 타입 ------------------
+export interface PostFormField {
+  name: keyof PostFormData;
+  label:string;
+  type:"text" | "textarea" | "file"; 
+}
 
+//  ============================= 포스트 관련 타입 ======================================================================
 export type Post = Models.Document & {
   $id: string;
   creator: {
@@ -93,13 +98,31 @@ export type Post = Models.Document & {
     name: string; // 유저 이름
     imageUrl?: string; // 유저 프로필 이미지 (선택적)
   };
-  likes: { $id: string }[]; // 🔥 관계(Relationship) 필드이므로 객체 배열!
-  caption: string; // 게시물 내용
-  tags: string[]; // 태그 리스트
-  imageUrl: string; // 게시물 이미지 URL
-  imageId: string; // 이미지 파일의 고유 ID
-  location?: string; // 위치 정보 (선택적)
-  save?: { $id: string }; // 🔥 관계(Relationship) 데이터이므로 객체 형태
+  likes: { $id: string }[]; //  관계(Relationship) 필드이므로 객체 배열!
+  caption: string;
+  tags: string[]; 
+  imageUrl: string; 
+  imageId: string; 
+  location?: string; 
+  save?: { $id: string }; 
 };
 
+// 게시물 등록 타입 
+export type CreatePostType = {
+  userId: string; // ✅ 현재 로그인한 사용자 ID
+  caption: string;
+  file: File[];  // ✅ 업로드할 이미지 파일 (필수)
+  location?: string;
+  tags?: string; // 
+};
 
+// 게시물 수정 타입 
+export type UpdatePostType = {
+  postId: string; // ✅ 수정할 게시물의 ID
+  caption: string;
+  imageId: string;  
+  imageUrl: string; 
+  file?: File[];  // 선택적 (새로운 파일이 있을 경우만)
+  location?: string;
+  tags?: string; // 
+};

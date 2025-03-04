@@ -37,5 +37,21 @@ export const SigninValidation = z.object({
     .min(8, { message: "비밀번호는 최소 8글자 이상이어야 합니다." }),
 });
 
+// PostForm 유효성 검증 
+
+export const PostValidation = z.object({
+  caption: z
+    .string()
+    .min(5, { message: "최소 5글자 이상이어야 합니다." })
+    .max(2200, { message: "최대 2,200글자까지 가능합니다." }),
+  file: z.custom<File[]>(),
+  location: z
+    .string()
+    .min(1, { message: "필수 입력 항목입니다." })
+    .max(1000, { message: "최대 1000글자까지 가능합니다." }),
+  tags: z.string(),
+});
+
+export type PostFormData = z.infer<typeof PostValidation>;
 export type SignupFormData = z.infer<typeof SignupValidation>;
 export type SigninFormData = z.infer<typeof SigninValidation>;

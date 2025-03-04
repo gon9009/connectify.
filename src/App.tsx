@@ -4,6 +4,8 @@ import Signup from "./pages/public/Signup";
 import Home from "./pages/private/Home";
 import PublicLayout from "./pages/layout/PublicLayout";
 import ProtectedLayout from "./pages/layout/ProtectedLayout";
+import Create from "./pages/private/Create";
+import Edit from "./pages/private/Edit";
 
 const App = () => {
   return (
@@ -17,6 +19,8 @@ const App = () => {
         {/* 인증 라우트 */}
         <Route element={<ProtectedLayout />}>
           <Route index path="/" element={<Home />} />
+          <Route path="/create-post" element={<Create/>} />
+          <Route path="/edit/:id" element={<Edit />} />
         </Route>
 
       </Routes>
