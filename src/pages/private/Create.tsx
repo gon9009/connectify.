@@ -19,16 +19,16 @@ const Create = () => {
   };
 
   return (
-    <div className="post-form">
-      <div className="post-form__container">
-        <div className="post-form__header">
+    <div className="post-form-page">
+      <div className="post-form-page__container">
+        <div className="post-form-page__header">
           <img
-            src="/assets/add-post.svg"
+            src="/assets/create.svg"
             width={36}
             height={36}
             alt="새로운 게시물 생성"
           />
-          <h2 className="post-form__title">새 게시글 생성</h2>
+          <h2 className="post-form-page__title">새 게시글 생성</h2>
         </div>
         <PostForm
           isPending={isPendingCreate}

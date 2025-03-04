@@ -20,7 +20,7 @@ const App = () => {
         <Route element={<ProtectedLayout />}>
           <Route index path="/" element={<Home />} />
           <Route path="/create-post" element={<Create/>} />
-          <Route path="/update-post/:id" element={<Edit />} />
+          <Route path="/edit/:id" element={<Edit />} />
         </Route>
 
       </Routes>

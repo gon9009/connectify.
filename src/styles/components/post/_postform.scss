@@ -1,0 +1,50 @@
+@use "../../abstracts/variables" as v;
+.post-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &__container {
+    width: 100%;
+    margin: 0.5rem;
+  }
+
+  &__label {
+  }
+
+  &__textarea {
+    resize: none; /* 사용자가 크기 조절하지 못하도록 설정 */
+    width: 100%;
+    padding: 0.5rem;
+    height: 200px;
+    border-radius: 10px;
+    background-color: v.$dark-4;
+    border: 0;
+    color: v.$light-2;
+    &.error {
+    }
+  }
+
+  &__input {
+    height: 40px;
+    border-radius: 10px;
+    background-color: v.$dark-4;
+    color: v.$light-2;
+    border: 0;
+    padding: 0.5rem;
+    &.error {
+    }
+  }
+
+  &__btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+  }
+  &__btn-cancel {
+  }
+  &__btn-post {
+  }
+}

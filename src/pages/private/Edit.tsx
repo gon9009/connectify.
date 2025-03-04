@@ -37,16 +37,16 @@ const Edit = () => {
   };
 
   return (
-    <div className="post-form">
-      <div className="post-form__container">
-        <div className="post-form__header">
+    <div className="post-form-page">
+      <div className="post-form-page__container">
+        <div className="post-form-page__header">
           <img
             src="/assets/edit.svg"
             width={36}
             height={36}
             alt="게시물 수정"
           />
-          <h2 className="post-form__title">게시물 수정</h2>
+          <h2 className="post-form-page__title">게시물 수정</h2>
         </div>
         <PostForm
           isPending={isUpdatePending}

@@ -102,12 +102,12 @@ const PostForm = ({
         {/* 태그 추가하기 */}
         <div className="post-form__container">
           <Label htmlFor="tags" className="post-form__label">
-            태그를 입력해주세요 (예: 여행,일상)
+            쉼표( , )로 구분하여 태그를 입력하세요
           </Label>
           <Input
             id="tags"
             type="text"
-            placeholder="태그를 입력하세요"
+            placeholder="여행,일상,공부"
             className={`post-form__input ${errors.tags ? "error" : ""}`}
             {...register("tags")}
           />
@@ -116,7 +116,7 @@ const PostForm = ({
           )}
         </div>
         {/* 버튼 */}
-        <div className="post-form__container">
+        <div className="post-form__btn-container">
           <Button
             onClick={() => navigate(-1)}
             className="btn auth-form__btn-cancel"
