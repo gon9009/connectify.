@@ -18,7 +18,7 @@ dayjs.extend(relativeTime);
 
 // 최종 타입 정의
 export type PostActionsProps = {
-  post: Pick<Post, "$id" >; // imageId 추가 (삭제 시 필요)
+  post: Pick<Post, "$id">; // imageId 추가 (삭제 시 필요)
   handleDeletePost: () => void;
 };
 
@@ -69,6 +69,8 @@ const PostHeader = ({ post, user, handleDeletePost }: PostHeaderProps) => {
           src={post?.creator.imageUrl || "/assets/placeholder.svg"}
           alt="creator"
           className="post-details__creator-avatar"
+          width={48}
+          height={48}
         />
         <div className="post-details__creator-info">
           <p className="post-details__creator-name">{post?.creator.name}</p>
@@ -131,18 +133,16 @@ const PostDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { user } = useUserContext();
-  // 단일 게시물 
+  // 단일 게시물
   const { data: post, isLoading } = useGetPostById(id);
-  // 사용자의 게시물들 
+  // 사용자의 게시물들
   const { data: userPosts, isLoading: isUserPostLoading } = useGetUserPosts(
     post?.creator.$id
   );
   const { mutateAsync: deletePost } = useDeletePost();
 
   // 같은 작성자의 다른 게시물들 , 작성자의 현재 게시물 (id) 을 제외한 다른 게시물 (userPost.$id)
-  const relatedPosts = userPosts?.filter(
-    (userPost) => userPost.$id !== id
-  );
+  const relatedPosts = userPosts?.filter((userPost) => userPost.$id !== id);
 
   if (isLoading) {
     return <Loader />;
@@ -185,10 +185,10 @@ const PostDetails = () => {
         </div>
       </div>
 
-      <RelatedPosts
+      {/* <RelatedPosts
         relatedPosts={relatedPosts}
         isUserPostLoading={isUserPostLoading}
-      />
+      /> */}
     </div>
   );
 };
