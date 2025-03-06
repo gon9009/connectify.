@@ -15,8 +15,20 @@ type PostStats = {
   userId: string;
 };
 
+type LikeButton = {
+  isLiked: boolean;
+  likes: string[];
+  handleLikePost: (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => void;
+};
+
+type SaveButton = {
+  isSaved: boolean;
+  handleSavePost: (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => void;
+};
+
 // 개별 PostCard + 개별 PostStats
 const PostStats = ({ post, userId }: PostStats) => {
+  // 좋아요 누른 사용자 리스트 반환
   const likesList = post.likes.map((user) => user.$id);
   const location = useLocation();
   const [likes, setLikes] = useState<string[]>(likesList);
@@ -26,14 +38,13 @@ const PostStats = ({ post, userId }: PostStats) => {
   const { mutate: deleteSavePost } = useDeleteSavedPost();
   const { data: currentUser } = useGetCurrentUser();
 
-  // 사용자가 현재 게시물을 저장했는지 확인하기 위한 함수
+  // 사용자가 현재 게시물을 저장(Saved)했는지 확인하기 위한 함수
   const savedPostRecord = currentUser?.save.find(
     (record: Models.Document) => record.post.$id === post.$id
   );
 
-  const checkIsLiked = (likeList: string[], userId: string) => {
-    return likeList.includes(userId);
-  };
+  // 사용자가 좋아요(Liked) 인지 확인
+  const isLiked = likes.includes(userId);
 
   // isSaved 상태 초기화/ 최산상태로 유지하기 위해 사용
   useEffect(() => {
@@ -80,16 +91,15 @@ const PostStats = ({ post, userId }: PostStats) => {
     <div className={`post__stats ${isProfilePage}`}>
       <LikeButton
         likes={likes}
-        userId={userId}
         handleLikePost={handleLikePost}
-        checkIsLiked={checkIsLiked}
+        isLiked={isLiked}
       />
       <SaveButton isSaved={isSaved} handleSavePost={handleSavePost} />
     </div>
   );
 };
 
-const SaveButton = ({ isSaved, handleSavePost }) => {
+const SaveButton = ({ isSaved, handleSavePost }: SaveButton) => {
   return (
     <div className="post__stats-save">
       <img
@@ -104,13 +114,11 @@ const SaveButton = ({ isSaved, handleSavePost }) => {
   );
 };
 
-const LikeButton = ({ likes, userId, handleLikePost, checkIsLiked }) => {
+const LikeButton = ({ likes, handleLikePost, isLiked }: LikeButton) => {
   return (
     <div className="post__stats-like">
       <img
-        src={`${
-          checkIsLiked(likes, userId) ? "/assets/liked.svg" : "/assets/like.svg"
-        }`}
+        src={isLiked ? "/assets/liked.svg" : "/assets/like.svg"} 
         alt="like"
         width={24}
         height={24}
@@ -123,3 +131,6 @@ const LikeButton = ({ likes, userId, handleLikePost, checkIsLiked }) => {
 };
 
 export default PostStats;
+
+
+

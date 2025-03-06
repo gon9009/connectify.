@@ -6,7 +6,7 @@ import {
   avatars,
   storage
 } from "../appwrite/appwriteConfig";
-import { NewUser,CreatePostType,UpdatePostType } from "../../types/types";
+import { NewUser,CreatePostType,UpdatePostType, Post } from "../../types/types";
 
 // ========================================================== 인증 / 보안 API ==========================================================================================
 
@@ -111,6 +111,7 @@ export async function getCurrentUser() {
 }
 
 // ===================================================== 게시물 (Post) ================================================================================
+
 // 좋아요 상태 업데이트 (postId에 해당하는 게시물의 likes 배열을 업데이트)
 export async function likePost(postId: string, likesArray: string[]) {
   try {
@@ -125,9 +126,9 @@ export async function likePost(postId: string, likesArray: string[]) {
 
     if (!updatedPost) throw Error; // 업데이트 실패 시 예외 발생
 
-    return updatedPost; // 업데이트된 게시물 반환
+    return updatedPost;
   } catch (error) {
-    console.log(error); // 에러 로깅
+    console.log(error);
   }
 }
 
@@ -187,24 +188,60 @@ export async function getRecentPosts() {
 
 export async function getPostById(postId?: string) {
   if (!postId) throw Error;
-
   try {
     const post = await databases.getDocument(
       appwriteConfig.databaseId,
       appwriteConfig.postCollectionId,
       postId
     );
-
     if (!post) throw Error;
+    return post as Post
+  } catch (error) {
+    console.log(error);
+    throw error 
+  }
+}
 
-    return post;
+export async function deletePost(postId?: string, imageId?: string) {
+  if (!postId || !imageId) return;
+
+  try {
+    const statusCode = await databases.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      postId
+    );
+
+    if (!statusCode) throw Error;
+
+    await deleteFile(imageId);
+
+    return { status: "Ok" };
   } catch (error) {
     console.log(error);
   }
 }
 
+export async function getUserPosts(userId?: string):Promise<Post[]> {
+  if (!userId) return [];
 
-// ==================================================== 유저 =======================================================
+  try {
+    const post = await databases.listDocuments<Post>(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      [Query.equal("creator", userId), Query.orderDesc("$createdAt")]
+    );
+
+    if (!post) throw Error;
+
+    return post.documents;
+  } catch (error) {
+    console.log(error);
+    throw error
+  }
+}
+
+// ==================================================== 유저(User) =======================================================
 export async function getUsers(limit?: number) {
   const queries: any[] = [Query.orderDesc("$createdAt")];
 
@@ -227,7 +264,7 @@ export async function getUsers(limit?: number) {
   }
 }
 
-// ====================================== 게시물 CRUD  ===========================================================
+// ====================================== 파일 CRUD  ===========================================================
 
 // 파일 업로드 
 export async function uploadFile(file: File) {
@@ -382,3 +419,4 @@ export async function updatePost(post: UpdatePostType) {
     console.log(error);
   }
 }
+

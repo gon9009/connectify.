@@ -10,9 +10,11 @@ import {
   getUsers,
   createPost,
   updatePost,
-  getPostById
+  getPostById,
+  deletePost,
+  getUserPosts,
 } from "../appwrite/api";
-
+import { Post } from "../../types/types";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { CreatePostType, NewUser, UpdatePostType } from "../../types/types";
 
@@ -132,10 +134,34 @@ export const useDeleteSavedPost = () => {
 };
 
 export const useGetPostById = (postId?: string) => {
-  return useQuery({
-    queryKey: ["getPostById", postId],
+  return useQuery<Post>({
+    queryKey: ["getUserPosts", postId],
     queryFn: () => getPostById(postId),
     enabled: !!postId,
+  });
+};
+
+export const useDeletePost = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ postId, imageId }: { postId?: string; imageId: string }) =>
+      deletePost(postId, imageId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["getRecentPosts"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["getUserPosts"],
+      });
+    },
+  });
+};
+
+export const useGetUserPosts = (userId?: string) => {
+  return useQuery<Post[]>({
+    queryKey: ["getUserPosts", userId],
+    queryFn: () => getUserPosts(userId),
+    enabled: !!userId,
   });
 };
 

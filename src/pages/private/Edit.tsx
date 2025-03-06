@@ -21,7 +21,7 @@ const Edit = () => {
   }
 
   if (!post) {
-    return <p>파일이 존재하지 않습니다다</p>;
+    return <p>파일이 존재하지 않습니다</p>;
   }
   // 게시물 수정 핸들러
   // useGetPostById(id) 는 비동기 쿼리 이므로 , 데이터가 로드되기 전 post값이 undefined 가 될수 있다
