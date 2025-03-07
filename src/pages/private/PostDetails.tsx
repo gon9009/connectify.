@@ -183,12 +183,11 @@ const PostDetails = () => {
             </div>
           </div>
         </div>
+        <RelatedPosts
+          relatedPosts={relatedPosts}
+          isUserPostLoading={isUserPostLoading}
+        />
       </div>
-
-      {/* <RelatedPosts
-        relatedPosts={relatedPosts}
-        isUserPostLoading={isUserPostLoading}
-      /> */}
     </div>
   );
 };

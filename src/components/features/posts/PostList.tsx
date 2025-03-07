@@ -13,7 +13,7 @@ type GridPostImageProps = Pick<Post, "$id" | "imageUrl">;
 // creator
 type GridUserInfoProps = Pick<Post, "creator">;
 type GridPostItemProps = {
-    post: Post; // ✅ Post 타입을 명시적으로 포함
+  post: Post; // ✅ Post 타입을 명시적으로 포함
   showUser: boolean;
   showStats: boolean;
   userId: string;
@@ -33,7 +33,13 @@ const GridUserInfo = ({ creator }: GridUserInfoProps) => {
   const { imageUrl, name } = creator;
   return (
     <div className="grid-posts__user-info">
-      <img src={imageUrl} alt="creator" className="grid-posts__user-avatar" />
+      <img
+        width={32}
+        height={32}
+        src={imageUrl}
+        alt="creator"
+        className="grid-posts__user-avatar"
+      />
       <p className="grid-posts__user-name">{name}</p>
     </div>
   );
@@ -51,7 +57,9 @@ const GridPostItem = ({
       <GridPostImage imageUrl={post.imageUrl} $id={post.$id} />
       <div className="grid-posts__info">
         {showUser && <GridUserInfo creator={post.creator} />}
-        {showStats && <PostStats post={post} userId={userId} />}
+        <div className="grid-posts__stats">
+          {showStats && <PostStats post={post} userId={userId} />}
+        </div>
       </div>
     </li>
   );
@@ -63,7 +71,7 @@ const GridPostList = ({
   showUser = true,
   showStats = true,
 }: GridPostListProps) => {
-  const { user } = useUserContext(); 
+  const { user } = useUserContext();
 
   return (
     <ul className="grid-posts">

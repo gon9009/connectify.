@@ -2,6 +2,8 @@
 .post-details {
   display: flex;
   flex: 1 1 0%;
+  flex-direction: column;
+  align-items: center;
   &__container {
     padding: 3rem;
     display: flex;
@@ -101,6 +103,12 @@
 }
 
 .post-details__related {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
   .post-details__related-title {
+    font-size: 2rem;
   }
 }
