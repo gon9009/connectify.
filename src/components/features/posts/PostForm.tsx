@@ -1,4 +1,4 @@
-import { useForm, setValue } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FileUploader } from "../posts/FileUploader";
 import { PostFormData, PostValidation } from "../../../lib/validation/auth";
@@ -7,10 +7,10 @@ import Label from "../../ui/Label";
 import Button from "../../ui/Button";
 import Textarea from "../../ui/Textarea";
 import { useNavigate } from "react-router-dom";
-import { Models } from "appwrite";
+import { Post } from "../../../types/types";
 
 type PostFormProps = {
-  post?: Models.Document; // 실제 Post 타입 읽어오기
+  post: Post;// 실제 Post 타입 읽어오기
   action: "Create" | "Update"; // 액션 타입 (생성 또는 수정)
   onCreate?: (values: PostFormData) => Promise<void>;
   onUpdate?: (values: PostFormData) => Promise<void>;
@@ -119,7 +119,7 @@ const PostForm = ({
         <div className="post-form__btn-container">
           <Button
             onClick={() => navigate(-1)}
-            className="btn auth-form__btn-cancel"
+            className="btn post-form__btn-cancel"
           >
             취소
           </Button>

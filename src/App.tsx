@@ -6,6 +6,7 @@ import PublicLayout from "./pages/layout/PublicLayout";
 import ProtectedLayout from "./pages/layout/ProtectedLayout";
 import Create from "./pages/private/Create";
 import Edit from "./pages/private/Edit";
+import PostDetails from "./pages/private/PostDetails";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route index path="/" element={<Home />} />
           <Route path="/create-post" element={<Create/>} />
           <Route path="/edit/:id" element={<Edit />} />
+          <Route path="/posts/:id" element={<PostDetails />} />
         </Route>
 
       </Routes>
