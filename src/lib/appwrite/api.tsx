@@ -4,9 +4,14 @@ import {
   account,
   databases,
   avatars,
-  storage
+  storage,
 } from "../appwrite/appwriteConfig";
-import { NewUser,CreatePostType,UpdatePostType, Post } from "../../types/types";
+import {
+  NewUser,
+  CreatePostType,
+  UpdatePostType,
+  Post,
+} from "../../types/types";
 
 // ========================================================== 인증 / 보안 API ==========================================================================================
 
@@ -195,10 +200,10 @@ export async function getPostById(postId?: string) {
       postId
     );
     if (!post) throw Error;
-    return post as Post
+    return post as Post;
   } catch (error) {
     console.log(error);
-    throw error 
+    throw error;
   }
 }
 
@@ -222,7 +227,7 @@ export async function deletePost(postId?: string, imageId?: string) {
   }
 }
 
-export async function getUserPosts(userId?: string):Promise<Post[]> {
+export async function getUserPosts(userId?: string): Promise<Post[]> {
   if (!userId) return [];
 
   try {
@@ -237,17 +242,13 @@ export async function getUserPosts(userId?: string):Promise<Post[]> {
     return post.documents;
   } catch (error) {
     console.log(error);
-    throw error
+    throw error;
   }
 }
 
 // ==================================================== 유저(User) =======================================================
-export async function getUsers(limit?: number) {
+export async function getUsers() {
   const queries: any[] = [Query.orderDesc("$createdAt")];
-
-  if (limit) {
-    queries.push(Query.limit(limit));
-  }
 
   try {
     const users = await databases.listDocuments(
@@ -256,17 +257,25 @@ export async function getUsers(limit?: number) {
       queries
     );
 
-    if (!users) throw Error;
+    if (!users) throw new Error("유저를 찾을수 없습니다");
 
-    return users;
+    return {
+      documents: users.documents.map(({ $id, imageUrl, name, username }) => ({
+        $id,
+        imageUrl: imageUrl || "/assets/icons/profile-placeholder.svg",
+        name,
+        username,
+      })),
+    };
   } catch (error) {
     console.log(error);
+    throw error;
   }
 }
 
 // ====================================== 파일 CRUD  ===========================================================
 
-// 파일 업로드 
+// 파일 업로드
 export async function uploadFile(file: File) {
   try {
     const uploadedFile = await storage.createFile(
@@ -281,7 +290,7 @@ export async function uploadFile(file: File) {
   }
 }
 
-// 사진 미리보기 
+// 사진 미리보기
 export function getFilePreview(fileId: string) {
   try {
     const fileUrl = storage.getFilePreview(
@@ -301,7 +310,7 @@ export function getFilePreview(fileId: string) {
   }
 }
 
-// 파일 삭제하기 
+// 파일 삭제하기
 export async function deleteFile(fileId: string) {
   try {
     await storage.deleteFile(appwriteConfig.storageId, fileId);
@@ -419,4 +428,3 @@ export async function updatePost(post: UpdatePostType) {
     console.log(error);
   }
 }
-

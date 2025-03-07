@@ -9,7 +9,6 @@ type UserCardProps = {
   };
 };
 
-// 나중에 타입을 알아내어 별도로 user 타입 추출하기
 const UserCard = ({ user }: UserCardProps) => {
   return (
     <Link to={`/profile/${user.$id}`} className="user-card">

@@ -13,7 +13,7 @@ export const sidebarLinks:SidebarNavLink[]= [
   },
   {
     imgURL: "/assets/people.svg",
-    route: "/all-users",
+    route: "/all",
     label: "사용자",
   },
   {
