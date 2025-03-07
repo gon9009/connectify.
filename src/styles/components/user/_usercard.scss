@@ -1,17 +1,15 @@
 @use "../../abstracts/variables" as v;
 
-// instagram 스타일 참조 
+// 개별카드
 .user-card {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
   margin: 0.3rem;
-  padding:1rem;
-  border: 1px solid white;
-  border-radius: 10%;
+  background-color: v.$dark-4;
+  border: 1px solid v.$light-4;
+  width: 100%;
   gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 10px;
   &__avatar {
     border-radius: 50%;
     margin: 0.5rem;
@@ -20,6 +18,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
 
   &__name {
