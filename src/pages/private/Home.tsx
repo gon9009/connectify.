@@ -62,11 +62,8 @@ const Home = () => {
     isError: isErrorCreators,
   } = useGetUsers(10);
 
-  const { user } = useUserContext();
-
   // Post 구조 확인
-  console.log(postsData);
-  console.log(user);
+  console.log("useGetUsers 의 반환 정보:", JSON.stringify(creatorsData, null, 2));
 
   // 에러 처리
   if (isErrorCreators || isErrorPosts) {
@@ -79,10 +76,6 @@ const Home = () => {
         <div className="home__posts">
           <PostList posts={postsData?.documents} isLoading={isPostLoading} />
         </div>
-      </div>
-
-      <div className="home__users">
-        <UserList users={creatorsData?.documents} isLoading={isUserLoading} />
       </div>
     </div>
   );
