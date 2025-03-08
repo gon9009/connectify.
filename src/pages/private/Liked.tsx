@@ -5,11 +5,12 @@ import Loader from "../../components/ui/Loader";
 const LikedPosts = () => {
   const { data: currentUser, isLoading } = useGetCurrentUser();
 
+  console.log(currentUser);
   if (isLoading) {
     return <Loader />;
   }
 
-  // null 값은 핸들러에서 처리할수 있도록 
+  // null 값은 핸들러에서 처리할수 있도록
   if (!currentUser) return <p>사용자 정보를 불러올 수 없습니다.</p>;
 
   if (currentUser.liked.length === 0) {

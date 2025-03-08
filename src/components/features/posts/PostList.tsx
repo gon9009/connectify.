@@ -8,9 +8,7 @@ type GridPostListProps = {
   showUser?: boolean;
   showStats?: boolean;
 };
-
 type GridPostImageProps = Pick<Post, "$id" | "imageUrl">;
-// creator
 type GridUserInfoProps = Pick<Post, "creator">;
 type GridPostItemProps = {
   post: Post; // ✅ Post 타입을 명시적으로 포함
@@ -72,6 +70,8 @@ const GridPostList = ({
   showStats = true,
 }: GridPostListProps) => {
   const { user } = useUserContext();
+
+  console.log(posts);
 
   return (
     <ul className="grid-posts">

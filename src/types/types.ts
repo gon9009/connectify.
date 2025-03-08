@@ -108,6 +108,14 @@ export type Post = Models.Document & {
   save?: { $id: string }; 
 };
 
+// 저장게시물 타입 (Save)
+export type SavedPost = {
+  $id:string;
+  createdAT:string;
+  post:Post
+}
+
+
 // 게시물 등록 타입 
 export type CreatePostType = {
   userId: string; // ✅ 현재 로그인한 사용자 ID
@@ -139,7 +147,7 @@ export type CurrentUser = Models.Document & {
   imageUrl: string;
   liked: Post[]; // liked가 문자열 배열 (좋아요한 게시물의 ID 배열)
   name: string;
-  posts: Post[]; // posts가 문서 배열이라면
-  save: string[]; // 저장한 게시물 ID 배열 (현재 빈 배열)
+  posts: Post[]; 
+  save: Post[]; // 저장한 게시물 ID 배열 (현재 빈 배열)
   username: string;
 };
