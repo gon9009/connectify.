@@ -60,6 +60,7 @@
     }
   }
   &__img {
+    object-fit: cover;
     border-radius: 20px;
     min-width: 640px;
     height: 500px;

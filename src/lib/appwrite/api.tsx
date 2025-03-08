@@ -11,6 +11,7 @@ import {
   CreatePostType,
   UpdatePostType,
   Post,
+  CurrentUser
 } from "../../types/types";
 
 // ========================================================== 인증 / 보안 API ==========================================================================================
@@ -94,26 +95,31 @@ export async function signOutAccount() {
 }
 
 // 현재 로그인한 사용자 정보 조회
-export async function getCurrentUser() {
+export async function getCurrentUser() :Promise<CurrentUser | null>{
   try {
-    // 1.현재 계정 정보 조회
+    // 1. 현재 계정 정보 조회
     const currentAccount = await account.get();
-    if (!currentAccount) throw Error;
+    if (!currentAccount) throw new Error("계정 정보를 가져오지 못했습니다.");
 
     // 2. DB에서 사용자 정보 조회
-    const currentUser = await databases.listDocuments(
+    const response = await databases.listDocuments<CurrentUser>(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
       [Query.equal("accountId", currentAccount.$id)]
     );
 
-    if (!currentUser) throw Error;
-    return currentUser.documents[0];
+    // 3. 사용자 정보가 없을 경우 처리 (빈 배열 대응)
+    if (!response.documents.length) {
+      return null; 
+    }
+
+    return response.documents[0]; // 항상 올바른 데이터를 반환
   } catch (error) {
-    console.log(error);
-    return null;
+    console.error("getCurrentUser() 실패:", error);
+    throw new Error("사용자 정보를 불러오는 중 오류가 발생했습니다.");
   }
 }
+
 
 // ===================================================== 게시물 (Post) ================================================================================
 

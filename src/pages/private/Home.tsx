@@ -1,8 +1,11 @@
 import Loader from "../../components/ui/Loader";
 import PostCard from "../../components/features/posts/PostCard";
 import UserCard from "../../components/features/user/UserCard";
-import { useGetRecentPosts, useGetUsers } from "../../lib/react-query/queries";
-import { useUserContext } from "../../context/AuthContext";
+import {
+  useGetRecentPosts,
+  useGetUsers,
+  useGetCurrentUser,
+} from "../../lib/react-query/queries";
 
 // 포스트 목록 컴포넌트
 const PostList = ({
@@ -60,11 +63,12 @@ const Home = () => {
     data: creatorsData,
     isLoading: isUserLoading,
     isError: isErrorCreators,
-  } = useGetUsers(10);
+  } = useGetUsers();
+  const {
+    data:currentUser
+  } = useGetCurrentUser();
 
-  // Post 구조 확인
-  console.log("useGetUsers 의 반환 정보:", JSON.stringify(creatorsData, null, 2));
-
+  console.log(currentUser);
   // 에러 처리
   if (isErrorCreators || isErrorPosts) {
     return <p>Error</p>;

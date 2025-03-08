@@ -8,6 +8,7 @@ import Create from "./pages/private/Create";
 import Edit from "./pages/private/Edit";
 import PostDetails from "./pages/private/PostDetails";
 import AllUsers from "./pages/private/AllUsers";
+import LikedPosts from "./pages/private/Liked";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/edit/:id" element={<Edit />} />
           <Route path="/posts/:id" element={<PostDetails />} />
           <Route path="/all" element={<AllUsers />} />
+          <Route path="/liked" element={<LikedPosts/>} />
         </Route>
 
       </Routes>
