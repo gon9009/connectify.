@@ -13,6 +13,7 @@ import {
   getPostById,
   deletePost,
   getUserPosts,
+  getUserById
 } from "../appwrite/api";
 import { Post,CurrentUser } from "../../types/types";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
@@ -59,6 +60,14 @@ export const useGetUsers = ( ) => {
   return useQuery({
     queryKey: ["getUsers"],
     queryFn: () => getUsers(),
+  });
+};
+
+export const useGetUserById = (userId: string) => {
+  return useQuery({
+    queryKey: [getUserById, userId],
+    queryFn: () => getUserById(userId),
+    enabled: !!userId,
   });
 };
 

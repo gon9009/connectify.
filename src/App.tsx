@@ -8,8 +8,10 @@ import Create from "./pages/private/Create";
 import Edit from "./pages/private/Edit";
 import PostDetails from "./pages/private/PostDetails";
 import AllUsers from "./pages/private/AllUsers";
-import LikedPosts from "./pages/private/Liked";
-import Saved from "./pages/private/Saved";
+import Liked from "./pages/private/Profile/Liked";
+import Saved from "./pages/private/Profile/Saved";
+import Profile from "./pages/private/Profile";
+import ProfilePosts from "./pages/private/Profile/ProfilePosts";
 const App = () => {
   return (
     <Router>
@@ -26,8 +28,11 @@ const App = () => {
           <Route path="/edit/:id" element={<Edit />} />
           <Route path="/posts/:id" element={<PostDetails />} />
           <Route path="/all" element={<AllUsers />} />
-          <Route path="/liked" element={<LikedPosts />} />
-          <Route path="/saved" element={<Saved />} />
+          <Route path="/profile/:id" element={<Profile />}>
+            <Route index element={<ProfilePosts />} />
+            <Route path="liked" element={<Liked />} />
+            <Route path="saved" element={<Saved />} />
+          </Route>
         </Route>
       </Routes>
     </Router>

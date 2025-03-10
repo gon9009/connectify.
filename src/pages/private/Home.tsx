@@ -1,11 +1,6 @@
 import Loader from "../../components/ui/Loader";
 import PostCard from "../../components/features/posts/PostCard";
-import UserCard from "../../components/features/user/UserCard";
-import {
-  useGetRecentPosts,
-  useGetUsers,
-  useGetCurrentUser,
-} from "../../lib/react-query/queries";
+import { useGetRecentPosts } from "../../lib/react-query/queries";
 
 // 포스트 목록 컴포넌트
 const PostList = ({
@@ -30,48 +25,11 @@ const PostList = ({
   );
 };
 
-// 사용자 목록 컴포넌트
-const UserList = ({
-  users,
-  isLoading,
-}: {
-  users?: User[];
-  isLoading: boolean;
-}) => {
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  return (
-    <ul className="home__user-list">
-      {users?.map((user) => (
-        <li key={user?.$id}>
-          <UserCard user={user} />
-        </li>
-      ))}
-    </ul>
-  );
-};
-
 const Home = () => {
-  const {
-    data: postsData,
-    isLoading: isPostLoading,
-    isError: isErrorPosts,
-  } = useGetRecentPosts();
-  const {
-    data: creatorsData,
-    isLoading: isUserLoading,
-    isError: isErrorCreators,
-  } = useGetUsers();
-  const {
-    data:currentUser
-  } = useGetCurrentUser();
+  const { data: postsData, isLoading: isPostLoading } = useGetRecentPosts();
 
-  console.log(currentUser);
-  // 에러 처리
-  if (isErrorCreators || isErrorPosts) {
-    return <p>Error</p>;
+  if (isPostLoading) {
+    return <Loader />;
   }
 
   return (

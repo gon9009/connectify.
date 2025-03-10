@@ -78,7 +78,7 @@ const PostCard = ({ post }: { post: Post }) => {
     <div className="post-card">
       <div className="post-card__header">
         <PostUser
-          creator={post.creator} // ✅ 이제 creator 전체를 전달해야 함!
+          creator={post.creator} 
           $createdAt={post.$createdAt}
         />
         {isEditable && (

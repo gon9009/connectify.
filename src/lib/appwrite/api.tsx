@@ -279,6 +279,26 @@ export async function getUsers() {
   }
 }
 
+
+// 아이디별 유저 
+export async function getUserById(userId: string): Promise<Models.Document> {
+  try {
+    const user = await databases.getDocument<Models.Document>(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      userId
+    );
+
+    if (!user) {
+      throw new Error("사용자를 찾을 수 없습니다."); 
+    }
+
+    return user;
+  } catch (error) {
+    console.error("사용자 정보를 가져오는 중 오류 발생:", error);
+    throw new Error("사용자 정보를 불러오지 못했습니다.");
+  }
+}
 // ====================================== 파일 CRUD  ===========================================================
 
 // 파일 업로드
