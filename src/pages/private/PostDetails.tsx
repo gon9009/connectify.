@@ -58,7 +58,6 @@ const PostActions = ({ post, handleDeletePost }: PostActionsProps) => {
 const PostHeader = ({ post, user, handleDeletePost }: PostHeaderProps) => {
   // 현재 게시물 작성자인지 묻는 함수
   const isPostOwner = user.id === post.creator.$id;
-
   return (
     <div className="post-details__top">
       <Link
@@ -87,6 +86,7 @@ const PostHeader = ({ post, user, handleDeletePost }: PostHeaderProps) => {
       {isPostOwner && (
         <PostActions post={post} handleDeletePost={handleDeletePost} />
       )}
+      {/* isPostOwner && <PostEdit /> */}
     </div>
   );
 };
@@ -133,7 +133,6 @@ const PostDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { user } = useUserContext();
-  // 단일 게시물
   const { data: post, isLoading } = useGetPostById(id);
   // 사용자의 게시물들
   const { data: userPosts, isLoading: isUserPostLoading } = useGetUserPosts(
@@ -165,6 +164,7 @@ const PostDetails = () => {
     <div className="post-details">
       <div className="post-details__container">
         <div className="post-details__card">
+          {/* 포스트 이미지대체 */}
           <img
             src={post?.imageUrl}
             alt="post"

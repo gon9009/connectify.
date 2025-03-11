@@ -26,7 +26,7 @@ const GridPostImage = ({ $id, imageUrl }: GridPostImageProps) => {
   );
 };
 
-// 사용자 정보 컴포넌트
+// 사용자 정보 컴포넌트 (사용자 아바타 + 이름 )
 const GridUserInfo = ({ creator }: GridUserInfoProps) => {
   const { imageUrl, name } = creator;
   return (
@@ -43,7 +43,7 @@ const GridUserInfo = ({ creator }: GridUserInfoProps) => {
   );
 };
 
-// 포스트 아이템 (이미지 + 사용자 정보 + 좋아요/저장 버튼튼)
+// 포스트 아이템 (이미지 + 사용자 정보 + 좋아요/저장 버튼)
 const GridPostItem = ({
   post,
   showUser,

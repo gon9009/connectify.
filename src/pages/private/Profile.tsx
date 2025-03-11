@@ -38,6 +38,7 @@ const ProfileTabs = ({ id }: ProfileTabProps) => {
     <div className="profile__tabs">
       <NavLink
         to={`/profile/${id}`}
+        end
         className={({ isActive }) => `profile__tab ${isActive ? "active" : ""}`}
       >
         <img src="/assets/posts.svg" alt="posts" width={20} height={20} />
@@ -122,34 +123,36 @@ const Profile = () => {
       <div className="profile__container">
         {/* 프로필 헤더로 분리 */}
         <div className="profile__header">
-          <img
-            src={
-              currentUser.imageUrl || "/assets/icons/profile-placeholder.svg"
-            }
-            width={144}
-            height={144}
-            alt="profile"
-            className="profile__image"
-          />
-          <ProfileInfo
-            name={currentUser.name}
-            username={currentUser.username}
-            postlength={currentUser.posts.length}
-            bio={currentUser.bio}
-          />
-          {isProfileOwner && <EditProfile userId={currentUser.$id} />}
+          <div className="profile__header-container">
+            <img
+              src={
+                currentUser.imageUrl || "/assets/icons/profile-placeholder.svg"
+              }
+              width={144}
+              height={144}
+              alt="profile"
+              className="profile__image"
+            />
+            <ProfileInfo
+              name={currentUser.name}
+              username={currentUser.username}
+              postlength={currentUser.posts.length}
+              bio={currentUser.bio}
+            />
+            {isProfileOwner && <EditProfile userId={currentUser.$id} />}
+          </div>
         </div>
+        {isProfileOwner && <ProfileTabs id={id} />}
+        <Outlet
+          context={{
+            posts: currentUser.posts,
+            save: isProfileOwner ? currentUser.save : [],
+            liked: isProfileOwner ? currentUser.liked : [],
+            isProfileOwner,
+            isLoading,
+          }}
+        />
       </div>
-      {isProfileOwner && <ProfileTabs id={id} />}
-      <Outlet
-        context={{
-          posts: currentUser.posts,
-          save: isProfileOwner ? currentUser.save : [],
-          liked: isProfileOwner ? currentUser.liked : [],
-          isProfileOwner,
-          isLoading,
-        }}
-      />
     </div>
   );
 };

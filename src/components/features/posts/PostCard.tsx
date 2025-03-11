@@ -10,18 +10,17 @@ dayjs.locale("ko");
 dayjs.extend(relativeTime);
 
 type PostUserProps = Pick<Post, "creator" | "$createdAt" | "location">;
-type PostEditButtonProps = Pick<Post, "$id"> & { isEditable: boolean };
+type PostEditButtonProps = Pick<Post, "$id"> & { isPostOwner: boolean };
 type PostImageProps = Pick<Post, "$id" | "imageUrl" | "caption" | "tags">;
 
 // ✅ 사용자 정보 (프로필 이미지, 이름, 날짜, 위치)
-// createdAt 은 Models.Docuemnt 에 잇을텐데 ?
 const PostUser = ({ creator, $createdAt }: PostUserProps) => {
   return (
     <div className="post-card__user">
       <Link to={creator.$id} className="post-card__user-link">
         <img
-        width={48}
-        height={48}
+          width={48}
+          height={48}
           src={creator.imageUrl || "/assets/placeholder.svg"}
           className="post-card__avatar"
         />
@@ -37,15 +36,12 @@ const PostUser = ({ creator, $createdAt }: PostUserProps) => {
 };
 
 // ✅ 게시물 수정 버튼 (작성자만 표시)
-const PostEditButton = ({ $id, isEditable }: PostEditButtonProps) => {
-  return isEditable ? (
+const PostEditButton = ({ $id }: PostEditButtonProps) => {
+  return (
     <Link to={`/edit/${$id}`} className="post-card__edit-button">
-      <img 
-      width={24}
-      height={24}
-      src="/assets/edit.svg" alt="Edit Post" />
+      <img width={24} height={24} src="/assets/edit.svg" alt="Edit Post" />
     </Link>
-  ) : null;
+  );
 };
 
 // ✅ 게시물 본문 및 이미지
@@ -71,18 +67,14 @@ const PostImage = ({ $id, imageUrl, caption, tags }: PostImageProps) => {
 
 const PostCard = ({ post }: { post: Post }) => {
   const { user } = useUserContext(); // 현재 로그인한 사용자 정보 가져오기
-  const isEditable = user.id === post.creator.$id; // 게시물 수정 가능 여부
+  const isPostOwner = user.id === post.creator.$id; // 게시물 수정 가능 여부
 
-  
   return (
     <div className="post-card">
       <div className="post-card__header">
-        <PostUser
-          creator={post.creator} 
-          $createdAt={post.$createdAt}
-        />
-        {isEditable && (
-          <PostEditButton $id={post.$id} isEditable={isEditable} />
+        <PostUser creator={post.creator} $createdAt={post.$createdAt} />
+        {isPostOwner && (
+          <PostEditButton $id={post.$id} isPostOwner={isPostOwner} />
         )}
       </div>
       {/* 📌 게시물 본문 (이미지, 캡션, 태그) */}
