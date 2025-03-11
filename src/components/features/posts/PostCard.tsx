@@ -5,6 +5,9 @@ import "dayjs/locale/ko";
 import { useUserContext } from "../../../context/AuthContext";
 import { Post } from "../../../types/types";
 import PostStats from "./PostStats";
+import { useLikePostHandler } from "../../../hooks/useLikePostHandler";
+import { useSavePostHandler } from "../../../hooks/useSavePosthandler";
+import { useMemo } from "react";
 
 dayjs.locale("ko");
 dayjs.extend(relativeTime);
@@ -66,8 +69,22 @@ const PostImage = ({ $id, imageUrl, caption, tags }: PostImageProps) => {
 };
 
 const PostCard = ({ post }: { post: Post }) => {
-  const { user } = useUserContext(); // 현재 로그인한 사용자 정보 가져오기
-  const isPostOwner = user.id === post.creator.$id; // 게시물 수정 가능 여부
+  const { user } = useUserContext();
+  const userId = user.id;
+  const isPostOwner = user.id === post.creator.$id;
+  const { isSaved, handleSavePost } = useSavePostHandler(post.$id, userId);
+
+  // usememo 로 참조값 유지 
+  const initialLikes = useMemo(
+    () => post.likes.map((user) => user.$id),
+    [post.likes]
+  );
+  
+  const { isLiked, handleLikePost, likesCount } = useLikePostHandler(
+    post.$id,
+    userId,
+    initialLikes
+  );
 
   return (
     <div className="post-card">
@@ -84,7 +101,13 @@ const PostCard = ({ post }: { post: Post }) => {
         caption={post.caption}
         tags={post.tags}
       />
-      <PostStats post={post} userId={user.id} />
+      <PostStats
+        isSaved={isSaved}
+        handleSavePost={handleSavePost}
+        isLiked={isLiked}
+        handleLikePost={handleLikePost}
+        likesCount={likesCount}
+      />
     </div>
   );
 };
