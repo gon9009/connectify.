@@ -1,45 +1,8 @@
 .grid-posts {
+  width: 100%;
+  border: 1px solid red;
   max-width: 64rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  &__item {
-    position: relative;
-    &-link {
-    }
-    &-image {
-      border-radius: 20px;
-    }
-  }
-
-  &__info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    z-index: 999;
-  }
-
-  &__user-info {
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-  }
-  &__user-avatar {
-    border-radius: 30px;
-  }
-
-  &__user-name {
-    color: white;
-    font-weight: 700;
-  }
-
-  &__stats {
-    display: flex;
-  }
 }

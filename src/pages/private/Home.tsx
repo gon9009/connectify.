@@ -1,5 +1,5 @@
 import Loader from "../../components/ui/Loader";
-import PostCard from "../../components/features/posts/PostCard";
+import PostCard from "../../components/features/posts/postcard/PostCard";
 import { useGetRecentPosts } from "../../lib/react-query/queries";
 
 // 포스트 목록 컴포넌트

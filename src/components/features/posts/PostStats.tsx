@@ -1,3 +1,4 @@
+import { PostVariant } from "./postcard/PostCard";
 
 type PostStatsProps = {
   isSaved: boolean;
@@ -5,6 +6,7 @@ type PostStatsProps = {
   isLiked: boolean;
   handleLikePost: (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => void;
   likesCount: number;
+  variant?: PostVariant;
 };
 
 type LikeButton = {
@@ -56,12 +58,12 @@ const PostStats = ({
   isLiked,
   handleLikePost,
   likesCount,
+  variant,
 }: PostStatsProps) => {
   // 페이지에 따라 스타일링 변화
-  const isProfilePage = location.pathname.startsWith("/profile");
 
   return (
-    <div className={`post__stats ${isProfilePage}`}>
+    <div className={`post__stats ${variant}`}>
       <LikeButton
         isLiked={isLiked}
         handleLikePost={handleLikePost}

@@ -12,6 +12,7 @@ import Liked from "./pages/private/Profile/Liked";
 import Saved from "./pages/private/Profile/Saved";
 import Profile from "./pages/private/Profile";
 import ProfilePosts from "./pages/private/Profile/ProfilePosts";
+
 const App = () => {
   return (
     <Router>
