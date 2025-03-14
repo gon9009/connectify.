@@ -2,12 +2,13 @@ import { useOutletContext } from "react-router-dom";
 import GridPostList from "../../../components/features/posts/PostList";
 import Loader from "../../../components/ui/Loader";
 
-// 사용자의 게시물 렌더링, isProfileOwner 체크 X 
+// Profile 에서 useOutletContext 로 데이터 전달
 const ProfilePosts = () => {
-  const { posts,isLoading } = useOutletContext();
+  const { posts, isLoading } = useOutletContext();
 
-  if(isLoading) {
-    return <Loader />
+
+  if (isLoading) {
+    return <Loader />;
   }
 
   return <GridPostList posts={posts} showUser={false} />;

@@ -100,8 +100,6 @@ const Profile = () => {
 
   // 프로필 사용자 추출
   const { data: currentUser, isLoading } = useGetUserById(id || "");
-
-  // 현재 사용자와 프로필 유저가 동일한지 확인하는 함수
   const isProfileOwner = user.id === currentUser?.$id;
 
   if (isLoading) {
@@ -111,8 +109,6 @@ const Profile = () => {
       </div>
     );
   }
-  console.log(isProfileOwner);
-
   if (!currentUser) {
     return <p className="error-message">유저 정보를 불러올 수 없습니다.</p>;
   }
@@ -145,7 +141,14 @@ const Profile = () => {
         {isProfileOwner && <ProfileTabs id={id} />}
         <Outlet
           context={{
-            posts: currentUser.posts,
+            posts: currentUser.posts.map((post) => ({
+              ...post,
+              creator: {
+                $id: currentUser.$id,
+                name: currentUser.name,
+                imageUrl: currentUser.imageUrl,
+              },
+            })),
             save: isProfileOwner ? currentUser.save : [],
             liked: isProfileOwner ? currentUser.liked : [],
             isProfileOwner,

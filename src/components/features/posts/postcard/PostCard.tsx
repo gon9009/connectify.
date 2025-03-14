@@ -14,6 +14,8 @@ type PostCardProps = {
   isDetail?: boolean;
   handleDelete?: () => void;
   variant?: PostVariant;
+  showUser?: boolean; // 추가
+  showStats?: boolean; // 추가
 };
 
 export type PostVariant = "" | "detail" | "compact";
@@ -23,8 +25,15 @@ const PostCard = ({
   isDetail = false,
   handleDelete,
   variant = "",
+  showUser = true, // 기본값 추가
+  showStats = true,
 }: PostCardProps) => {
   const { user } = useUserContext();
+
+  if(variant ==="compact") {
+    console.log(post.creator)
+  }
+
   const userId = user.id;
   const isPostOwner = user.id === post.creator.$id;
 
@@ -96,7 +105,6 @@ const PostCard = ({
   if (variant === "compact") {
     return (
       <div className="post-card post-card--compact">
-        <PostHeader {...headerProps} />
         <PostImage postId={post.$id} imageUrl={post.imageUrl} />
       </div>
     );

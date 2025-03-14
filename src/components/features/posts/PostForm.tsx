@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FileUploader } from "../posts/FileUploader";
+import { FileUploader } from "../fileuploader/FileUploader";
 import { PostFormData, PostValidation } from "../../../lib/validation/auth";
 import Input from "../../ui/Input";
 import Label from "../../ui/Label";
