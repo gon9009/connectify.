@@ -12,6 +12,7 @@ import Liked from "./pages/private/Profile/Liked";
 import Saved from "./pages/private/Profile/Saved";
 import Profile from "./pages/private/Profile";
 import ProfilePosts from "./pages/private/Profile/ProfilePosts";
+import ProfileEdit from "./pages/private/ProfileEdit";
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
             <Route path="liked" element={<Liked />} />
             <Route path="saved" element={<Saved />} />
           </Route>
+          <Route path="/edit-profile/:id" element={<ProfileEdit />} />
         </Route>
       </Routes>
     </Router>

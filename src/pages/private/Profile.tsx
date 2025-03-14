@@ -66,7 +66,7 @@ const ProfileTabs = ({ id }: ProfileTabProps) => {
 const EditProfile = ({ userId }: EditProfileProps) => {
   return (
     <div className="profile__actions">
-      <Link to={`/update-profile/${userId}`} className="edit-profile">
+      <Link to={`/edit-profile/${userId}`} className="edit-profile">
         <img src="/assets/edit.svg" alt="edit" width={20} height={20} />
         <p>프로필 수정</p>
       </Link>
