@@ -8,6 +8,10 @@ import Create from "./pages/private/Create";
 import Edit from "./pages/private/Edit";
 import PostDetails from "./pages/private/PostDetails";
 import AllUsers from "./pages/private/AllUsers";
+import Liked from "./pages/private/Profile/Liked";
+import Saved from "./pages/private/Profile/Saved";
+import Profile from "./pages/private/Profile";
+import ProfilePosts from "./pages/private/Profile/ProfilePosts";
 
 const App = () => {
   return (
@@ -21,12 +25,16 @@ const App = () => {
         {/* 인증 라우트 */}
         <Route element={<ProtectedLayout />}>
           <Route index path="/" element={<Home />} />
-          <Route path="/create-post" element={<Create/>} />
+          <Route path="/create-post" element={<Create />} />
           <Route path="/edit/:id" element={<Edit />} />
           <Route path="/posts/:id" element={<PostDetails />} />
           <Route path="/all" element={<AllUsers />} />
+          <Route path="/profile/:id" element={<Profile />}>
+            <Route index element={<ProfilePosts />} />
+            <Route path="liked" element={<Liked />} />
+            <Route path="saved" element={<Saved />} />
+          </Route>
         </Route>
-
       </Routes>
     </Router>
   );

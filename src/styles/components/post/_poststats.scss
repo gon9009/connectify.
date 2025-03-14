@@ -6,11 +6,13 @@
   align-items: center;
   justify-content: space-between;
   &-save {
+    cursor: pointer;
     &-icon {
     }
   }
 
   &-like {
+    cursor: pointer;
     display: flex;
     &-icon {
       margin-right: 0.3rem;

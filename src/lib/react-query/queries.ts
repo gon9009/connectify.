@@ -13,8 +13,9 @@ import {
   getPostById,
   deletePost,
   getUserPosts,
+  getUserById
 } from "../appwrite/api";
-import { Post } from "../../types/types";
+import { Post,CurrentUser } from "../../types/types";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { CreatePostType, NewUser, UpdatePostType } from "../../types/types";
 
@@ -48,16 +49,25 @@ export const useSignOutAccount = (options = {}) => {
 // ====================================== 사용자(user) 쿼리 =================================================================================
 
 export const useGetCurrentUser = () => {
-  return useQuery({
+  // 핸들러에서 반환 가능한 값 
+  return useQuery<CurrentUser | null>({
     queryKey: ["getCurrentUser"],
     queryFn: getCurrentUser,
   });
 };
 
-export const useGetUsers = (limit?: number) => {
+export const useGetUsers = ( ) => {
   return useQuery({
     queryKey: ["getUsers"],
-    queryFn: () => getUsers(limit),
+    queryFn: () => getUsers(),
+  });
+};
+
+export const useGetUserById = (userId: string) => {
+  return useQuery({
+    queryKey: [getUserById, userId],
+    queryFn: () => getUserById(userId),
+    enabled: !!userId,
   });
 };
 
