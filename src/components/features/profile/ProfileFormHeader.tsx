@@ -1,6 +1,4 @@
-import React from "react";
-
-const ProfileFormHeader = ({ title }) => {
+const ProfileFormHeader = ({ title }: { title: string }) => {
   return (
     <div className="form-page__header">
       <img
