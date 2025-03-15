@@ -13,11 +13,17 @@ import {
   getPostById,
   deletePost,
   getUserPosts,
-  getUserById
+  getUserById,
+  updateUser,
 } from "../appwrite/api";
-import { Post,CurrentUser } from "../../types/types";
+import { Post, CurrentUser } from "../../types/types";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
-import { CreatePostType, NewUser, UpdatePostType } from "../../types/types";
+import {
+  UpdateUserType,
+  CreatePostType,
+  NewUser,
+  UpdatePostType,
+} from "../../types/types";
 
 // ============================================ 가입 / 인증 쿼리 ==================================================================
 
@@ -49,14 +55,14 @@ export const useSignOutAccount = (options = {}) => {
 // ====================================== 사용자(user) 쿼리 =================================================================================
 
 export const useGetCurrentUser = () => {
-  // 핸들러에서 반환 가능한 값 
+  // 핸들러에서 반환 가능한 값
   return useQuery<CurrentUser | null>({
     queryKey: ["getCurrentUser"],
     queryFn: getCurrentUser,
   });
 };
 
-export const useGetUsers = ( ) => {
+export const useGetUsers = () => {
   return useQuery({
     queryKey: ["getUsers"],
     queryFn: () => getUsers(),
@@ -198,6 +204,22 @@ export const useUpdatePost = () => {
     onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: ["getPostById", data?.$id],
+      });
+    },
+  });
+};
+
+// ========================================= 프로필 업데이트 쿼리 ========================================================export const useUpdateUser = () => {
+export const useUpdateUser = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (user: UpdateUserType) => updateUser(user),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: ["getCurrentUser"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["getUserById", data?.$id],
       });
     },
   });

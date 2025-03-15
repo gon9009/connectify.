@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { ProfileFormData } from "../../lib/validation/profile";
 import Loader from "../../components/ui/Loader";
 import { useUserContext } from "../../context/AuthContext";
-// useUpdateUser 추가 
+import { useUpdateUser } from "../../lib/react-query/queries";
 
 // 프로필 수정 페이지
 const ProfileEdit = () => {
@@ -15,6 +15,7 @@ const ProfileEdit = () => {
   const { user } = useUserContext();
 
   const { data: currentUser, isLoading } = useGetUserById(id || "");
+  const { mutateAsync: updateUser, isPending } = useUpdateUser();
 
   if (isLoading) {
     return <Loader />;
@@ -38,7 +39,7 @@ const ProfileEdit = () => {
           user={user}
           currentUser={currentUser}
           handleEditProfile={handleEditProfile}
-          // isPending={isPending}
+          isPending={isPending}
         />
       </div>
     </div>

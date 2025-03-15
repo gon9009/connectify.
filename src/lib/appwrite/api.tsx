@@ -1,4 +1,4 @@
-import { ID, ImageGravity, Query } from "appwrite";
+import { ID, ImageGravity, Query, Models } from "appwrite";
 import {
   appwriteConfig,
   account,
@@ -11,7 +11,8 @@ import {
   CreatePostType,
   UpdatePostType,
   Post,
-  CurrentUser
+  CurrentUser,
+  UpdateUserType
 } from "../../types/types";
 
 // ========================================================== 인증 / 보안 API ==========================================================================================
@@ -95,7 +96,7 @@ export async function signOutAccount() {
 }
 
 // 현재 로그인한 사용자 정보 조회
-export async function getCurrentUser() :Promise<CurrentUser | null>{
+export async function getCurrentUser(): Promise<CurrentUser | null> {
   try {
     // 1. 현재 계정 정보 조회
     const currentAccount = await account.get();
@@ -110,7 +111,7 @@ export async function getCurrentUser() :Promise<CurrentUser | null>{
 
     // 3. 사용자 정보가 없을 경우 처리 (빈 배열 대응)
     if (!response.documents.length) {
-      return null; 
+      return null;
     }
 
     return response.documents[0]; // 항상 올바른 데이터를 반환
@@ -119,7 +120,6 @@ export async function getCurrentUser() :Promise<CurrentUser | null>{
     throw new Error("사용자 정보를 불러오는 중 오류가 발생했습니다.");
   }
 }
-
 
 // ===================================================== 게시물 (Post) ================================================================================
 
@@ -279,8 +279,7 @@ export async function getUsers() {
   }
 }
 
-
-// 아이디별 유저 
+// 아이디별 유저
 export async function getUserById(userId: string): Promise<Models.Document> {
   try {
     const user = await databases.getDocument<Models.Document>(
@@ -290,7 +289,7 @@ export async function getUserById(userId: string): Promise<Models.Document> {
     );
 
     if (!user) {
-      throw new Error("사용자를 찾을 수 없습니다."); 
+      throw new Error("사용자를 찾을 수 없습니다.");
     }
 
     return user;
@@ -450,6 +449,59 @@ export async function updatePost(post: UpdatePostType) {
     }
 
     return updatedPost;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// ===================================================== 사용자 정보 업데이트 =============================================================
+export async function updateUser(user: UpdateUserType) {
+  const hasFileToUpdate = user.file.length > 0;
+  try {
+    let image = {
+      imageUrl: user.imageUrl,
+      imageId: user.imageId,
+    };
+
+    if (hasFileToUpdate) {
+      const uploadedFile = await uploadFile(user.file[0]);
+      if (!uploadedFile) throw Error;
+
+      const fileUrl = getFilePreview(uploadedFile.$id);
+      if (!fileUrl) {
+        await deleteFile(uploadedFile.$id);
+        throw Error;
+      }
+
+      image = { ...image, imageUrl: fileUrl, imageId: uploadedFile.$id };
+    }
+
+    //  Update user
+    const updatedUser = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      user.userId,
+      {
+        name: user.name,
+        bio: user.bio,
+        imageUrl: image.imageUrl,
+        imageId: image.imageId,
+      }
+    );
+
+    if (!updatedUser) {
+      if (hasFileToUpdate) {
+        await deleteFile(image.imageId);
+      }
+
+      throw Error;
+    }
+
+    if (user.imageId && hasFileToUpdate) {
+      await deleteFile(user.imageId);
+    }
+
+    return updatedUser;
   } catch (error) {
     console.log(error);
   }
