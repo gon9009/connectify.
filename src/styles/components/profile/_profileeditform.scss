@@ -1,20 +1,20 @@
 @use "../../abstracts/variables" as v;
-.post-form {
+
+.profile-form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+
   &__container {
     width: 100%;
     margin: 0.5rem;
   }
-
+  // 이미 label 컴포넌트 SCSS 가 존재한다 ⭐
   &__label {
   }
-
   &__textarea {
-    resize: none; /* 사용자가 크기 조절하지 못하도록 설정 */
+    resize: none;
     width: 100%;
     padding: 0.5rem;
     height: 200px;
@@ -25,7 +25,6 @@
     &.error {
     }
   }
-
   &__input {
     height: 40px;
     border-radius: 10px;
@@ -33,9 +32,16 @@
     color: v.$light-2;
     border: 0;
     padding: 0.5rem;
-    &.error {
+    &--error {
+      color: red;
+      font-weight: 800;
+    }
+    &--disabled {
+      opacity: 0.5;
     }
   }
+
+  // 유저이름 / 이메일은 변경 불가
 
   &__btn-container {
     width: 100%;

@@ -1,6 +1,6 @@
 const ProfileFormHeader = ({ title }: { title: string }) => {
   return (
-    <div className="form-page__header">
+    <div className="profile-edit__header">
       <img
         src="/assets/edit.svg"
         width={36}
@@ -8,7 +8,7 @@ const ProfileFormHeader = ({ title }: { title: string }) => {
         alt="edit"
         className="invert-white"
       />
-      <h2 className="form-page__title">{title}</h2>
+      <h2 className="profile-edit__title">{title}</h2>
     </div>
   );
 };

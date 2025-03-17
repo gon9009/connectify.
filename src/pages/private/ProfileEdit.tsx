@@ -61,7 +61,7 @@ const ProfileEdit = () => {
   };
 
   return (
-    <div className="profile-edit-page">
+    <div className="profile-edit">
       <div className="profile-edit__container">
         <ProfileFormHeader title="프로필 수정" />
         <ProfileForm

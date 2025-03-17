@@ -7,7 +7,7 @@ import Button from "../../ui/Button";
 import Textarea from "../../ui/Textarea";
 import { useNavigate } from "react-router-dom";
 import { Post } from "../../../types/types";
-import { ProfileUploader } from "../fileuploader/ProfileUploader";
+import { PostFileUploader } from "../fileuploader/PostFileUploader";
 
 type PostFormProps = {
   post: Post;// 실제 Post 타입 읽어오기
@@ -74,7 +74,7 @@ const PostForm = ({
           <Label htmlFor="file" className="post-form__label">
             사진을 추가하세요
           </Label>
-          <ProfileUploader
+          <PostFileUploader
             fieldChange={(files) => setValue("file", files)} // setValue 사용
             mediaUrl={post?.imageUrl} // 수정 모드에서 기존 이미지 URL 전달
           />
