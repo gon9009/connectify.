@@ -8,6 +8,7 @@ import { PostFormData } from "../../lib/validation/auth";
 const Create = () => {
   const navigate = useNavigate();
   const { user } = useUserContext();
+  
   // 쿼리
   const { mutateAsync: createPost, isPending: isPendingCreate } =
     useCreatePost();
@@ -15,7 +16,7 @@ const Create = () => {
   // 새 게시물
   const handleCreate = async (value: PostFormData) => {
     await createPost({ ...value, userId: user.id });
-    navigate("/");
+    return  navigate("/");
   };
 
   return (

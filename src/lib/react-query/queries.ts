@@ -16,7 +16,7 @@ import {
   getUserById,
   updateUser,
 } from "../appwrite/api";
-import { Post, CurrentUser } from "../../types/types";
+import { Post, CurrentUser,ProfileUser } from "../../types/types";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import {
   UpdateUserType,
@@ -70,7 +70,7 @@ export const useGetUsers = () => {
 };
 
 export const useGetUserById = (userId: string) => {
-  return useQuery({
+  return useQuery<ProfileUser>({
     queryKey: [getUserById, userId],
     queryFn: () => getUserById(userId),
     enabled: !!userId,

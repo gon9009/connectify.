@@ -95,7 +95,6 @@ export interface PostFormField {
 }
 
 //  ============================= 포스트 관련 타입 ======================================================================
-
 export type Post = Models.Document & {
   $id: string;
   creator: {
@@ -156,7 +155,17 @@ export type CurrentUser = Models.Document & {
 };
 
 // =============================================================== 사용자 프로필====================================
-export type UpdateUserType = {
+export type ProfileUser = Models.Document & { 
+  bio: string; 
+  email: string; 
+  imageId: string; 
+  imageUrl: string; 
+  name: string; 
+  username: string; 
+};
+
+
+export type UpdateUserType= {
   userId: string;
   name: string;
   bio: string;

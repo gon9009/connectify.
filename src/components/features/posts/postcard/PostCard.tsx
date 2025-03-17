@@ -1,8 +1,8 @@
 import { useUserContext } from "../../../../context/AuthContext";
 import { Post } from "../../../../types/types";
 import PostStats from "../PostStats";
-import { useLikePostHandler } from "../../../../hooks/useLikePostHandler";
-import { useSavePostHandler } from "../../../../hooks/useSavePostHandler";
+import useLikePostHandler from "../../../../hooks/useLikePostHandler";
+import useSavePostHandler from "../../../../hooks/useSavePostHandler";
 import { useMemo } from "react";
 import PostHeader from "./PostHeader"; // default import
 import { PostContent } from "./PostContent";
@@ -30,8 +30,8 @@ const PostCard = ({
 }: PostCardProps) => {
   const { user } = useUserContext();
 
-  if(variant ==="compact") {
-    console.log(post.creator)
+  if (variant === "compact") {
+    console.log(post.creator);
   }
 
   const userId = user.id;

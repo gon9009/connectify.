@@ -12,7 +12,8 @@ import {
   UpdatePostType,
   Post,
   CurrentUser,
-  UpdateUserType
+  UpdateUserType,
+  ProfileUser
 } from "../../types/types";
 
 // ========================================================== 인증 / 보안 API ==========================================================================================
@@ -280,9 +281,9 @@ export async function getUsers() {
 }
 
 // 아이디별 유저
-export async function getUserById(userId: string): Promise<Models.Document> {
+export async function getUserById(userId: string): Promise<ProfileUser> {
   try {
-    const user = await databases.getDocument<Models.Document>(
+    const user = await databases.getDocument<ProfileUser>(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
       userId
@@ -432,18 +433,14 @@ export async function updatePost(post: UpdatePostType) {
       }
     );
 
-    // Failed to update
     if (!updatedPost) {
-      // Delete new file that has been recently uploaded
       if (hasFileToUpdate) {
         await deleteFile(image.imageId);
       }
 
-      // If no new file uploaded, just throw error
       throw Error;
     }
 
-    // Safely delete old file after successful update
     if (hasFileToUpdate) {
       await deleteFile(post.imageId);
     }

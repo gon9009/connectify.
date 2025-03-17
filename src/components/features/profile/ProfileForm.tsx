@@ -9,18 +9,15 @@ import Label from "../../ui/Label";
 import Input from "../../ui/Input";
 import Textarea from "../../ui/Textarea";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import { User } from "../../../types/types";
+import { ProfileUploader } from "../fileuploader/ProfileUploader";
+import { ProfileUser } from "../../../types/types";
 
 // CurrentUser의 타입
-// CurrentUser타입 필요한것만
 type ProfileFormProps = {
   handleEditProfile: (data: ProfileFormData) => void;
-  currentUser: {
-    $id: string;
-    imageUrl:string;
-    imageId: string;  
-  };
+  // 현재 사용자 정보 표시용
+  currentUser: ProfileUser;
   isPending: boolean;
   user: User;
 };
@@ -48,21 +45,16 @@ const ProfileForm = ({
     },
   });
 
-  // 접근 권한 확인
-  useEffect(() => {
-    if (currentUser.$id !== user.id) {
-      navigate("/");
-    }
-  }, []);
-
   return (
     <form onSubmit={handleSubmit(handleEditProfile)} className="profile-form">
-      {/* 프로필 변경 핸들러, setValue 필요함  */}
-      {/* <div className="post-form__container">
-          {errors.file && (
-            <p className="error-message">{errors.file.message}</p>
-          )}
-      </div> */}
+      {/* 프로필 이미지 변경  */}
+      <div className="post-form__container">
+        <ProfileUploader
+          fieldChange={(files) => setValue("file", files)}
+          mediaUrl={currentUser.imageUrl}
+        />
+        {errors.file && <p className="error-message">{errors.file.message}</p>}
+      </div>
 
       {/* 이름 (name) 변경 */}
       <div className="post-form__container">
