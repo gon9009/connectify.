@@ -19,7 +19,6 @@
 
   &__header {
     border: 1px solid v.$light-4;
-
     background-color: v.$dark-3;
     width: 100%;
     padding: 1rem;
@@ -54,6 +53,9 @@
   }
 
   &__bio {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: v.$light-2;
   }
 
   &__stats {
@@ -64,7 +66,7 @@
   &__actions {
     background-color: v.$dark-4;
     border-radius: 15px;
-    align-self: flex-start; // ✅ 상위 컨테이너의 높이를 따라가지 않도록 설정
+    align-self: flex-start;
     padding: 1rem;
     .edit-profile {
       display: flex;

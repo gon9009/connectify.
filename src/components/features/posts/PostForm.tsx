@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FileUploader } from "../fileuploader/FileUploader";
 import { PostFormData, PostValidation } from "../../../lib/validation/auth";
 import Input from "../../ui/Input";
 import Label from "../../ui/Label";
@@ -8,6 +7,7 @@ import Button from "../../ui/Button";
 import Textarea from "../../ui/Textarea";
 import { useNavigate } from "react-router-dom";
 import { Post } from "../../../types/types";
+import { PostFileUploader } from "../fileuploader/PostFileUploader";
 
 type PostFormProps = {
   post: Post;// 실제 Post 타입 읽어오기
@@ -44,7 +44,6 @@ const PostForm = ({
 
   // 제출 핸들러
   const onSubmit = async (values: PostFormData) => {
-    // { caption: "...", file: [...], location: "...", tags: "..." }
     if (action === "Update" && onUpdate) {
       await onUpdate(values);
     } else if (action === "Create" && onCreate) {
@@ -75,7 +74,7 @@ const PostForm = ({
           <Label htmlFor="file" className="post-form__label">
             사진을 추가하세요
           </Label>
-          <FileUploader
+          <PostFileUploader
             fieldChange={(files) => setValue("file", files)} // setValue 사용
             mediaUrl={post?.imageUrl} // 수정 모드에서 기존 이미지 URL 전달
           />

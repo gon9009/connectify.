@@ -66,7 +66,7 @@ const ProfileTabs = ({ id }: ProfileTabProps) => {
 const EditProfile = ({ userId }: EditProfileProps) => {
   return (
     <div className="profile__actions">
-      <Link to={`/update-profile/${userId}`} className="edit-profile">
+      <Link to={`/edit-profile/${userId}`} className="edit-profile">
         <img src="/assets/edit.svg" alt="edit" width={20} height={20} />
         <p>프로필 수정</p>
       </Link>
@@ -111,7 +111,11 @@ const Profile = () => {
   }
   if (!currentUser) {
     return <p className="error-message">유저 정보를 불러올 수 없습니다.</p>;
+    
   }
+  // 현재 유저가 "좋아요" 한 게시물
+  // console.log(currentUser.liked);
+
 
   // ProfileOwner 일때 프로필 수정과 / 프로필 탭이 활성화
   return (

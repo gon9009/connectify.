@@ -6,7 +6,7 @@ import {
 } from "../lib/react-query/queries";
 
 // 게시물 저장기능 커스텀 훅
-export const useSavePostHandler = (postId: string, userId: string) => {
+const useSavePostHandler = (postId: string, userId: string) => {
   const [isSaved, setIsSaved] = useState(false);
   const { data: currentUser } = useGetCurrentUser();
   // 새로운 게시물을 저장, 기존에 저장된 게시물을 삭제
@@ -18,7 +18,7 @@ export const useSavePostHandler = (postId: string, userId: string) => {
     () => currentUser?.save.find((record) => record.post.$id === postId),
     [currentUser?.save, postId]
   );
-  
+
   // isSaved 상태 초기화/ 최신상태로 유지하기 위해 사용
   useEffect(() => {
     setIsSaved(!!savedPostRecord);
@@ -45,3 +45,4 @@ export const useSavePostHandler = (postId: string, userId: string) => {
 
   return { isSaved, handleSavePost };
 };
+export default useSavePostHandler;

@@ -1,0 +1,26 @@
+// 프로필 변경 페이지
+.profile-edit {
+  flex: 1 1 0%;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+
+  &__container {
+    max-width: 90%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2rem;
+  }
+
+  &__header {
+    display: flex;
+    gap: 0.5rem;
+  }
+}
+
+
+// Edit/Create 페이지와 완전히 동일한 형태 ! 
+// SCSS 구조화 시키기 ! 

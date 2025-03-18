@@ -38,7 +38,6 @@ export const SigninValidation = z.object({
 });
 
 // PostForm 유효성 검증 
-
 export const PostValidation = z.object({
   caption: z
     .string()
