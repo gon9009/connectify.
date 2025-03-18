@@ -13,7 +13,7 @@ import {
   Post,
   CurrentUser,
   UpdateUserType,
-  ProfileUser
+  ProfileUser,
 } from "../../types/types";
 
 // ========================================================== 인증 / 보안 API ==========================================================================================
@@ -241,7 +241,7 @@ export async function getUserPosts(userId?: string): Promise<Post[]> {
     const post = await databases.listDocuments<Post>(
       appwriteConfig.databaseId,
       appwriteConfig.postCollectionId,
-      [Query.equal("creator", userId), Query.orderDesc("$createdAt")]
+      [Query.equal("creator", userId), Query.orderAsc("$createdAt")]
     );
 
     if (!post) throw Error;
