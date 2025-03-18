@@ -1,6 +1,17 @@
+// 그리드 형식 포스트 리스트 스타일
 .grid-posts {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap:1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); // 기본값 (큰 화면에서 3열)
+  gap: 2rem;
+
+  // 1024px 이하에서 2열
+  @media (max-width: 1286px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  // 768px 이하에서 1열
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
 }

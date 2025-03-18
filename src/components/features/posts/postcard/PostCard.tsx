@@ -30,16 +30,31 @@ const PostCard = ({
 }: PostCardProps) => {
   const { user } = useUserContext();
 
-  if (variant === "compact") {
-    console.log(post.creator);
-  }
+  console.log(post);
+  console.log(post.$id);
+
+  // "프로필"로 접근했다면 post.creator.$id 를 반환 !
+  // 그러나 "저장됨"으로 접근했다면 post.creator.$id 를 반환하지 않고 오류 발생 !
+  // "컨텍스트" 에 따른 소유자 체크 로직 검사 필요 !
 
   const userId = user.id;
-  const isPostOwner = user.id === post.creator.$id;
+  // 컨텍스트에 따른 소유자 체크 로직
+  const isPostOwner = useMemo(() => {
+    // saved 탭에서 접근한 경우
+    if (!post.creator) {
+      return user.id === post.$id;
+    }
+    // 프로필이나 일반 포스트에서 접근한 경우
+    return user.id === post.creator.$id;
+  }, [user.id, post]);
 
-  // usememo 로 참조값 유지
+  // 컨텍스트에 따른 좋아요 상태
   const initialLikes = useMemo(
-    () => post.likes.map((user) => user.$id),
+    // 프로필의 liked/saved 탭에서는 빈 배열 반환
+    () => {
+      if (!post.likes) return [];
+      return post.likes.map((user) => user.$id);
+    },
     [post.likes]
   );
   const { isSaved, handleSavePost } = useSavePostHandler(post.$id, userId);
@@ -52,9 +67,9 @@ const PostCard = ({
   // 카드 헤더 Props
   const headerProps = {
     variant,
-    creatorImageUrl: post.creator.imageUrl,
-    creatorId: post.creator.$id,
-    creatorName: post.creator.name,
+    creatorImageUrl: post.creator?.imageUrl || user.imageUrl,
+    creatorId: post.creator?.$id || post.$id,
+    creatorName: post.creator?.name || user.name,
     createdAt: post.$createdAt,
     location: post.location,
     postId: post.$id,
@@ -94,7 +109,6 @@ const PostCard = ({
             <Divider postType="detail" />
             <PostContent {...contentProps} />
           </div>
-
           <PostStats {...statsProps} />
         </div>
       </div>
