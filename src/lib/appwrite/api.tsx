@@ -503,3 +503,32 @@ export async function updateUser(user: UpdateUserType) {
     console.log(error);
   }
 }
+
+// ====================================================== 검색 + 무한 스크롤 =============================================================
+export async function searchInfinitePosts(
+  searchTerm: string,
+  pageParam?: string
+) {
+  const queries = [
+    Query.search("caption", searchTerm),
+    Query.limit(10), // 한 번에 10개씩
+  ];
+
+  // pageParam이 있으면 커서 추가
+  if (pageParam) {
+    queries.push(Query.cursorAfter(pageParam));
+  }
+
+  const response = await databases.listDocuments(
+    appwriteConfig.databaseId,
+    appwriteConfig.postCollectionId,
+    queries
+  );
+
+  // 반환값(hasNextPage)은 단순히 우리가 데이터를 관리하기 위해 추가한 필드
+  return {
+    documents: response.documents,
+    hasNextPage: response.documents.length === 10, 
+  };
+}
+

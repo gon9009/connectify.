@@ -15,9 +15,15 @@ import {
   getUserPosts,
   getUserById,
   updateUser,
+  searchInfinitePosts,
 } from "../appwrite/api";
-import { Post, CurrentUser,ProfileUser } from "../../types/types";
-import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
+import { Post, CurrentUser, ProfileUser } from "../../types/types";
+import {
+  useMutation,
+  useQueryClient,
+  useQuery,
+  useInfiniteQuery,
+} from "@tanstack/react-query";
 import {
   UpdateUserType,
   CreatePostType,
@@ -222,5 +228,22 @@ export const useUpdateUser = () => {
         queryKey: ["getUserById", data?.$id],
       });
     },
+  });
+};
+
+// ========================================= 검색+ 무한스크롤 쿼리 =======================================
+
+export const useSearchInfinitePosts = (debouncedSearch: string) => {
+  return useInfiniteQuery({
+    queryKey: ["infiniteSearch", debouncedSearch],
+    queryFn: ({ pageParam }: { pageParam?: string }) =>
+      searchInfinitePosts(debouncedSearch, pageParam),
+
+    getNextPageParam: (lastPage) => {
+      if (!lastPage || !lastPage.documents.length) return null;
+      return lastPage.documents[lastPage.documents.length - 1].$id;
+    },
+    enabled: debouncedSearch.length > 0,
+    initialPageParam: undefined,
   });
 };
