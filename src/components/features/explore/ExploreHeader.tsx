@@ -1,4 +1,8 @@
-const ExploreHeader = () => {
+interface ExploreHeaderProps {
+  searchValue: string;
+  setSearchValue: (value: string) => void;
+}
+const ExploreHeader = ({ searchValue, setSearchValue }: ExploreHeaderProps) => {
   return (
     <div className="explore__header">
       <h2 className="explore__title">검색</h2>
@@ -10,8 +14,8 @@ const ExploreHeader = () => {
         className="invert-white"
       />
       <input
-        value={}
-        onChange={}
+        value={searchValue}
+        onChange={(e) => setSearchValue(e.target.value)}
         className="explore__search-input"
         placeholder="검색어를 입력하세요"
       />
