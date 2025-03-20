@@ -30,9 +30,6 @@ const PostCard = ({
 }: PostCardProps) => {
   const { user } = useUserContext();
 
-  console.log(post);
-  console.log(post.$id);
-
   // "프로필"로 접근했다면 post.creator.$id 를 반환 !
   // 그러나 "저장됨"으로 접근했다면 post.creator.$id 를 반환하지 않고 오류 발생 !
   // "컨텍스트" 에 따른 소유자 체크 로직 검사 필요 !
@@ -48,6 +45,7 @@ const PostCard = ({
     return user.id === post.creator.$id;
   }, [user.id, post]);
 
+  
   // 컨텍스트에 따른 좋아요 상태
   const initialLikes = useMemo(
     // 프로필의 liked/saved 탭에서는 빈 배열 반환

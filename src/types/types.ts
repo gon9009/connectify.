@@ -173,3 +173,9 @@ export type UpdateUserType= {
   imageUrl: URL | string;
   file: File[];
 };
+
+//=============================================================== 검색 + 무한 스크롤 ======================================
+export type SearchResponse = {
+  docuemnts: Post[];
+  hasNextPage: boolean;
+}

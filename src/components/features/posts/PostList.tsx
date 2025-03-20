@@ -14,7 +14,6 @@ const GridPostList = ({
   showUser = true,
   showStats = true,
 }: GridPostListProps) => {
-  console.log(posts)
   return (
     <ul className="grid-posts">
       {posts.map((post) => (
