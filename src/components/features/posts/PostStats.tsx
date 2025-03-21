@@ -3,14 +3,14 @@ import { PostVariant } from "./postcard/PostCard";
 type PostStatsProps = {
   isSaved: boolean;
   handleSavePost: (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => void;
-  isLiked: boolean;
+  isUserLiked: boolean;
   handleLikePost: (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => void;
   likesCount: number;
   variant?: PostVariant;
 };
 
 type LikeButton = {
-  isLiked: boolean;
+  isUserLiked: boolean;
   handleLikePost: (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => void;
   likesCount: number;
 };
@@ -35,11 +35,11 @@ const SaveButton = ({ isSaved, handleSavePost }: SaveButton) => {
   );
 };
 
-const LikeButton = ({ handleLikePost, isLiked, likesCount }: LikeButton) => {
+const LikeButton = ({ handleLikePost, isUserLiked, likesCount }: LikeButton) => {
   return (
     <div className="post__stats-like">
       <img
-        src={isLiked ? "/assets/liked.svg" : "/assets/like.svg"}
+        src={isUserLiked ? "/assets/liked.svg" : "/assets/like.svg"}
         alt="like"
         width={24}
         height={24}
@@ -55,7 +55,7 @@ const LikeButton = ({ handleLikePost, isLiked, likesCount }: LikeButton) => {
 const PostStats = ({
   isSaved,
   handleSavePost,
-  isLiked,
+  isUserLiked,
   handleLikePost,
   likesCount,
   variant,
@@ -65,7 +65,7 @@ const PostStats = ({
   return (
     <div className={`post__stats ${variant}`}>
       <LikeButton
-        isLiked={isLiked}
+        isUserLiked={isUserLiked}
         handleLikePost={handleLikePost}
         likesCount={likesCount}
       />

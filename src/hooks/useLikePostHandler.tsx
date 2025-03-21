@@ -1,46 +1,33 @@
-import { useState, useEffect } from "react";
 import { useLikePost } from "../lib/react-query/queries";
 
 // 게시물 "좋아요" 기능 커스텀 훅
-// 게시물 하나하나 마다 좋아요 누른 사람들 반환 (initialLikes) -> 상태로 
 export const useLikePostHandler = (
   postId: string,
   userId: string,
-  initialLikes: string[]
+  usersWhoLiked: string[]
 ) => {
-  const [likes, setLikes] = useState<string[]>(initialLikes);
   const { mutate: likePost } = useLikePost();
 
-  // 서버 - 로컬 동기화 useEFfect
-  useEffect(() => {
-    if (JSON.stringify(likes) !== JSON.stringify(initialLikes)) {
-      setLikes(initialLikes);
-    }
-  }, [initialLikes]);
+  // 사용자가 게시물(Card) 에 좋아요를 눌렀는지 확인 
+  const isUserLiked = usersWhoLiked.includes(userId);
 
-  // 사용자가 좋아요(Liked) 인지 확인
-  const isLiked = likes.includes(userId);
-
-  // 좋아요 동작 핸들러
   const handleLikePost = (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>
   ) => {
     e.stopPropagation();
 
-    const newLikes = isLiked
-      ? likes.filter((id) => id !== userId) // 좋아요 취소
-      : [...likes, userId]; // 좋아요 추가
+    // 좋아요 상태 토글 
+    const newLikes = isUserLiked
+      ? usersWhoLiked.filter((id) => id !== userId) // 좋아요 취소
+      : [...usersWhoLiked, userId]; // 좋아요 추가
 
+
+    // 나중에 onSuccess,onError 토스트 메시지 추가
     likePost(
-      { postId, likesArray: newLikes },
-      {
-        onSuccess: () => {
-          setLikes(newLikes);
-        },
-      }
+      { postId, likesArray: newLikes }
     );
   };
 
-  return { isLiked, likesCount: likes.length, handleLikePost };
+  return { isUserLiked, likesCount: usersWhoLiked.length, handleLikePost };
 };
 

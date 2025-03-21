@@ -1,6 +1,6 @@
 import { SidebarNavLink } from "../types/types";
 
-export const sidebarLinks:SidebarNavLink[]= [
+export const sidebarLinks: SidebarNavLink[] = [
   {
     imgURL: "/assets/home.svg",
     route: "/",
@@ -14,12 +14,7 @@ export const sidebarLinks:SidebarNavLink[]= [
   {
     imgURL: "/assets/people.svg",
     route: "/all",
-    label: "사용자",
-  },
-  {
-    imgURL: "/assets/saved.svg",
-    route: "/saved",
-    label: "저장된 게시물",
+    label: "사용자들",
   },
   {
     imgURL: "/assets/create.svg",
@@ -28,7 +23,7 @@ export const sidebarLinks:SidebarNavLink[]= [
   },
 ];
 
-export const mobileMenuLinks:SidebarNavLink[]=[
+export const mobileMenuLinks: SidebarNavLink[] = [
   {
     imgURL: "/assets/home.svg",
     route: "/",
@@ -40,9 +35,9 @@ export const mobileMenuLinks:SidebarNavLink[]=[
     label: "Explore",
   },
   {
-    imgURL: "/assets/saved.svg",
-    route: "/saved",
-    label: "Saved",
+    imgURL: "/assets/people.svg",
+    route: "/all",
+    label: "All",
   },
   {
     imgURL: "/assets/create.svg",
