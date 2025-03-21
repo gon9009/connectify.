@@ -28,14 +28,14 @@ const SearchResult = ({ debouncedSearch }: DebouncedSearchProps) => {
   // 2. 검색어 입력 전 초기 상태
   if (!debouncedSearch) {
     return (
-      <>
-        <p className="explore__search-result--empty">
-          관심있는 게시물을 검색해보세요
+      <div className="explore__search-results--initial">
+        <p className="explore__search-results--empty">
+          관심있는 게시물을 검색해보세요!
         </p>
-        <p className="explore__serach-result--empty-test">
-          "테스트" 라고 검색해보세요
+        <p className="explore__search-results--empty-test">
+          ❗"테스트" 라고 검색해보세요❗
         </p>
-      </>
+      </div>
     );
   }
 
@@ -47,7 +47,11 @@ const SearchResult = ({ debouncedSearch }: DebouncedSearchProps) => {
   // 검색 결과가 없을떄
   if (posts.length === 0) {
     return (
-      <p className="explore__search-results--noresult">검색 결과가 없습니다.</p>
+      <div className="explore__search-results--initial">
+        <p className="explore__search-results--noresult">
+          검색 결과가 없습니다.
+        </p>
+      </div>
     );
   }
 
@@ -56,6 +60,7 @@ const SearchResult = ({ debouncedSearch }: DebouncedSearchProps) => {
     <>
       <div className="explore__search-results">
         {/* PostList 에 전달하는것은 데이터 묶음들들 */}
+
         <GridPostList posts={posts} />
 
         {/* 다음 페이지 데이터가 있어야지 ref 영역 활성화 */}

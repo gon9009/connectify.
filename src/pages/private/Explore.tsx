@@ -11,6 +11,7 @@ const Explore = () => {
   // 디바운싱 처리된 결과 값
   const debouncedSearch = useDebounce(searchValue, 500);
 
+  
   useEffect(() => {
     if (debouncedSearch) {
       setSearchParmas({ q: debouncedSearch });
@@ -21,7 +22,7 @@ const Explore = () => {
 
   return (
     <div className="explore">
-      <div className="expore__container">
+      <div className="explore__container">
         <ExploreHeader
           setSearchValue={setSearchValue}
           searchValue={searchValue}
