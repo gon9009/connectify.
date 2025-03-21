@@ -13,7 +13,7 @@ const ProfilePosts = () => {
   if (posts.length === 0) {
     return <p>아직 올린 게시물이 없습니다 </p>;
   }
-  return <GridPostList posts={posts} showUser={false} />;
+  return <GridPostList posts={posts} />;
 };
 
 export default ProfilePosts;

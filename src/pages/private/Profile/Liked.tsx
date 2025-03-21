@@ -19,7 +19,7 @@ const LikedPosts = () => {
 
   return (
     <>
-      <GridPostList posts={liked} showStats={false} />
+      <GridPostList posts={liked} />
     </>
   );
 };

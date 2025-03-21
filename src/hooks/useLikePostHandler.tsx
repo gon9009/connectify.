@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useLikePost } from "../lib/react-query/queries";
 
 // 게시물 "좋아요" 기능 커스텀 훅
-const useLikePostHandler = (
+// 게시물 하나하나 마다 좋아요 누른 사람들 반환 (initialLikes) -> 상태로 
+export const useLikePostHandler = (
   postId: string,
   userId: string,
   initialLikes: string[]
@@ -43,4 +44,3 @@ const useLikePostHandler = (
   return { isLiked, likesCount: likes.length, handleLikePost };
 };
 
-export default useLikePostHandler;

@@ -113,7 +113,6 @@ const Profile = () => {
     return <p className="error-message">유저 정보를 불러올 수 없습니다.</p>;
     
   }
-  // 현재 유저가 "좋아요" 한 게시물
   // console.log(currentUser.liked);
 
 

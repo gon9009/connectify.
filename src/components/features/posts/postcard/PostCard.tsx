@@ -1,136 +1,127 @@
-import { useUserContext } from "../../../../context/AuthContext";
 import { Post } from "../../../../types/types";
 import PostStats from "../PostStats";
-import useLikePostHandler from "../../../../hooks/useLikePostHandler";
-import useSavePostHandler from "../../../../hooks/useSavePostHandler";
-import { useMemo } from "react";
+import { usePostCardProps } from "../../../../hooks/usePostCardProps";
 import PostHeader from "./PostHeader"; // default import
 import { PostContent } from "./PostContent";
 import { PostImage } from "./PostImage";
 import { Divider } from "../Divider";
+import {HeaderProps,ContentProps,StatsProps,ImageProps} from "../../../../hooks/usePostCardProps";
 
+// PostCard 타입
 type PostCardProps = {
   post: Post;
   isDetail?: boolean;
   handleDelete?: () => void;
   variant?: PostVariant;
-  showUser?: boolean; // 추가
-  showStats?: boolean; // 추가
 };
 
 export type PostVariant = "" | "detail" | "compact";
 
-const PostCard = ({
-  post,
-  isDetail = false,
+// 디테일 카드 타입
+type DetailPostCardProps = {
+  headerProps: HeaderProps;
+  contentProps: ContentProps;
+  statsProps: StatsProps;
+  imageProps: ImageProps;
+} & Pick<PostCardProps, "isDetail" | "handleDelete">;
+
+// 리스트 카드 타입
+type CompactPostCardProps = {
+  imageProps: ImageProps;
+};
+// 기본 카드 타입
+type BasePostCardProps = {
+  headerProps: HeaderProps;
+  contentProps: ContentProps;
+  statsProps: StatsProps;
+  imageProps: ImageProps;
+};
+
+// 디테일 카드 (isDetail,handleDelete 포함)
+const DetailPostCard = ({
+  headerProps,
+  contentProps,
+  statsProps,
+  imageProps,
   handleDelete,
-  variant = "",
-  showUser = true, // 기본값 추가
-  showStats = true,
-}: PostCardProps) => {
-  const { user } = useUserContext();
-
-  // "프로필"로 접근했다면 post.creator.$id 를 반환 !
-  // 그러나 "저장됨"으로 접근했다면 post.creator.$id 를 반환하지 않고 오류 발생 !
-  // "컨텍스트" 에 따른 소유자 체크 로직 검사 필요 !
-
-  const userId = user.id;
-  // 컨텍스트에 따른 소유자 체크 로직
-  const isPostOwner = useMemo(() => {
-    // saved 탭에서 접근한 경우
-    if (!post.creator) {
-      return user.id === post.$id;
-    }
-    // 프로필이나 일반 포스트에서 접근한 경우
-    return user.id === post.creator.$id;
-  }, [user.id, post]);
-
-  
-  // 컨텍스트에 따른 좋아요 상태
-  const initialLikes = useMemo(
-    // 프로필의 liked/saved 탭에서는 빈 배열 반환
-    () => {
-      if (!post.likes) return [];
-      return post.likes.map((user) => user.$id);
-    },
-    [post.likes]
-  );
-  const { isSaved, handleSavePost } = useSavePostHandler(post.$id, userId);
-  const { isLiked, handleLikePost, likesCount } = useLikePostHandler(
-    post.$id,
-    userId,
-    initialLikes
-  );
-
-  // 카드 헤더 Props
-  const headerProps = {
-    variant,
-    creatorImageUrl: post.creator?.imageUrl || user.imageUrl,
-    creatorId: post.creator?.$id || post.$id,
-    creatorName: post.creator?.name || user.name,
-    createdAt: post.$createdAt,
-    location: post.location,
-    postId: post.$id,
-    isPostOwner,
-    isDetail,
-    handleDeletePost: isPostOwner ? handleDelete : undefined,
-  };
-
-  // 카드 콘텐츠 Props
-  const contentProps = {
-    variant,
-    caption: post.caption,
-    tags: post.tags,
-    postId: post.$id,
-  };
-
-  // 카드 Stat Props
-  const statsProps = {
-    variant,
-    isSaved,
-    handleSavePost,
-    isLiked,
-    handleLikePost,
-    likesCount,
-  };
-
-  // 상세 페이지 카드
-  if (variant === "detail") {
-    return (
-      <div className="post-card post-card--detail">
-        <div className="post-card__left">
-          <PostImage postId={post.$id} imageUrl={post.imageUrl} />
-        </div>
-        <div className="post-card__right">
-          <div className="post-card__content-wrapper">
-            <PostHeader {...headerProps} />
-            <Divider postType="detail" />
-            <PostContent {...contentProps} />
-          </div>
-          <PostStats {...statsProps} />
-        </div>
+  isDetail,
+}: DetailPostCardProps) => {
+  return (
+    <div className="post-card post-card--detail">
+      <div className="post-card__left">
+        <PostImage {...imageProps} />
       </div>
-    );
-  }
-
-  // 리스트 페이지 카드
-  if (variant === "compact") {
-    return (
-      <div className="post-card post-card--compact">
-        <PostImage postId={post.$id} imageUrl={post.imageUrl} />
+      <div className="post-card__right">
+        <div className="post-card__content-wrapper">
+          <PostHeader
+            isDetail={isDetail}
+            handleDelete={handleDelete}
+            {...headerProps}
+          />
+          <Divider postType="detail" />
+          <PostContent {...contentProps} />
+        </div>
+        <PostStats {...statsProps} />
       </div>
-    );
-  }
+    </div>
+  );
+};
 
-  // 기본카드 (Home)
+// 리스트 카드
+const CompactPostCard = ({ imageProps }: CompactPostCardProps) => {
+  return (
+    <div className="post-card post-card--compact">
+      <PostImage {...imageProps} />
+    </div>
+  );
+};
+
+// 기본 카드
+const BasePostCard = ({
+  headerProps,
+  contentProps,
+  imageProps,
+  statsProps,
+}: BasePostCardProps) => {
   return (
     <div className="post-card">
       <PostHeader {...headerProps} />
       <PostContent {...contentProps} />
-      <PostImage variant={variant} postId={post.$id} imageUrl={post.imageUrl} />
+      <PostImage {...imageProps} />
       <PostStats {...statsProps} />
     </div>
   );
+};
+
+const PostCard = (props: PostCardProps) => {
+  const { headerProps, contentProps, statsProps, imageProps } =
+    usePostCardProps(props.post);
+
+  switch (props.variant) {
+    case "detail":
+      return (
+        <DetailPostCard
+          // 원본 props 전달
+          {...props}
+          headerProps={headerProps}
+          contentProps={contentProps}
+          statsProps={statsProps}
+          imageProps={imageProps}
+        />
+      );
+    case "compact":
+      return <CompactPostCard {...props} imageProps={imageProps} />;
+    default:
+      return (
+        <BasePostCard
+          {...props}
+          headerProps={headerProps}
+          contentProps={contentProps}
+          statsProps={statsProps}
+          imageProps={imageProps}
+        />
+      );
+  }
 };
 
 export default PostCard;
