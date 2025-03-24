@@ -1,0 +1,29 @@
+@use "../../abstracts/mixins" as m;
+@use "../../abstracts/variables" as v;
+
+.auth-form {
+  width: 100%;
+  margin: 1.2rem;
+  gap: 1.3rem;
+  @include m.flex-column;
+  &__container {
+    width: 100%;
+  }
+  &__description {
+    text-align: center;
+    font-size: 1rem;
+    color: v.$light-3;
+
+    &-link {
+      margin-left: 0.5rem;
+      color: v.$light-1;
+      font-weight: 800;
+      transition: all 0.2s ease;
+
+      &:hover {
+        color: v.$off-white;
+        text-decoration: underline;
+      }
+    }
+  }
+}

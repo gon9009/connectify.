@@ -1,6 +1,0 @@
-@use "../abstracts/mixins" as m;
-@use "../abstracts/variables" as v;
-
-.input {
-  @include m.base-input(v.$light-2, v.$dark-1);
-}

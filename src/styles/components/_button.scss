@@ -1,7 +1,0 @@
-@use "../abstracts/mixins" as m;
-@use "../abstracts/variables" as v;
-
-// 버튼 컴포넌트 
-.btn {
-  @include m.base-button(v.$light-1, v.$dark-1);
-}

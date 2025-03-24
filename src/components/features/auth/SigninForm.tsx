@@ -9,9 +9,10 @@ import { LOGIN_FIELDS, LOGIN_META } from "../../../constants/formField";
 
 interface SigninFormProps {
   onSubmit: (data: SigninFormData) => void;
+  isPending: boolean;
 }
 
-const SigninForm = ({ onSubmit }: SigninFormProps) => {
+const SigninForm = ({ onSubmit, isPending }: SigninFormProps) => {
   const {
     register,
     handleSubmit,
@@ -22,28 +23,32 @@ const SigninForm = ({ onSubmit }: SigninFormProps) => {
 
   return (
     <>
-      <img src="/assets/logo.png" alt="Connectify 로고" className="logo auth-container__logo" />
+      <div className="logo">
+        <img
+          src="/assets/logo.png"
+          alt="Connectify 로고"
+          className="logo__image"
+        />
+      </div>
       <form className="auth-form" onSubmit={handleSubmit(onSubmit)}>
         {LOGIN_FIELDS.map((field) => (
           <div key={field.name} className="auth-form__container">
-            <Label htmlFor={field.name} className="auth-form__label">
+            <Label htmlFor={field.name} variant="auth">
               {field.label}
             </Label>
             <Input
               id={field.name}
               type={field.type}
+              variant="auth"
               placeholder={`${field.label}을 입력해주세요`}
-              className={`auth-form__input ${
-                errors[field.name] ? "error" : ""
-              }`}
               {...register(field.name)}
               error={errors[field.name]?.message}
             />
           </div>
         ))}
         <div className="auth-form__container">
-          <Button type="submit" className="auth-form__btn">
-            {LOGIN_META.buttonText}
+          <Button type="submit" variant="auth">
+            {isPending ? "로그인 중..." : LOGIN_META.buttonText}
           </Button>
         </div>
       </form>

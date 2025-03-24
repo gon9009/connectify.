@@ -3,11 +3,13 @@ import { ForwardedRef, forwardRef, InputHTMLAttributes } from "react";
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   error?: string;
+  variant: "default" | "auth";
+  className?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   (
-    { id, type = "text", placeholder, className, error, ...rest },
+    { id, type = "text", variant = "default", placeholder, error, ...rest },
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
@@ -17,10 +19,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           type={type}
           id={id}
           placeholder={placeholder}
-          className={`input ${className || ""}`}
+          className={`input input--${variant} ${error && "input--error"}`}
           {...rest}
         />
-        {error && <p className="error-msg">{error}</p>}
+        {error && <p className="input__error-msg">{error}</p>}
       </>
     );
   }

@@ -9,18 +9,10 @@
     @include m.flex-column;
     width: 440px;
     padding: 1rem;
-
-    &__logo {
-      width: 160px;
-      // height: 100%;
-      margin-bottom: 1.2rem;
-      border-bottom: 3px dotted #4a4a4a; // 점선 스타일의 회색 밑줄
-      padding-bottom: 10px; // 로고와 점선 사이 간격
-    }
   }
 }
 
-// 메인 레이아웃
+// 메인 레이아웃 (BEM 구조화 시키기 ! )
 .main {
   display: flex;
   height: 100vh;
@@ -30,12 +22,14 @@
     .main-content {
       flex: 1;
       display: flex;
-      padding:2rem;
-      overflow-y:auto;
-      margin:0 auto;
-      // 모바일 헤더 높이만큼의 패딩추가 
+      padding: 2rem;
+      overflow-y: auto;
+      margin: 0 auto;
+      // 모바일 헤더 높이만큼의 패딩추가
       @media (max-width: 768px) {
-        padding-top: calc(72px + 2rem); // 모바일 헤더 높이(72px) + 기존 패딩(2rem)
+        padding-top: calc(
+          72px + 2rem
+        ); // 모바일 헤더 높이(72px) + 기존 패딩(2rem)
       }
     }
   }

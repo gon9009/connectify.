@@ -1,21 +1,24 @@
 import { ButtonHTMLAttributes } from "react";
 
-// 버튼 속성 타입 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  className: string;
+  className?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  variant: "default" | "auth";
 }
 
-// base 버튼 참조 
 const Button = ({
   children,
   type = "submit",
-  className,
+  variant = "default",
   onClick,
 }: ButtonProps) => {
   return (
-    <button onClick={onClick} type={type} className={`btn ${className || ""}`}>
+    <button
+      onClick={onClick}
+      type={type}
+      className={`button button--${variant}`}
+    >
       {children}
     </button>
   );

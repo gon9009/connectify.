@@ -1,0 +1,25 @@
+@use "../../abstracts/variables" as v;
+
+.input {
+  width: 100%;
+  background-color: v.$light-2;
+  border-radius: 4px;
+  outline: none;
+  padding: 0.8rem;
+  font-size: 1rem;
+  &--auth {
+    &:focus {
+      border: 3px solid v.$light-2;
+    }
+  }
+  // 에러시 인풋필드 변화
+  &--error {
+    border: 1px solid red;
+  }
+  // 에러시 인풋 메시지
+  &__error-msg {
+    margin-top: 1rem;
+    color: red;
+  }
+}
+
