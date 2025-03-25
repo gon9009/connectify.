@@ -10,8 +10,16 @@ type GridPostListProps = {
 const GridPostList = ({ posts }: GridPostListProps) => {
   return (
     <ul className="grid-posts">
-      {posts.map((post) => (
-        <PostCard key={post.$id} post={post} variant="compact" />
+      {posts.map((post, index) => (
+        <li key={post.$id}>
+          <PostCard
+            // 그리드 형식에서는 3개까지 우선순위로
+            isPriority={index < 6}
+            key={post.$id}
+            post={post}
+            variant="compact"
+          />
+        </li>
       ))}
     </ul>
   );

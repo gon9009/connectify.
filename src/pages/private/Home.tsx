@@ -1,6 +1,10 @@
 import Loader from "../../components/ui/Loader";
-import PostCard from "../../components/features/posts/postcard/PostCard";
 import { useGetRecentPosts } from "../../lib/react-query/queries";
+import { lazy, Suspense } from "react";
+
+const PostCard = lazy(
+  () => import("../../components/features/posts/postcard/PostCard")
+);
 
 // 포스트 목록 컴포넌트
 const PostList = ({
@@ -14,11 +18,18 @@ const PostList = ({
     return <Loader />;
   }
 
+  // 첫 번쨰 카드만 Lazy 로딩 배제
   return (
     <ul className="home__post-list">
-      {posts?.map((post) => (
+      {posts?.map((post, index) => (
         <li key={post.$id}>
-          <PostCard post={post} />
+          {index === 0 ? (
+            <PostCard post={post} isPriority />
+          ) : (
+            <Suspense >
+              <PostCard post={post} isPriority={false} />
+            </Suspense>
+          )}
         </li>
       ))}
     </ul>

@@ -5,7 +5,12 @@ import PostHeader from "./PostHeader"; // default import
 import { PostContent } from "./PostContent";
 import { PostImage } from "./PostImage";
 import { Divider } from "../Divider";
-import {HeaderProps,ContentProps,StatsProps,ImageProps} from "../../../../hooks/usePostCardProps";
+import {
+  HeaderProps,
+  ContentProps,
+  StatsProps,
+  ImageProps,
+} from "../../../../hooks/usePostCardProps";
 
 // PostCard 타입
 type PostCardProps = {
@@ -13,6 +18,7 @@ type PostCardProps = {
   isDetail?: boolean;
   handleDelete?: () => void;
   variant?: PostVariant;
+  isPriority: boolean;
 };
 
 export type PostVariant = "" | "detail" | "compact";
@@ -23,19 +29,20 @@ type DetailPostCardProps = {
   contentProps: ContentProps;
   statsProps: StatsProps;
   imageProps: ImageProps;
-} & Pick<PostCardProps, "isDetail" | "handleDelete">;
+} & Pick<PostCardProps, "isDetail" | "handleDelete" | "isPriority">;
 
 // 리스트 카드 타입
 type CompactPostCardProps = {
   imageProps: ImageProps;
-};
+} & Pick<PostCardProps, "isPriority">;
+
 // 기본 카드 타입
 type BasePostCardProps = {
   headerProps: HeaderProps;
   contentProps: ContentProps;
   statsProps: StatsProps;
   imageProps: ImageProps;
-};
+} & Pick<PostCardProps, "isPriority">;
 
 // 디테일 카드 (isDetail,handleDelete 포함)
 const DetailPostCard = ({
@@ -45,11 +52,12 @@ const DetailPostCard = ({
   imageProps,
   handleDelete,
   isDetail,
+  isPriority,
 }: DetailPostCardProps) => {
   return (
     <div className="post-card post-card--detail">
       <div className="post-card__left">
-        <PostImage {...imageProps} />
+        <PostImage isPriority={isPriority} {...imageProps} />
       </div>
       <div className="post-card__right">
         <div className="post-card__content-wrapper">
@@ -68,10 +76,10 @@ const DetailPostCard = ({
 };
 
 // 리스트 카드
-const CompactPostCard = ({ imageProps }: CompactPostCardProps) => {
+const CompactPostCard = ({ imageProps, isPriority }: CompactPostCardProps) => {
   return (
     <div className="post-card post-card--compact">
-      <PostImage {...imageProps} />
+      <PostImage isPriority={isPriority} {...imageProps} />
     </div>
   );
 };
@@ -82,12 +90,13 @@ const BasePostCard = ({
   contentProps,
   imageProps,
   statsProps,
+  isPriority,
 }: BasePostCardProps) => {
   return (
     <div className="post-card">
       <PostHeader {...headerProps} />
       <PostContent {...contentProps} />
-      <PostImage {...imageProps} />
+      <PostImage isPriority={isPriority} {...imageProps} />
       <PostStats {...statsProps} />
     </div>
   );
@@ -103,6 +112,7 @@ const PostCard = (props: PostCardProps) => {
         <DetailPostCard
           // 원본 props 전달
           {...props}
+          isPriority={props.isPriority}
           headerProps={headerProps}
           contentProps={contentProps}
           statsProps={statsProps}
@@ -110,11 +120,18 @@ const PostCard = (props: PostCardProps) => {
         />
       );
     case "compact":
-      return <CompactPostCard {...props} imageProps={imageProps} />;
+      return (
+        <CompactPostCard
+          {...props}
+          isPriority={props.isPriority}
+          imageProps={imageProps}
+        />
+      );
     default:
       return (
         <BasePostCard
           {...props}
+          isPriority={props.isPriority}
           headerProps={headerProps}
           contentProps={contentProps}
           statsProps={statsProps}

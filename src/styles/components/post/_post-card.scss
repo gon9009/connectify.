@@ -12,6 +12,12 @@
   border-radius: 15px;
   margin-bottom: 2rem;
   border: 1px solid v.$light-4;
+  // 레이지 로드 카드 용
+  .lazy-load-image-background {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+  }
   // ============================ 상세 (Detail) 카드  ==========================================================
   &--detail {
     display: flex;
@@ -55,6 +61,15 @@
     width: 100%;
     padding-top: 100%;
     height: 20rem;
+
+    .lazy-load-image-background {
+      position: absolute !important;
+      top: 0;
+      left: 0;
+      width: 100% !important;
+      height: 100% !important;
+      display: block !important;
+    }
 
     .post-card__img {
       position: absolute;

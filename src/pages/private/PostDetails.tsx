@@ -9,6 +9,7 @@ import {
 import { Post } from "../../types/types";
 import PostCard from "../../components/features/posts/postcard/PostCard";
 import { Divider } from "../../components/features/posts/Divider";
+
 export type RelatedPostsProps = {
   relatedPosts?: Post[]; // undefined만 처리 (null은 제외)
   isUserPostLoading: boolean;
@@ -70,6 +71,7 @@ const PostDetails = () => {
     <div className="post-details">
       <div className="post-details__container">
         <PostCard
+          isPriority
           variant="detail"
           post={post}
           isDetail={true}
