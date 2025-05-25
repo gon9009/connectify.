@@ -14,7 +14,6 @@ const SidebarLogo = () => (
   </Link>
 );
 
-
 const SidebarUserProfile = ({
   user,
   isLoading,
@@ -74,9 +73,9 @@ const SidebarLogoutButton = ({
   handleSignout: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }) => {
   return (
-    <Button className="sidebar__logout-btn" onClick={handleSignout}>
-      <img src="/assets/logout.svg" alt="로그아웃" />
+    <Button variant="logout" onClick={handleSignout}>
       <p className="sidebar__logout-btn-description">로그아웃</p>
+
     </Button>
   );
 };

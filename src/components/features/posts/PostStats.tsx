@@ -35,7 +35,11 @@ const SaveButton = ({ isSaved, handleSavePost }: SaveButton) => {
   );
 };
 
-const LikeButton = ({ handleLikePost, isUserLiked, likesCount }: LikeButton) => {
+const LikeButton = ({
+  handleLikePost,
+  isUserLiked,
+  likesCount,
+}: LikeButton) => {
   return (
     <div className="post__stats-like">
       <img
@@ -52,7 +56,7 @@ const LikeButton = ({ handleLikePost, isUserLiked, likesCount }: LikeButton) => 
 };
 
 // 개별 PostCard + 개별 PostStats
-const PostStats = ({
+export const PostStats = ({
   isSaved,
   handleSavePost,
   isUserLiked,
@@ -73,5 +77,3 @@ const PostStats = ({
     </div>
   );
 };
-
-export default PostStats;

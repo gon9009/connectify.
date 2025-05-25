@@ -10,8 +10,8 @@ import { Post } from "../../../types/types";
 import { PostFileUploader } from "../fileuploader/PostFileUploader";
 
 type PostFormProps = {
-  post: Post;// 실제 Post 타입 읽어오기
-  action: "Create" | "Update"; // 액션 타입 (생성 또는 수정)
+  post?: Post;
+  action: "Create" | "Update";
   onCreate?: (values: PostFormData) => Promise<void>;
   onUpdate?: (values: PostFormData) => Promise<void>;
   isPending: boolean;

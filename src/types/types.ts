@@ -4,6 +4,7 @@ import {
   PostFormData,
 } from "../lib/validation/auth";
 import { Models } from "appwrite";
+import { Post } from "./post.types";
 
 // ============== 인증 관련 타입 =============================================
 export type SidebarNavLink = {
@@ -94,23 +95,6 @@ export interface PostFormField {
   type: "text" | "textarea" | "file";
 }
 
-//  ============================= 포스트 관련 타입 ======================================================================
-export type Post = Models.Document & {
-  $id: string;
-  creator: {
-    $id: string; // 유저 고유 ID (Users 컬렉션과 연결)
-    name: string; // 유저 이름
-    imageUrl?: string; // 유저 프로필 이미지 (선택적)
-  };
-  likes: { $id: string }[]; //  관계(Relationship) 필드이므로 객체 배열!
-  caption: string;
-  tags: string[];
-  imageUrl: string;
-  imageId: string;
-  location?: string;
-  save?: { $id: string };
-};
-
 // 저장게시물 타입 (Save)
 export type SavedPost = {
   $id: string;
@@ -155,17 +139,16 @@ export type CurrentUser = Models.Document & {
 };
 
 // =============================================================== 사용자 프로필====================================
-export type ProfileUser = Models.Document & { 
-  bio: string; 
-  email: string; 
-  imageId: string; 
-  imageUrl: string; 
-  name: string; 
-  username: string; 
+export type ProfileUser = Models.Document & {
+  bio: string;
+  email: string;
+  imageId: string;
+  imageUrl: string;
+  name: string;
+  username: string;
 };
 
-
-export type UpdateUserType= {
+export type UpdateUserType = {
   userId: string;
   name: string;
   bio: string;
@@ -178,4 +161,4 @@ export type UpdateUserType= {
 export type SearchResponse = {
   docuemnts: Post[];
   hasNextPage: boolean;
-}
+};

@@ -4,7 +4,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   className?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  variant: "default" | "auth";
+  variant: "default" | "auth" | "logout";
 }
 
 const Button = ({

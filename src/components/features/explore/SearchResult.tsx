@@ -3,6 +3,7 @@ import { useInView } from "react-intersection-observer";
 import Loader from "../../ui/Loader";
 import GridPostList from "../posts/PostList";
 import { useEffect } from "react";
+import EmptyState from "../posts/EmptyState";
 
 type DebouncedSearchProps = {
   debouncedSearch: string;
@@ -20,49 +21,29 @@ const SearchResult = ({ debouncedSearch }: DebouncedSearchProps) => {
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-  // 1. 로딩 상태
+  // 로딩 상태
   if (isLoading) {
     return <Loader />;
   }
 
-  // 2. 검색어 입력 전 초기 상태
+  // 검색어 입력 전 초기 상태
   if (!debouncedSearch) {
-    return (
-      <div className="explore__search-results--initial">
-        <p className="explore__search-results--empty">
-          관심있는 게시물을 검색해보세요!
-        </p>
-        <p className="explore__search-results--empty-test">
-          ❗"테스트" 라고 검색해보세요❗
-        </p>
-      </div>
-    );
+    return <EmptyState message="테스트 라고 검색해보세요❗" />;
   }
 
   // 데이터 평탄화
   const posts = data?.pages.flatMap((page) => page.documents) ?? [];
 
-  console.log(posts);
-
   // 검색 결과가 없을떄
   if (posts.length === 0) {
-    return (
-      <div className="explore__search-results--initial">
-        <p className="explore__search-results--noresult">
-          검색 결과가 없습니다.
-        </p>
-      </div>
-    );
+    return <EmptyState message="검색 결과가 없습니다" />;
   }
 
   //
   return (
     <>
       <div className="explore__search-results">
-        {/* PostList 에 전달하는것은 데이터 묶음들들 */}
-
         <GridPostList posts={posts} />
-
         {/* 다음 페이지 데이터가 있어야지 ref 영역 활성화 */}
         {debouncedSearch && hasNextPage && (
           <div ref={ref}>{isFetchingNextPage && <Loader />}</div>

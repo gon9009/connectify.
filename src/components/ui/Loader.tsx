@@ -1,10 +1,6 @@
-interface LoaderProps {
-  size?: "small" | "medium" | "large";
-}
-
-const Loader = ({ size = "medium" }: LoaderProps) => {
+const Loader = () => {
   return (
-    <div className={`loader loader--${size}`}>
+    <div className="loader">
       <div className="loader__spinner"></div>
     </div>
   );

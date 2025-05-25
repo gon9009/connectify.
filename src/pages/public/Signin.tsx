@@ -7,7 +7,7 @@ import { useSignInAccount } from "../../lib/react-query/queries";
 // 로그인 페이지
 const Signin = () => {
   const { checkAuth } = useUserContext();
-  const { mutateAsync: signIn,isPending } = useSignInAccount();
+  const { mutateAsync: signIn, isPending } = useSignInAccount();
   const navigate = useNavigate();
 
   const handleSubmit = async (data: SigninFormData) => {
@@ -30,9 +30,7 @@ const Signin = () => {
     }
   };
 
-  return <SigninForm 
-  isPending={isPending}
-  onSubmit={handleSubmit} />;
+  return <SigninForm isPending={isPending} onSubmit={handleSubmit} />;
 };
 
 export default Signin;

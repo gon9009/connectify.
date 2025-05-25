@@ -11,7 +11,7 @@ type PostHeaderProp = PostUserAvatarProp &
     handleDeletePost?: () => void; // 선택적 prop
     variant?: PostVariant; // ✅ 명확한 타입 지정
   };
-const PostHeader = ({
+export const PostHeader = ({
   creatorId,
   creatorImageUrl,
   creatorName,
@@ -46,5 +46,3 @@ const PostHeader = ({
     </div>
   );
 };
-
-export default PostHeader; // default export

@@ -1,6 +1,7 @@
 import Loader from "../../components/ui/Loader";
 import { useGetRecentPosts } from "../../lib/react-query/queries";
 import { lazy, Suspense } from "react";
+import { Post } from "../../types/types";
 
 const PostCard = lazy(
   () => import("../../components/features/posts/postcard/PostCard")
@@ -26,7 +27,7 @@ const PostList = ({
           {index === 0 ? (
             <PostCard post={post} isPriority />
           ) : (
-            <Suspense >
+            <Suspense>
               <PostCard post={post} isPriority={false} />
             </Suspense>
           )}

@@ -7,7 +7,7 @@ export const sidebarLinks: SidebarNavLink[] = [
     label: "홈",
   },
   {
-    imgURL: "/assets/wallpaper.svg",
+    imgURL: "/assets/search.svg",
     route: "/explore",
     label: "검색",
   },
@@ -30,7 +30,7 @@ export const mobileMenuLinks: SidebarNavLink[] = [
     label: "Home",
   },
   {
-    imgURL: "/assets/wallpaper.svg",
+    imgURL: "/assets/search.svg",
     route: "/explore",
     label: "Explore",
   },

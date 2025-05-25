@@ -19,12 +19,10 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        {/* 공용 라우트 - MainLayout으로 감싸 중앙정렬 */}
         <Route element={<PublicLayout />}>
           <Route path="/sign-in" element={<Signin />} />
           <Route path="/sign-up" element={<Signup />} />
         </Route>
-        {/* 인증 라우트 */}
         <Route element={<ProtectedLayout />}>
           <Route index path="/" element={<Home />} />
           <Route path="/create-post" element={<Create />} />
@@ -37,7 +35,6 @@ const App = () => {
             <Route path="saved" element={<Saved />} />
           </Route>
           <Route path="/edit-profile/:id" element={<ProfileEdit />} />
-          {/* URL 이 상태를 저장하게 */}
           <Route path="/explore" element={<Explore />} />
         </Route>
       </Routes>

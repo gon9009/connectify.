@@ -1,17 +1,35 @@
-// 그리드 형식 포스트 리스트 스타일
-.grid-posts {
+@use "../../abstracts/variables" as v;
+
+.post-container {
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr)); // 기본값 (큰 화면에서 3열)
-  gap: 2rem;
+  min-height: 40vh; // 빈 상태일 때도 높이 확보
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem;
 
-  // 1024px 이하에서 2열
-  @media (max-width: 1286px) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+  // 그리드 형식 포스트 리스트
+  .grid-posts {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
 
-  // 768px 이하에서 1열
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
+    @media (max-width: 1286px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
   }
+}
+
+.empty-msg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: v.$light-4;
 }

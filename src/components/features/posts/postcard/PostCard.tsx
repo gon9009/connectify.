@@ -1,48 +1,11 @@
-import { Post } from "../../../../types/types";
-import PostStats from "../PostStats";
-import { usePostCardProps } from "../../../../hooks/usePostCardProps";
-import PostHeader from "./PostHeader"; // default import
-import { PostContent } from "./PostContent";
-import { PostImage } from "./PostImage";
-import { Divider } from "../Divider";
+import { usePostCardProps } from "@/hooks/usePostCardProps";
+import { PostStats,Divider,PostHeader,PostImage,PostContent,} from "@/components/features/posts";
 import {
-  HeaderProps,
-  ContentProps,
-  StatsProps,
-  ImageProps,
-} from "../../../../hooks/usePostCardProps";
-
-// PostCard 타입
-type PostCardProps = {
-  post: Post;
-  isDetail?: boolean;
-  handleDelete?: () => void;
-  variant?: PostVariant;
-  isPriority: boolean;
-};
-
-export type PostVariant = "" | "detail" | "compact";
-
-// 디테일 카드 타입
-type DetailPostCardProps = {
-  headerProps: HeaderProps;
-  contentProps: ContentProps;
-  statsProps: StatsProps;
-  imageProps: ImageProps;
-} & Pick<PostCardProps, "isDetail" | "handleDelete" | "isPriority">;
-
-// 리스트 카드 타입
-type CompactPostCardProps = {
-  imageProps: ImageProps;
-} & Pick<PostCardProps, "isPriority">;
-
-// 기본 카드 타입
-type BasePostCardProps = {
-  headerProps: HeaderProps;
-  contentProps: ContentProps;
-  statsProps: StatsProps;
-  imageProps: ImageProps;
-} & Pick<PostCardProps, "isPriority">;
+  CompactPostCardProps,
+  PostCardProps,
+  DetailPostCardProps,
+  BasePostCardProps,
+} from "@/types/index";
 
 // 디테일 카드 (isDetail,handleDelete 포함)
 const DetailPostCard = ({

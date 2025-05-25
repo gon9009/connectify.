@@ -16,4 +16,9 @@
     color: v.$light-4;
     font-size: 1.2rem;
   }
+
+  // 로그아웃
+  &--logout {
+    background-color: v.$light-2-5;
+  }
 }

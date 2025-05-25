@@ -33,7 +33,6 @@ const UserStat = ({ value, label }: UserStatProps) => (
 
 // 프로필 탭 (게시물 + 좋아요)
 const ProfileTabs = ({ id }: ProfileTabProps) => {
-  // Navlink 분리시키기
   return (
     <div className="profile__tabs">
       <NavLink
@@ -85,8 +84,6 @@ const ProfileInfo = ({ name, username, postlength, bio }: ProfileInfo) => {
 
       <div className="profile__stats">
         <UserStat value={postlength} label="Posts" />
-        <UserStat value={20} label="Followers" />
-        <UserStat value={20} label="Following" />
       </div>
 
       <p className="profile__bio">{bio}</p>
@@ -111,10 +108,8 @@ const Profile = () => {
   }
   if (!currentUser) {
     return <p className="error-message">유저 정보를 불러올 수 없습니다.</p>;
-    
   }
   // console.log(currentUser.liked);
-
 
   // ProfileOwner 일때 프로필 수정과 / 프로필 탭이 활성화
   return (
@@ -141,7 +136,7 @@ const Profile = () => {
             {isProfileOwner && <EditProfile userId={currentUser.$id} />}
           </div>
         </div>
-        {isProfileOwner && <ProfileTabs id={id} />}
+        <ProfileTabs id={id} />
         <Outlet
           context={{
             posts: currentUser.posts.map((post) => ({
