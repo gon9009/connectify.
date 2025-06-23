@@ -28,26 +28,33 @@ export type PostCardProps = {
   isPriority: boolean;
 };
 
-// 디테일 카드 타입
-export type DetailPostCardProps = {
-  headerProps: HeaderProps;
-  contentProps: ContentProps;
-  statsProps: StatsProps;
-  imageProps: ImageProps;
-} & Pick<PostCardProps, "isDetail" | "handleDelete" | "isPriority">;
+// =============================== 카드 variant =================
+export interface PostCardBaseProps {
+  post: Post;
+  isPriority?: boolean;
+}
+export interface PostCardCompactProps {
+  post: Post;
+  isPriority?: boolean;
+}
+export interface PostCardDetailProps {
+  post: Post;
+  isPriority?: boolean;
+  onDelete: () => void;
+}
+//======================== Base 카드 ===============================
 
-// 리스트 카드 타입
-export type CompactPostCardProps = {
-  imageProps: ImageProps;
-} & Pick<PostCardProps, "isPriority">;
-
-// 기본 카드 타입
+// UI 용타입
 export type BasePostCardProps = {
-  headerProps: HeaderProps;
-  contentProps: ContentProps;
-  statsProps: StatsProps;
-  imageProps: ImageProps;
-} & Pick<PostCardProps, "isPriority">;
+  header?: ReactNode;
+  content?: ReactNode;
+  image?: ReactNode;
+  stats?: ReactNode;
+  actions?: ReactNode;
+  className?: string;
+};
+
+//=========================
 
 // headerProps 타입 정의
 export type HeaderProps = {
@@ -81,5 +88,3 @@ export type ImageProps = {
   postId: string;
   imageUrl: string;
 };
-
-

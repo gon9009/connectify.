@@ -1,14 +1,23 @@
+import { BasePostCardProps } from "@/types/index";
 
-// // props 로 화면만 그리는 Dumb UI
+// UI 표시만 담당,PostCardProps를 받아서 표시
+const BasePostCard = ({
+  className = "",
+  header,
+  content,
+  image,
+  stats,
+  actions,
+}: BasePostCardProps) => {
+  return (
+    <div className={`post-card ${className || ""}`}>
+      {header}
+      {content}
+      {image}
+      {stats}
+      {actions}
+    </div>
+  );
+};
 
-// const BasePostCard = ({
-
-// }) => {
-//   return (
-  
-//   <div className="post-card">
-
-//   </div>)
-// };
-
-// export default BasePostCard;
+export default BasePostCard;

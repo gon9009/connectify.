@@ -10,7 +10,6 @@ const Explore = () => {
 
   // 디바운싱 처리된 결과 값
   const debouncedSearch = useDebounce(searchValue, 500);
-
   
   useEffect(() => {
     if (debouncedSearch) {

@@ -7,7 +7,7 @@ import {
   useDeletePost,
 } from "../../lib/react-query/queries";
 import { Post } from "../../types/types";
-import PostCard from "../../components/features/posts/postcard/PostCard";
+import { PostCardDetail } from "@/components/features/posts/postcard/variants/PostCardDetail";
 import { Divider } from "../../components/features/posts/Divider";
 
 export type RelatedPostsProps = {
@@ -66,17 +66,10 @@ const PostDetails = () => {
       console.error("게시물 삭제 실패:", error);
     }
   };
-
   return (
     <div className="post-details">
       <div className="post-details__container">
-        <PostCard
-          isPriority
-          variant="detail"
-          post={post}
-          isDetail={true}
-          handleDelete={handleDeletePost}
-        />
+        <PostCardDetail post={post} isPriority onDelete={handleDeletePost} />
         <RelatedPosts
           relatedPosts={relatedPosts}
           isUserPostLoading={isUserPostLoading}

@@ -115,7 +115,6 @@ const Profile = () => {
   return (
     <div className="profile">
       <div className="profile__container">
-        {/* 프로필 헤더로 분리 */}
         <div className="profile__header">
           <div className="profile__header-container">
             <img

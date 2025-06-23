@@ -1,4 +1,4 @@
-import { PostVariant } from "./postcard/PostCard";
+import { PostVariant } from "@/types/post.types";
 
 type PostStatsProps = {
   isSaved: boolean;
@@ -65,7 +65,6 @@ export const PostStats = ({
   variant,
 }: PostStatsProps) => {
   // 페이지에 따라 스타일링 변화
-
   return (
     <div className={`post__stats ${variant}`}>
       <LikeButton

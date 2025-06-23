@@ -1,6 +1,19 @@
-// 컴팩트 카드 
-const PostCardCompact = () => {
-  return <div>PostCardCompact</div>;
-};
+import { usePostCardProps } from "@/hooks/usePostCardProps";
+import { PostImage, PostContent } from "@/components/features/posts";
+import { BasePostCard } from "@/components/features/posts/postcard/BasePostCard";
+import { PostCardCompactProps } from "@/types/index";
 
-export default PostCardCompact;
+export function PostCardCompact({
+  post,
+  isPriority = false,
+}: PostCardCompactProps) {
+  const { contentProps, imageProps } = usePostCardProps(post);
+
+  return (
+    <BasePostCard
+      image={<PostImage {...imageProps} isPriority={isPriority} />}
+      content={<PostContent {...contentProps} />}
+      className="post-card--compact"
+    />
+  );
+}

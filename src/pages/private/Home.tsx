@@ -3,8 +3,8 @@ import { useGetRecentPosts } from "../../lib/react-query/queries";
 import { lazy, Suspense } from "react";
 import { Post } from "../../types/types";
 
-const PostCard = lazy(
-  () => import("../../components/features/posts/postcard/PostCard")
+const PostCardBase = lazy(
+  () => import("../../components/features/posts/postcard/variants/PostCardBase")
 );
 
 // 포스트 목록 컴포넌트
@@ -25,10 +25,10 @@ const PostList = ({
       {posts?.map((post, index) => (
         <li key={post.$id}>
           {index === 0 ? (
-            <PostCard post={post} isPriority />
+            <PostCardBase post={post} isPriority />
           ) : (
             <Suspense>
-              <PostCard post={post} isPriority={false} />
+              <PostCardBase post={post} isPriority={false} />
             </Suspense>
           )}
         </li>

@@ -1,5 +1,5 @@
 import { Post } from "../../../types/types";
-import PostCard from "./postcard/PostCard";
+import { PostCardCompact } from "@/components/features/posts/postcard/variants/PostCardCompact";
 
 type GridPostListProps = {
   posts: Post[];
@@ -11,12 +11,10 @@ const GridPostList = ({ posts }: GridPostListProps) => {
     <ul className="grid-posts">
       {posts.map((post, index) => (
         <li key={post.$id}>
-          <PostCard
+          <PostCardCompact
             // 그리드 형식에서는 3개까지 우선순위로
             isPriority={index < 6}
-            key={post.$id}
             post={post}
-            variant="compact"
           />
         </li>
       ))}
