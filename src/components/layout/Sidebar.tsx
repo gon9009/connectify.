@@ -1,10 +1,9 @@
 import { Link, useLocation, NavLink, useNavigate } from "react-router-dom";
 import { SidebarNavLink } from "../../types/types";
 import { sidebarLinks } from "../../constants/sidebar";
-import Loader from "../ui/Loader";
+import { Loader, Button } from "@/components/ui";
 import { useUserContext } from "../../context/AuthContext";
 import { INITIAL_USER } from "../../constants/authState";
-import Button from "../ui/Button";
 import { useSignOutAccount } from "../../lib/react-query/queries";
 
 // 사이드바 로고 컴포넌트
@@ -75,7 +74,6 @@ const SidebarLogoutButton = ({
   return (
     <Button variant="logout" onClick={handleSignout}>
       <p className="sidebar__logout-btn-description">로그아웃</p>
-
     </Button>
   );
 };

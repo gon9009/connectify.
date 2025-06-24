@@ -4,10 +4,10 @@ import { useParams } from "react-router-dom";
 import { useGetUserById } from "../../lib/react-query/queries";
 import { useNavigate } from "react-router-dom";
 import { ProfileFormData } from "../../lib/validation/profile";
-import Loader from "../../components/ui/Loader";
 import { useUserContext } from "../../context/AuthContext";
 import { useUpdateUser } from "../../lib/react-query/queries";
 import { useEffect } from "react";
+import { Loader } from "@/components/ui";
 
 // 프로필 수정 페이지
 const ProfileEdit = () => {

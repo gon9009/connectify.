@@ -4,50 +4,43 @@ import { Post } from "@/types/index";
 import { useLikePostHandler } from "./useLikePostHandler";
 import { useSavePostHandler } from "./useSavePostHandler";
 
-// /api/posts 로 접근할시 likes,creator 포함
-// /api/users/{userId}/saved 로 접근시 likes,creator 미포함
+// 1) 소유자 여부 판단만 분리
+function isPostOwner(post: Post, userId: string) {
+  return userId === (post.creator?.$id ?? post.$id);
+}
+
+// 2) 좋아요 ID 추출만 분리
+function getUsersWhoLiked(post: Post) {
+  return post.likes?.map((u) => u.$id) ?? [];
+}
+
+// 게시물(Post) 데이터를 기반으로 PostCard 컴포넌트가 필요로 하는 여러 UI 관련 props를 가공해서 반환하는 커스텀 훅
 export const usePostCardProps = (post: Post) => {
   const { user } = useUserContext();
-
-  // "프로필" 접근 -> post.creator.$id 를 반환, "저장됨" 접근 -> post.$id 반환
   const userId = user.id;
 
-  const isPostOwner = useMemo(() => {
-    // saved 탭에서 접근한 경우 post.$id 가 동일 한지를 묻는다
-    if (!post.creator) {
-      return user.id === post.$id;
-    }
-
-    // 프로필이나 일반 포스트에서 접근한 경우
-    return user.id === post.creator.$id;
-  }, [user.id, post]);
-
-  // 좋아요를 누른 사용자 ID 목록을 관리
-  const usersWhoLiked = useMemo(
-    // 프로필의 liked/saved 탭에서는 빈 배열 반환
-    () => {
-      if (!post.likes) return [];
-      return post.likes.map((user) => user.$id);
-    },
-    [post.likes]
+  const owner = useMemo(
+    () => isPostOwner(post, userId),
+    [post.$id, post.creator?.$id, userId]
   );
+  const likedUsers = useMemo(() => getUsersWhoLiked(post), [post.likes]);
 
   const { isSaved, handleSavePost } = useSavePostHandler(post.$id, userId);
   const { isUserLiked, handleLikePost, likesCount } = useLikePostHandler(
     post.$id,
     userId,
-    usersWhoLiked
+    likedUsers
   );
 
   return {
     headerProps: {
-      creatorImageUrl: post.creator?.imageUrl || user.imageUrl,
-      creatorId: post.creator?.$id || post.$id,
-      creatorName: post.creator?.name || user.name,
+      creatorImageUrl: post.creator?.imageUrl ?? user.imageUrl,
+      creatorId: post.creator?.$id ?? post.$id,
+      creatorName: post.creator?.name ?? user.name,
       createdAt: post.$createdAt,
       location: post.location,
       postId: post.$id,
-      isPostOwner,
+      isPostOwner: owner,
     },
     contentProps: {
       caption: post.caption,

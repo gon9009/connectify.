@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { PostVariant } from "./PostCard";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+ import { LazyLoadImage } from "react-lazy-load-image-component";
+ import { PostVariant } from "@/types";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
 export type PostImageProp = {

@@ -2,9 +2,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SigninFormData, SigninValidation } from "../../../lib/validation/auth";
-import Input from "../../ui/Input";
-import Label from "../../ui/Label";
-import Button from "../../ui/Button";
+import { Input, Label, Button } from "@/components/ui";
 import { LOGIN_FIELDS, LOGIN_META } from "../../../constants/formField";
 
 interface SigninFormProps {
@@ -12,7 +10,7 @@ interface SigninFormProps {
   isPending: boolean;
 }
 
-const SigninForm = ({ onSubmit, isPending }: SigninFormProps) => {
+export const SigninForm = ({ onSubmit, isPending }: SigninFormProps) => {
   const {
     register,
     handleSubmit,
@@ -61,5 +59,3 @@ const SigninForm = ({ onSubmit, isPending }: SigninFormProps) => {
     </>
   );
 };
-
-export default SigninForm;

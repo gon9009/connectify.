@@ -1,4 +1,4 @@
-const ProfileFormHeader = ({ title }: { title: string }) => {
+export const ProfileFormHeader = ({ title }: { title: string }) => {
   return (
     <div className="profile-edit__header">
       <img
@@ -12,5 +12,3 @@ const ProfileFormHeader = ({ title }: { title: string }) => {
     </div>
   );
 };
-
-export default ProfileFormHeader;

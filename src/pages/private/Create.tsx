@@ -1,6 +1,6 @@
 import { useCreatePost } from "../../lib/react-query/queries";
 import { useNavigate } from "react-router-dom";
-import PostForm from "../../components/features/posts/PostForm";
+import { PostForm } from "../../components/features/posts/PostForm";
 import { useUserContext } from "../../context/AuthContext";
 import { PostFormData } from "../../lib/validation/auth";
 
@@ -8,7 +8,7 @@ import { PostFormData } from "../../lib/validation/auth";
 const Create = () => {
   const navigate = useNavigate();
   const { user } = useUserContext();
-  
+
   // 쿼리
   const { mutateAsync: createPost, isPending: isPendingCreate } =
     useCreatePost();
@@ -16,7 +16,7 @@ const Create = () => {
   // 새 게시물
   const handleCreate = async (value: PostFormData) => {
     await createPost({ ...value, userId: user.id });
-    return  navigate("/");
+    return navigate("/");
   };
 
   return (

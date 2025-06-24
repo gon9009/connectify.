@@ -1,6 +1,6 @@
 import { useUserContext } from "../../context/AuthContext";
 import { Outlet, Navigate } from "react-router-dom";
-import Loader from "../../components/ui/Loader";
+import { Loader } from "@/components/ui";
 import Sidebar from "../../components/layout/Sidebar";
 import MobileHeader from "../../components/layout/MobileHeader";
 import MobileMenu from "../../components/layout/MobileMenu";

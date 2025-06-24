@@ -1,8 +1,7 @@
 import { useOutletContext } from "react-router-dom";
-import GridPostList from "../../../components/features/posts/PostList";
-import Loader from "../../../components/ui/Loader";
-import EmptyState from "../../../components/features/posts/EmptyState";
-import PostListContainer from "../../../components/features/posts/PostListContainer";
+import { Loader } from "@/components/ui";
+import {GridPostList,EmptyState,PostListContainer} from "@/components/features/posts"
+
 
 const LikedPosts = () => {
   const { liked, isProfileOwner, isLoading } = useOutletContext();

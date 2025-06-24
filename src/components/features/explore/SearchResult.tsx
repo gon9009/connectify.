@@ -1,6 +1,6 @@
 import { useSearchInfinitePosts } from "../../../lib/react-query/queries";
 import { useInView } from "react-intersection-observer";
-import Loader from "../../ui/Loader";
+import { Loader } from "@/components/ui";
 import GridPostList from "../posts/PostList";
 import { useEffect } from "react";
 import EmptyState from "../posts/EmptyState";

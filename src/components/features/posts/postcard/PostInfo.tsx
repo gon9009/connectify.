@@ -1,7 +1,8 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";
-import { PostVariant } from "./PostCard";
+import { PostVariant } from "@/types";
+
 
 dayjs.locale("ko");
 dayjs.extend(relativeTime);
@@ -14,12 +15,11 @@ export type PostInfoProp = {
 };
 
 // PostInfo.tsx
-// GridList 에서는 보이지 않는다 
+// GridList 에서는 보이지 않는다
 export const PostInfo = ({
   creatorName,
   createdAt,
   location,
-  variant = "",
 }: PostInfoProp) => {
   return (
     <>

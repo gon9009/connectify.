@@ -4,10 +4,7 @@ import {
   ProfileValidation,
   ProfileFormData,
 } from "../../../lib/validation/profile";
-import Button from "../../ui/Button";
-import Label from "../../ui/Label";
-import Input from "../../ui/Input";
-import Textarea from "../../ui/Textarea";
+import { Input, Label, Button, Textarea } from "@/components/ui";
 import { useNavigate } from "react-router-dom";
 import { User } from "../../../types/types";
 import { ProfileUploader } from "../fileuploader/ProfileUploader";
@@ -22,7 +19,7 @@ type ProfileFormProps = {
   user: User;
 };
 
-const ProfileForm = ({
+export const ProfileForm = ({
   handleEditProfile,
   currentUser,
   isPending,
@@ -143,4 +140,3 @@ const ProfileForm = ({
   );
 };
 
-export default ProfileForm;

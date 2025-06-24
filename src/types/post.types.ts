@@ -1,4 +1,5 @@
 import { Models } from "appwrite";
+import { ReactNode } from "react";
 
 export type Post = Models.Document & {
   $id: string;

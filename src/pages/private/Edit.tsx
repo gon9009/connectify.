@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useUpdatePost } from "../../lib/react-query/queries";
-import PostForm from "../../components/features/posts/PostForm";
+import { PostForm } from "../../components/features/posts/PostForm";
 import { PostFormData } from "../../lib/validation/auth";
 import { useParams } from "react-router-dom";
 import { useGetPostById } from "../../lib/react-query/queries";
-import Loader from "../../components/ui/Loader";
+import { Loader } from "@/components/ui";
 
 // 기존 게시물을 수정하는 페이지
 const Edit = () => {

@@ -9,6 +9,7 @@ import {
 import { BasePostCard } from "@/components/features/posts/postcard/BasePostCard";
 import { PostCardDetailProps } from "@/types/index";
 
+// 디테일 카드 
 export function PostCardDetail({
   post,
   isPriority = false,

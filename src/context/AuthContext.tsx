@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import Loader from "../components/ui/Loader";
+import { Loader } from "@/components/ui";
 import { getCurrentUser } from "../lib/appwrite/api";
 import { INITIAL_USER, INITIAL_STATE } from "../constants/authState";
 import { ContextType } from "../types/types";

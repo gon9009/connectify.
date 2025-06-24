@@ -1,8 +1,6 @@
 import { useOutletContext } from "react-router-dom";
-import GridPostList from "../../../components/features/posts/PostList";
-import Loader from "../../../components/ui/Loader";
-import EmptyState from "../../../components/features/posts/EmptyState";
-import PostListContainer from "../../../components/features/posts/PostListContainer";
+import {GridPostList,EmptyState,PostListContainer} from "@/components/features/posts"
+import { Loader } from "@/components/ui";
 
 // Profile 에서 useOutletContext 로 데이터 전달
 const ProfilePosts = () => {

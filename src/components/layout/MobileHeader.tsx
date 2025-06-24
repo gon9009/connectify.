@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import Button from "../ui/Button";
+import { Button } from "@/components/ui";
 import { useUserContext } from "../../context/AuthContext";
 import { useSignOutAccount } from "../../lib/react-query/queries";
 import { INITIAL_USER } from "../../constants/authState";
@@ -67,7 +67,7 @@ const MobileHeader = () => {
       <div className="mobile-header__wrapper">
         <MobileHeaderLogo />
         <div className="mobile-header__actions">
-          {/* <MobileLogoutButton handleSignout={handleSignout} /> */}
+          <MobileLogoutButton handleSignout={handleSignout} />
           <MobileUserProfile user={user} />
         </div>
       </div>

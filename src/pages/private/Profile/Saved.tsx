@@ -1,14 +1,12 @@
-import GridPostList from "../../../components/features/posts/PostList";
-import Loader from "../../../components/ui/Loader";
+import { Loader } from "@/components/ui";
 import { useOutletContext } from "react-router-dom";
-import EmptyState from "../../../components/features/posts/EmptyState";
-import PostListContainer from "../../../components/features/posts/PostListContainer";
+import { GridPostList,EmptyState,PostListContainer} from "@/components/features/posts";
 
 const Saved = () => {
   // creator 를 반환하는 쿼리 찾기
   const { save, isProfileOwner, isLoading } = useOutletContext();
 
-  // <p>해당 페이지는 로그인한 사용자만 볼 수 있어요</p>
+  // 프로필 소유자가 아닌 경우에는 해당 페이지를 볼수 없도록 처리 
   if (!isProfileOwner) {
     return (
       <PostListContainer>

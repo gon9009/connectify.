@@ -7,7 +7,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: "default" | "auth" | "logout";
 }
 
-const Button = ({
+export const Button = ({
   children,
   type = "submit",
   variant = "default",
@@ -23,5 +23,3 @@ const Button = ({
     </button>
   );
 };
-
-export default Button;

@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import GridPostList from "../../components/features/posts/PostList";
-import Loader from "../../components/ui/Loader";
+import { Loader } from "@/components/ui";
 import {
   useGetPostById,
   useGetUserPosts,

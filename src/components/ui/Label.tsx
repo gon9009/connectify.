@@ -5,7 +5,7 @@ interface LabelProps {
   variant: "default" | "auth";
 }
 
-const Label = ({ htmlFor, children, variant = "default" }: LabelProps) => {
+export const Label = ({ htmlFor, children, variant = "default" }: LabelProps) => {
   return (
     <label htmlFor={htmlFor} className={`label label--${variant}`}>
       {children}
@@ -13,4 +13,3 @@ const Label = ({ htmlFor, children, variant = "default" }: LabelProps) => {
   );
 };
 
-export default Label;

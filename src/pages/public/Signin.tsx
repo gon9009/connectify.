@@ -1,4 +1,4 @@
-import SigninForm from "../../components/features/auth/SigninForm";
+import { SigninForm } from "../../components/features/auth/SigninForm";
 import { SigninFormData } from "../../lib/validation/auth";
 import { useUserContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";

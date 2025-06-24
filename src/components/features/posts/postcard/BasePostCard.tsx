@@ -1,7 +1,7 @@
 import { BasePostCardProps } from "@/types/index";
 
 // UI 표시만 담당,PostCardProps를 받아서 표시
-const BasePostCard = ({
+export const BasePostCard = ({
   className = "",
   header,
   content,
@@ -20,4 +20,3 @@ const BasePostCard = ({
   );
 };
 
-export default BasePostCard;

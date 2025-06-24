@@ -1,4 +1,4 @@
-import Loader from "../../components/ui/Loader";
+import { Loader } from "@/components/ui";
 import { useGetRecentPosts } from "../../lib/react-query/queries";
 import { lazy, Suspense } from "react";
 import { Post } from "../../types/types";

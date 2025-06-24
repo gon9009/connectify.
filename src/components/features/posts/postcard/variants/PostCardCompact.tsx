@@ -3,6 +3,7 @@ import { PostImage, PostContent } from "@/components/features/posts";
 import { BasePostCard } from "@/components/features/posts/postcard/BasePostCard";
 import { PostCardCompactProps } from "@/types/index";
 
+// 컴팩트 카드 
 export function PostCardCompact({
   post,
   isPriority = false,

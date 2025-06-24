@@ -1,4 +1,4 @@
-import Loader from "../../components/ui/Loader";
+import { Loader } from "@/components/ui";
 import UserCard from "../../components/features/user/UserCard";
 import { useGetUsers } from "../../lib/react-query/queries";
 
@@ -25,4 +25,3 @@ const AllUsers = () => {
 };
 
 export default AllUsers;
-

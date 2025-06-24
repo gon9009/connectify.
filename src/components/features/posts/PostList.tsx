@@ -1,4 +1,4 @@
-import { Post } from "../../../types/types";
+import { Post } from "../../../types";
 import { PostCardCompact } from "@/components/features/posts/postcard/variants/PostCardCompact";
 
 type GridPostListProps = {
@@ -6,7 +6,7 @@ type GridPostListProps = {
 };
 
 // compact 형식으로 카드를 렌더링 한다
-const GridPostList = ({ posts }: GridPostListProps) => {
+export const GridPostList = ({ posts }: GridPostListProps) => {
   return (
     <ul className="grid-posts">
       {posts.map((post, index) => (
@@ -22,4 +22,3 @@ const GridPostList = ({ posts }: GridPostListProps) => {
   );
 };
 
-export default GridPostList;

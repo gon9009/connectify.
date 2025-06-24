@@ -1,10 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PostFormData, PostValidation } from "../../../lib/validation/auth";
-import Input from "../../ui/Input";
-import Label from "../../ui/Label";
-import Button from "../../ui/Button";
-import Textarea from "../../ui/Textarea";
+import { Button, Label, Input, Textarea } from "@/components/ui";
 import { useNavigate } from "react-router-dom";
 import { Post } from "../../../types/types";
 import { PostFileUploader } from "../fileuploader/PostFileUploader";
@@ -18,7 +15,7 @@ type PostFormProps = {
 };
 
 // Model-> 타입 추출용
-const PostForm = ({
+export const PostForm = ({
   post,
   action,
   onCreate,
@@ -135,4 +132,3 @@ const PostForm = ({
   );
 };
 
-export default PostForm;
