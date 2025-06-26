@@ -1,10 +1,11 @@
 import { useOutletContext } from "react-router-dom";
 import { Loader } from "@/components/ui";
 import {GridPostList,EmptyState,PostListContainer} from "@/components/features/posts"
+import { ProfileOutletContext } from "@/types";
 
 
 const LikedPosts = () => {
-  const { liked, isProfileOwner, isLoading } = useOutletContext();
+  const { liked, isProfileOwner, isLoading } = useOutletContext<ProfileOutletContext>();
 
   if (!isProfileOwner) {
     return (

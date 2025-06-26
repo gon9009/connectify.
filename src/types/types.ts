@@ -162,3 +162,12 @@ export type SearchResponse = {
   docuemnts: Post[];
   hasNextPage: boolean;
 };
+
+//=============================================================== outletContext 타입 ======================================
+export type ProfileOutletContext = {
+  posts: Post[];
+  save: Post[];
+  liked: Post[];
+  isProfileOwner: boolean;
+  isLoading: boolean;
+};

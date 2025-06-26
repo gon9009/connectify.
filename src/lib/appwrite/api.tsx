@@ -1,4 +1,4 @@
-import { ID, ImageGravity, Query, Models } from "appwrite";
+import { ID, ImageGravity, Query } from "appwrite";
 import {
   appwriteConfig,
   account,
@@ -10,11 +10,12 @@ import {
   NewUser,
   CreatePostType,
   UpdatePostType,
-  Post,
   CurrentUser,
   UpdateUserType,
   ProfileUser,
 } from "../../types/types";
+
+import { Post } from "@/types/post.types";
 
 // ========================================================== 인증 / 보안 API ==========================================================================================
 
@@ -189,9 +190,8 @@ export async function getRecentPosts() {
       appwriteConfig.postCollectionId,
       [Query.orderDesc("$createdAt"), Query.limit(20)]
     );
-
+    console.log("getRecentPosts 반환값:", posts);
     if (!posts) throw Error;
-
     return posts;
   } catch (error) {
     console.log(error);
@@ -505,11 +505,11 @@ export async function updateUser(user: UpdateUserType) {
 }
 
 // ====================================================== 검색 + 무한 스크롤 =============================================================
-export async function searchInfinitePosts(searchTerm: string, pageParam?: string) {
-  const queries = [
-    Query.search("caption", searchTerm),
-    Query.limit(10),
-  ];
+export async function searchInfinitePosts(
+  searchTerm: string,
+  pageParam?: string
+) {
+  const queries = [Query.search("caption", searchTerm), Query.limit(10)];
 
   if (pageParam) {
     queries.push(Query.cursorAfter(pageParam));

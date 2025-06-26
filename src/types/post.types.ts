@@ -53,6 +53,8 @@ export type BasePostCardProps = {
   stats?: ReactNode;
   actions?: ReactNode;
   className?: string;
+  left?: ReactNode;
+  right?: ReactNode;
 };
 
 //=========================

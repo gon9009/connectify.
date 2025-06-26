@@ -16,7 +16,7 @@ export const PostImage = ({ imageUrl, postId, isPriority }: PostImageProp) => {
     return (
       <Link to={`/posts/${postId}`}>
         <img
-          src={imageUrl}
+          src={imageUrl || "/assets/placeholder.svg"}
           alt="Post Image"
           className="post-card__img"
           loading="eager"
@@ -28,7 +28,7 @@ export const PostImage = ({ imageUrl, postId, isPriority }: PostImageProp) => {
     return (
       <Link to={`/posts/${postId}`}>
         <LazyLoadImage
-          src={imageUrl}
+          src={imageUrl || "/assets/placeholder.svg"}
           alt="Post Image"
           className="post-card__img"
           effect="blur"

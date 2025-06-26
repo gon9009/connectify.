@@ -1,5 +1,5 @@
 export type DividerProps = {
-  postType: "detail" | "list";
+  postType: "detail" | "list" | "all";
 };
 
 export const Divider = ({ postType }: DividerProps) => {

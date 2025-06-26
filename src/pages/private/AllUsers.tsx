@@ -12,6 +12,7 @@ const AllUsers = () => {
     <div className="all-users">
       <div className="all-users__container">
         <h2 className="all-users__title">사용자 목록</h2>
+        <hr className="all-users__divider" />
         <ul className="all-users__lists">
           {creators?.documents.map((creator) => (
             <li key={creator.$id} className="all-users__list">

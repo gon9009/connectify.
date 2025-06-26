@@ -1,5 +1,5 @@
-import ProfileFormHeader from "../../components/features/profile/ProfileFormHeader";
-import ProfileForm from "../../components/features/profile/ProfileForm";
+import {ProfileFormHeader} from "../../components/features/profile/ProfileFormHeader";
+import { ProfileForm} from "../../components/features/profile/ProfileForm";
 import { useParams } from "react-router-dom";
 import { useGetUserById } from "../../lib/react-query/queries";
 import { useNavigate } from "react-router-dom";

@@ -3,7 +3,7 @@ import { ForwardedRef, forwardRef, InputHTMLAttributes } from "react";
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   error?: string;
-  variant: "default" | "auth";
+  variant?: "default" | "auth";
   className?: string;
 }
 

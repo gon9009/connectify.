@@ -6,8 +6,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   &__container {
-    padding: 1.5rem;
+    padding: 2.5rem 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,47 +16,54 @@
     flex-grow: 1;
     flex: 1 1 auto;
     gap: 2rem;
-    width: 30%;
-    max-width: 900px;
-    min-width: 600px;
-    max-height: 100%;
+    width: 100%;
+    max-width: 480px; // 더 컴팩트하게
+    min-width: 320px;
+    border-radius: 24px;
+    background: rgba(30, 30, 32, 0.95); // 약간 투명한 느낌
   }
 
   &__title {
-    font-weight: 700;
-    font-size: 30px;
+    font-weight: 800;
+    font-size: 2rem;
+    letter-spacing: -0.02em;
+    color: v.$light-1;
+    text-align: center;
   }
 
   &__lists {
     width: 100%;
-    flex: 1 1 auto;
-    height: 80%;
-    padding: 2rem;
-    overflow: scroll;
-    overflow-x: hidden;
-    border: 1px solid v.$light-4;
-    background-color: v.$dark-4;
-    border-radius: 20px;
+    max-height: 600px;
+    padding: 0.5rem 0;
+    overflow-y: auto;
+    border: none;
+    background: transparent;
+    border-radius: 16px;
     display: flex;
     flex-direction: column;
   }
-  &__lists::-webkit-scrollbar {
-    width: 6px; // ✅ 스크롤바 너비를 얇게 조정
-    border-radius: 10px; // ✅ 스크롤바에 곡선 추가
+  &__list {
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
   }
-
-  &__lists::-webkit-scrollbar-track {
-    background: transparent; // ✅ 트랙 배경을 투명하게 설정
+  &__divider {
+    border: none;
+    height: 2px;
+    background: v.$light-1;
+    width: 80%;
+  }
+  // 스크롤바 스타일은 기존 그대로
+  &__lists::-webkit-scrollbar {
+    width: 6px;
     border-radius: 10px;
   }
 
   &__lists::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2); // ✅ 반투명한 스크롤바 색상
-    border-radius: 10px; // ✅ 둥글게 처리
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
     transition: background 0.3s ease-in-out;
-  }
-
-  &__lists::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.4); // ✅ 호버 시 색상 강조
   }
 }

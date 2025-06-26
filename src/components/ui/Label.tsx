@@ -2,7 +2,7 @@ interface LabelProps {
   htmlFor: string;
   children: React.ReactNode;
   className?: string;
-  variant: "default" | "auth";
+  variant?: "default" | "auth";
 }
 
 export const Label = ({ htmlFor, children, variant = "default" }: LabelProps) => {

@@ -2,6 +2,7 @@ import { Link, Outlet, useParams, NavLink } from "react-router-dom";
 import { useUserContext } from "../../context/AuthContext";
 import { useGetUserById } from "../../lib/react-query/queries";
 import { Loader } from "@/components/ui";
+import { Post } from "@/types";
 
 interface UserStatProps {
   value: string | number;
@@ -139,7 +140,7 @@ const Profile = () => {
         <ProfileTabs id={id} />
         <Outlet
           context={{
-            posts: currentUser.posts.map((post) => ({
+            posts: currentUser.posts.map((post:Post) => ({
               ...post,
               creator: {
                 $id: currentUser.$id,

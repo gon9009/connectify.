@@ -1,12 +1,12 @@
 import { useNavigate, useParams } from "react-router-dom";
-import GridPostList from "../../components/features/posts/PostList";
+import { GridPostList } from  "@/components/features/posts";
 import { Loader } from "@/components/ui";
 import {
   useGetPostById,
   useGetUserPosts,
   useDeletePost,
 } from "../../lib/react-query/queries";
-import { Post } from "../../types/types";
+import { Post } from "@/types";
 import { PostCardDetail } from "@/components/features/posts/postcard/variants/PostCardDetail";
 import { Divider } from "../../components/features/posts/Divider";
 

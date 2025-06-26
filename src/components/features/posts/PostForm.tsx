@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { PostFormData, PostValidation } from "../../../lib/validation/auth";
 import { Button, Label, Input, Textarea } from "@/components/ui";
 import { useNavigate } from "react-router-dom";
-import { Post } from "../../../types/types";
+import { Post } from "@/types"
 import { PostFileUploader } from "../fileuploader/PostFileUploader";
 
 type PostFormProps = {

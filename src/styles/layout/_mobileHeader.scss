@@ -1,8 +1,7 @@
 // 모바일 헤더
-// 전체 헤더의 스타일을 담당 (배경, 위치, 높이 등)
 .mobile-header {
-  flex: none; // ✅ flex 아이템이 되지 않도록 설정
-  width: 100vw; // ✅ 전체 뷰포트 너비를 강제 적용
+  flex: none;
+  width: 100vw;
   display: flex;
   position: fixed;
   top: 0;
@@ -14,7 +13,6 @@
   @media (min-width: 768px) {
     display: none;
   }
-  // 내부 요소(로고, 버튼, 프로필 등)의 정렬 및 배치 조정
   &__wrapper {
     width: 100%;
     padding-left: 2rem;
@@ -37,16 +35,19 @@
   &__profile {
     &-img {
       border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      max-width: none;
     }
   }
 
   &__logout {
-    width: 32px; // ✅ 크기 고정
+    width: 32px;
     height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 8px; // ✅ 살짝 둥글게
-    padding: 4px; // ✅ 내부 여백 추가
+    border-radius: 8px;
+    padding: 4px;
   }
 }

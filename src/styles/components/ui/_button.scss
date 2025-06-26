@@ -21,4 +21,9 @@
   &--logout {
     background-color: v.$light-2-5;
   }
+
+  // 모바일 로그아웃
+  &--mobile-logout {
+    background-color: black;
+  }
 }

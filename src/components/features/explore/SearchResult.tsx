@@ -1,9 +1,8 @@
 import { useSearchInfinitePosts } from "../../../lib/react-query/queries";
 import { useInView } from "react-intersection-observer";
 import { Loader } from "@/components/ui";
-import GridPostList from "../posts/PostList";
+import { GridPostList, EmptyState } from "@/components/features/posts";
 import { useEffect } from "react";
-import EmptyState from "../posts/EmptyState";
 
 type DebouncedSearchProps = {
   debouncedSearch: string;
@@ -39,7 +38,7 @@ const SearchResult = ({ debouncedSearch }: DebouncedSearchProps) => {
     return <EmptyState message="검색 결과가 없습니다" />;
   }
 
-  //
+
   return (
     <>
       <div className="explore__search-results">

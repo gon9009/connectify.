@@ -1,12 +1,18 @@
 import { usePostCardProps } from "@/hooks/usePostCardProps";
-import { PostStats, PostHeader, PostImage, PostContent } from "@/components/features/posts";
+import {
+  PostStats,
+  PostHeader,
+  PostImage,
+  PostContent,
+} from "@/components/features/posts";
 import { BasePostCard } from "@/components/features/posts/postcard/BasePostCard";
-import {PostCardBaseProps }from "@/types/index";
+import { PostCardBaseProps } from "@/types/index";
 
-// 기본카드 
-export function PostCardBase({ post, isPriority = false }: PostCardBaseProps) {
-  
-  const { headerProps, contentProps, imageProps, statsProps } = usePostCardProps(post);
+// 기본카드
+const PostCardBase = ({ post, isPriority = false }: PostCardBaseProps) => {
+  const { headerProps, contentProps, imageProps, statsProps } =
+    usePostCardProps(post);
+
   return (
     <BasePostCard
       header={<PostHeader {...headerProps} />}
@@ -15,4 +21,6 @@ export function PostCardBase({ post, isPriority = false }: PostCardBaseProps) {
       stats={<PostStats {...statsProps} />}
     />
   );
-}
+};
+
+export default PostCardBase;

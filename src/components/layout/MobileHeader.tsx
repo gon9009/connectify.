@@ -26,8 +26,11 @@ const MobileLogoutButton = ({
   handleSignout: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }) => {
   return (
-    <Button className="mobile-header__logout" onClick={handleSignout}>
-      <img width={10} height={15} src="/assets/logout.svg" alt="로그아웃" />
+    <Button
+      variant="mobile-logout"
+      onClick={handleSignout}
+    >
+      <img width={32} height={32} src="/assets/sign-out.svg" alt="로그아웃" />
     </Button>
   );
 };

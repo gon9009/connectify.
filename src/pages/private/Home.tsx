@@ -1,7 +1,7 @@
 import { Loader } from "@/components/ui";
 import { useGetRecentPosts } from "../../lib/react-query/queries";
 import { lazy, Suspense } from "react";
-import { Post } from "../../types/types";
+import { Post } from "@/types";
 
 const PostCardBase = lazy(
   () => import("../../components/features/posts/postcard/variants/PostCardBase")
@@ -12,7 +12,7 @@ const PostList = ({
   posts,
   isLoading,
 }: {
-  posts?: Post[];
+  posts: Post[];
   isLoading: boolean;
 }) => {
   if (isLoading) {
@@ -27,7 +27,7 @@ const PostList = ({
           {index === 0 ? (
             <PostCardBase post={post} isPriority />
           ) : (
-            <Suspense>
+            <Suspense fallback={<Loader />}>
               <PostCardBase post={post} isPriority={false} />
             </Suspense>
           )}

@@ -1,23 +1,24 @@
 import { useDropzone } from "react-dropzone";
+import { DropzoneRootProps, DropzoneInputProps } from "react-dropzone";
 import { useFileUploader } from "../../../hooks/useFileUploader";
 
 export type FileUploaderRenderProps = {
-  getRootProps: () => any;
-  getInputProps: () => any;
+  getRootProps: () => DropzoneRootProps;
+  getInputProps: () => DropzoneInputProps;
   fileUrl: string;
 };
 
 // BaseFileUploader props 타입
 export type BaseFileUploaderProps = {
   children: (props: FileUploaderRenderProps) => React.ReactNode;
-  mediaUrl: string;
+  mediaUrl: string | undefined;
   fieldChange: (files: File[]) => void;
 };
 
 // 파일 업로더 props (PostFile, ProfileFile)
 export type FileUploaderProps = {
   fieldChange: (files: File[]) => void;
-  mediaUrl: string;
+  mediaUrl: string | undefined;
 };
 
 export const BaseFileUploader = ({
@@ -25,7 +26,7 @@ export const BaseFileUploader = ({
   mediaUrl,
   fieldChange,
 }: BaseFileUploaderProps) => {
-  const { onDrop, fileUrl } = useFileUploader(mediaUrl, fieldChange); 
+  const { onDrop, fileUrl } = useFileUploader(mediaUrl, fieldChange);
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,

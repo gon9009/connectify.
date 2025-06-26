@@ -9,7 +9,7 @@ import {
 import { BasePostCard } from "@/components/features/posts/postcard/BasePostCard";
 import { PostCardDetailProps } from "@/types/index";
 
-// 디테일 카드 
+// 디테일 카드
 export function PostCardDetail({
   post,
   isPriority = false,
@@ -20,16 +20,39 @@ export function PostCardDetail({
 
   return (
     <BasePostCard
-      header={<PostHeader {...headerProps} isDetail handleDelete={onDelete} />}
-      image={<PostImage {...imageProps} isPriority={isPriority} />}
-      content={
+      left={<PostImage {...imageProps} isPriority={isPriority} />}
+      right={
         <>
-          <Divider postType="detail" />
-          <PostContent {...contentProps} />
+          <div className="post-card__content-wrapper">
+            <PostHeader {...headerProps} isDetail handleDelete={onDelete} />
+            <Divider postType="detail" />
+            <PostContent {...contentProps} />
+          </div>
+          <PostStats {...statsProps} />
         </>
       }
-      stats={<PostStats {...statsProps} />}
       className="post-card--detail"
     />
   );
 }
+
+
+// <div className="post-card post-card--detail">
+// <div className="post-card__left">
+// <PostImage isPriority={isPriority} {...imageProps} />
+// </div>
+// <div className="post-card__right">
+// <div className="post-card__content-wrapper">
+// <PostHeader
+// isDetail={isDetail}
+// handleDelete={handleDelete}
+// {...headerProps}
+// />
+// <Divider postType="detail" />
+// <PostContent {...contentProps} />
+// </div>
+// <PostStats {...statsProps} />
+// </div>
+// </div>
+
+

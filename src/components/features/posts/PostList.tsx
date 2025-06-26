@@ -12,7 +12,6 @@ export const GridPostList = ({ posts }: GridPostListProps) => {
       {posts.map((post, index) => (
         <li key={post.$id}>
           <PostCardCompact
-            // 그리드 형식에서는 3개까지 우선순위로
             isPriority={index < 6}
             post={post}
           />

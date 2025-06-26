@@ -1,4 +1,4 @@
-import { PostVariant } from "@/types/post.types";
+import { PostVariant } from "@/types";
 
 type PostStatsProps = {
   isSaved: boolean;

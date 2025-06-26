@@ -1,10 +1,12 @@
 import { useOutletContext } from "react-router-dom";
 import {GridPostList,EmptyState,PostListContainer} from "@/components/features/posts"
 import { Loader } from "@/components/ui";
+import { ProfileOutletContext } from "@/types";
+
 
 // Profile 에서 useOutletContext 로 데이터 전달
 const ProfilePosts = () => {
-  const { posts, isLoading } = useOutletContext();
+  const { posts, isLoading } = useOutletContext<ProfileOutletContext>();
 
   if (isLoading) {
     return <Loader />;
