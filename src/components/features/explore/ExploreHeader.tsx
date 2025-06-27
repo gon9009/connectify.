@@ -6,7 +6,6 @@ const ExploreHeader = ({ searchValue, setSearchValue }: ExploreHeaderProps) => {
   return (
     <div className="explore__header">
       <h2 className="explore__title">검색</h2>
-
       <input
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}

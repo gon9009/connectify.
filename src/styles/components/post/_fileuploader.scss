@@ -33,11 +33,10 @@
     color: v.$light-3;
   }
 
-  &__btn {
-    margin-top: 0.5rem;
+  .button {
     background-color: v.$light-4;
-    font-size: 0.8rem;
-    color: white;
+    color: v.$light-2;
     padding: 1rem;
+    width: 200px;
   }
 }

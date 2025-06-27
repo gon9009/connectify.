@@ -59,11 +59,12 @@ export const ProfileForm = ({
           이름
         </Label>
         <Input
+          variant="post"
           id="name"
           type="text"
           placeholder="이름을 변경하세요"
-          className={`profile-form__input ${errors.name ? "error" : ""}`}
           {...register("name")}
+          errors={errors.name}
         />
         {errors.name && <p className="error-message">{errors.name.message}</p>}
       </div>
@@ -73,6 +74,7 @@ export const ProfileForm = ({
         <Label htmlFor="username" className="profile-form__label">
           유저이름
         </Label>
+
         <Input
           id="username"
           type="text"
@@ -121,22 +123,13 @@ export const ProfileForm = ({
 
       {/* 제출 버튼 */}
       <div className="profile-form__btn-container">
-        <Button
-          onClick={() => navigate(-1)}
-          className="btn profile-form__btn-cancel"
-          type="button"
-        >
+        <Button onClick={() => navigate(-1)} variant="cancle" type="button">
           취소
         </Button>
-        <Button
-          type="submit"
-          className="btn profile-form__btn-post"
-          disabled={isPending}
-        >
+        <Button type="submit" variant="post" disabled={isPending}>
           {isPending ? "제출 중..." : "제출"}
         </Button>
       </div>
     </form>
   );
 };
-

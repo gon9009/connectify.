@@ -8,9 +8,14 @@ import { LOGIN_FIELDS, LOGIN_META } from "../../../constants/formField";
 interface SigninFormProps {
   onSubmit: (data: SigninFormData) => void;
   isPending: boolean;
+  errorMsg: string;
 }
 
-export const SigninForm = ({ onSubmit, isPending }: SigninFormProps) => {
+export const SigninForm = ({
+  onSubmit,
+  isPending,
+  errorMsg,
+}: SigninFormProps) => {
   const {
     register,
     handleSubmit,
@@ -29,6 +34,7 @@ export const SigninForm = ({ onSubmit, isPending }: SigninFormProps) => {
         />
       </div>
       <form className="auth-form" onSubmit={handleSubmit(onSubmit)}>
+        {/* 폼 상단 */}
         {LOGIN_FIELDS.map((field) => (
           <div key={field.name} className="auth-form__container">
             <Label htmlFor={field.name} variant="auth">
@@ -42,12 +48,25 @@ export const SigninForm = ({ onSubmit, isPending }: SigninFormProps) => {
               {...register(field.name)}
               error={errors[field.name]?.message}
             />
+            {errorMsg && <p className="input__error-msg">{errorMsg}</p>}
           </div>
         ))}
         <div className="auth-form__container">
+          <div className="auth-form__btn-container">
           <Button type="submit" variant="auth">
             {isPending ? "로그인 중..." : LOGIN_META.buttonText}
           </Button>
+          <Button
+            onClick={() =>
+              onSubmit({ email: "test12345@demo.com", password: "Test!@345" })
+            }
+            disabled={isPending}
+            type="button"
+            variant="test"
+          >
+            {isPending ? "테스트 계정 로그인중..." : "테스트 계정으로 로그인"}
+          </Button>
+          </div>
         </div>
       </form>
       <p className="auth-form__description">

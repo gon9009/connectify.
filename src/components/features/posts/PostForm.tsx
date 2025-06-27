@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { PostFormData, PostValidation } from "../../../lib/validation/auth";
 import { Button, Label, Input, Textarea } from "@/components/ui";
 import { useNavigate } from "react-router-dom";
-import { Post } from "@/types"
+import { Post } from "@/types";
 import { PostFileUploader } from "../fileuploader/PostFileUploader";
 
 type PostFormProps = {
@@ -85,10 +85,11 @@ export const PostForm = ({
             어디서 찍은 사진인가요 ?
           </Label>
           <Input
-            id="location"
             type="text"
+            variant="post"
+            id="location"
             placeholder="위치를 입력하세요"
-            className={`post-form__input ${errors.location ? "error" : ""}`}
+            error={errors.location}
             {...register("location")}
           />
           {errors.location && (
@@ -101,10 +102,11 @@ export const PostForm = ({
             쉼표( , )로 구분하여 태그를 입력하세요
           </Label>
           <Input
+            variant="post"
             id="tags"
             type="text"
             placeholder="여행,일상,공부"
-            className={`post-form__input ${errors.tags ? "error" : ""}`}
+            error={errors.tags}
             {...register("tags")}
           />
           {errors.tags && (
@@ -113,17 +115,10 @@ export const PostForm = ({
         </div>
         {/* 버튼 */}
         <div className="post-form__btn-container">
-          <Button
-            onClick={() => navigate(-1)}
-            className="btn post-form__btn-cancel"
-          >
+          <Button onClick={() => navigate(-1)} variant="cancle">
             취소
           </Button>
-          <Button
-            type="submit"
-            className="btn post-form__btn-post"
-            disabled={isPending}
-          >
+          <Button type="submit" variant="post" disabled={isPending}>
             {isPending ? "제출 중..." : "제출"}
           </Button>
         </div>
@@ -131,4 +126,3 @@ export const PostForm = ({
     </>
   );
 };
-

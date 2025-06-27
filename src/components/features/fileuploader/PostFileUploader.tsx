@@ -26,9 +26,7 @@ export const PostFileUploader = ({
             <p className="file-uploader__description">
               사진 형식 (PNG,SVG) 만 가능합니다
             </p>
-            <Button className="btn file-uploader__btn">
-              컴퓨터에서 선택하기
-            </Button>
+            <Button variant="post">컴퓨터에서 선택하기</Button>
           </div>
         )}
       </div>

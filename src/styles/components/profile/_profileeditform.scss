@@ -1,5 +1,6 @@
 @use "../../abstracts/variables" as v;
 
+// 프로필 변경
 .profile-form {
   display: flex;
   flex-direction: column;
@@ -42,15 +43,13 @@
   }
 
   // 유저이름 / 이메일은 변경 불가
-
   &__btn-container {
     width: 100%;
     display: flex;
     justify-content: flex-end;
     gap: 2rem;
-  }
-  &__btn-cancel {
-  }
-  &__btn-post {
+    button {
+      width: 200px;
+    }
   }
 }

@@ -3,7 +3,7 @@ import { ForwardedRef, forwardRef, InputHTMLAttributes } from "react";
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   error?: string;
-  variant?: "default" | "auth";
+  variant?: "default" | "auth" | "post";
   className?: string;
 }
 
@@ -19,7 +19,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           type={type}
           id={id}
           placeholder={placeholder}
-          className={`input input--${variant} ${error && "input--error"}`}
+          className={`input input--${variant} ${error ? "input--error" : ""}`}
           {...rest}
         />
         {error && <p className="input__error-msg">{error}</p>}

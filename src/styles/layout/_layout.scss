@@ -19,13 +19,15 @@
   .content-wrapper {
     display: flex;
     width: 100%;
+
     .main-content {
       flex: 1;
       display: flex;
       padding: 2rem;
-      overflow-y: auto;
+      flex-direction: column;
       margin: 0 auto;
-      // 모바일 헤더 높이만큼의 패딩추가
+      height: 100%;
+      overflow-y: auto;
       @media (max-width: 768px) {
         padding-top: calc(
           72px + 2rem

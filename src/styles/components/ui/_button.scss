@@ -17,6 +17,13 @@
     font-size: 1.2rem;
   }
 
+  // 테스트 계정 로그인
+  &--test {
+    background-color: v.$light-4;
+    color: v.$light-2;
+    font-size: 1.2rem;
+  }
+
   // 로그아웃
   &--logout {
     background-color: v.$light-2-5;
@@ -25,5 +32,15 @@
   // 모바일 로그아웃
   &--mobile-logout {
     background-color: black;
+  }
+
+  // 글쓰기 / 수정
+  &--post {
+    background-color: white;
+  }
+
+  &--cancle {
+    background-color: v.$dark-4;
+    color: v.$light-2-5;
   }
 }

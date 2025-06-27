@@ -11,7 +11,7 @@ const Create = () => {
 
   // 쿼리
   const { mutateAsync: createPost, isPending: isPendingCreate } =
-    useCreatePost();
+  useCreatePost();
 
   // 새 게시물
   const handleCreate = async (value: PostFormData) => {
