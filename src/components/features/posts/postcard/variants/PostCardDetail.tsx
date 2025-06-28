@@ -17,7 +17,7 @@ export function PostCardDetail({
 }: PostCardDetailProps) {
   const { headerProps, contentProps, imageProps, statsProps } =
     usePostCardProps(post);
-
+    
   return (
     <BasePostCard
       left={<PostImage {...imageProps} isPriority={isPriority} />}
@@ -37,22 +37,5 @@ export function PostCardDetail({
 }
 
 
-// <div className="post-card post-card--detail">
-// <div className="post-card__left">
-// <PostImage isPriority={isPriority} {...imageProps} />
-// </div>
-// <div className="post-card__right">
-// <div className="post-card__content-wrapper">
-// <PostHeader
-// isDetail={isDetail}
-// handleDelete={handleDelete}
-// {...headerProps}
-// />
-// <Divider postType="detail" />
-// <PostContent {...contentProps} />
-// </div>
-// <PostStats {...statsProps} />
-// </div>
-// </div>
 
 

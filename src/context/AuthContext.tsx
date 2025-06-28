@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           username: currentUser.username,
           email: currentUser.email,
           imageUrl: currentUser.imageUrl,
-          bio: currentUser.bio,
+          bio: currentUser.bio ?? "",
         });
         return true;
       }
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  if (isLoading) return <Loader size="large" />;
+  if (isLoading) return <Loader />;
 
   const value = {
     user,

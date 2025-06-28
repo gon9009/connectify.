@@ -21,6 +21,8 @@ interface ProfileInfo {
   name: string;
   username: string;
   postlength: number;
+  savelength: number;
+  likedlength: number;
   bio: string;
 }
 
@@ -75,7 +77,14 @@ const EditProfile = ({ userId }: EditProfileProps) => {
 };
 
 // 프로필 계정 정보
-const ProfileInfo = ({ name, username, postlength, bio }: ProfileInfo) => {
+const ProfileInfo = ({
+  name,
+  username,
+  postlength,
+  savedlength,
+  likedlength,
+  bio,
+}: ProfileInfo) => {
   return (
     <div className="profile__info">
       <div className="profile__name">
@@ -83,7 +92,12 @@ const ProfileInfo = ({ name, username, postlength, bio }: ProfileInfo) => {
         <p className="profile__username">@{username}</p>
       </div>
       <div className="profile__stats">
-        <UserStat value={postlength} label="Posts" />
+        {/* 사용자가 올린 포스팅 갯수 */}
+        <UserStat value={postlength} label="게시물" />
+        {/* 저장한 포시팅 갯수 */}
+        <UserStat value={savedlength} label="좋아요" />
+        {/* 좋아요한 포스팅 갯수 */}
+        <UserStat value={likedlength} label="저장됨" />
       </div>
       <p className="profile__bio">{bio}</p>
     </div>
@@ -94,7 +108,7 @@ const Profile = () => {
   const { id } = useParams();
   const { user } = useUserContext();
 
-// URL 파라미터(id)에 해당하는 사용자의 정보
+  // URL 파라미터(id)에 해당하는 사용자의 정보
   const { data: currentUser, isLoading } = useGetUserById(id || "");
   const isProfileOwner = user.id === currentUser?.$id;
 
@@ -105,13 +119,13 @@ const Profile = () => {
       </div>
     );
   }
-  
+
   if (!currentUser) {
     return <p className="error-message">유저 정보를 불러올 수 없습니다.</p>;
   }
 
- // 기존 creator -> 해당 게시글을 작성한 "유저"의 정보 
- // 추가하는 creator -> 현재 프로필 유저의 정보를 강제로 넣는것  
+  // 기존 creator -> 해당 게시글을 작성한 "유저"의 정보
+  // 추가하는 creator -> 현재 프로필 유저의 정보를 강제로 넣는것
 
   // ProfileOwner 일때 프로필 수정과 / 프로필 탭이 활성화
   return (
@@ -132,6 +146,8 @@ const Profile = () => {
               name={currentUser.name}
               username={currentUser.username}
               postlength={currentUser.posts.length}
+              likedlength={currentUser.liked.length}
+              savedlength={currentUser.save.length}
               bio={currentUser.bio}
             />
             {isProfileOwner && <EditProfile userId={currentUser.$id} />}
@@ -140,7 +156,7 @@ const Profile = () => {
         <ProfileTabs id={id} />
         <Outlet
           context={{
-            posts: currentUser.posts.map((post:Post) => ({
+            posts: currentUser.posts.map((post: Post) => ({
               ...post,
               creator: {
                 $id: currentUser.$id,
@@ -161,8 +177,8 @@ const Profile = () => {
 
 export default Profile;
 
-// useGetUserByID 는 getUserById 쿼리 훅을 호출 -> creator 필드가 기본적으로 포함 X 
+// useGetUserByID 는 getUserById 쿼리 훅을 호출 -> creator 필드가 기본적으로 포함 X
 // save,liked,isProfileOwner, isLoading
 // 위 값들은 라우트 Outlet 의 Context 로 전달되어 하위 컴포넌트에서  인증/권한 /상태관리를 위해 사용됩니다.
 // API 에서 받은 원본 데이터에는 없는 값이며 프론트에서 -> context 로 추가해서 전달하는 구조
-// currentUser 는 URL의 id 파리미터에 해당하는 사용자의 정보 
+// currentUser 는 URL의 id 파리미터에 해당하는 사용자의 정보

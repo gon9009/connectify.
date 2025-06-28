@@ -16,9 +16,8 @@ export const useSavePostHandler = (postId: string, userId: string) => {
     () => currentUser?.save.find((record) => record.post.$id === postId),
     [currentUser?.save, postId]
   );
-
   const isSaved = Boolean(savedPostRecord);
-
+  
   // 저장 핸들러
   const handleSavePost = (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>

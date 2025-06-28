@@ -23,8 +23,6 @@ const RelatedPosts = ({
   if (isUserPostLoading) {
     return <Loader />;
   }
-
-  // undefined -> loading : true
   return (
     <div className="post-details__related">
       <Divider postType="list" />
@@ -41,13 +39,11 @@ const PostDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { data: post, isLoading } = useGetPostById(id);
-  // 사용자의 게시물들
   const { data: userPosts, isLoading: isUserPostLoading } = useGetUserPosts(
-    post?.creator.$id
+    post?.creator?.$id
   );
   const { mutateAsync: deletePost } = useDeletePost();
 
-  // 같은 작성자의 다른 게시물들 , 작성자의 현재 게시물 (id) 을 제외한 다른 게시물 (userPost.$id)
   const relatedPosts = userPosts?.filter((userPost) => userPost.$id !== id);
 
   if (isLoading) {

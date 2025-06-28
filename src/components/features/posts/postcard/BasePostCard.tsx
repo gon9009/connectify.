@@ -11,6 +11,7 @@ export const BasePostCard = ({
   left,
   right,
 }: BasePostCardProps) => {
+  
   // left와 right가 모두 존재하는 경우, 레이아웃을 변경 (Detail 카드 형태로)
   if (left && right) {
     return (
@@ -22,7 +23,6 @@ export const BasePostCard = ({
   }
 
   // 컴팩트 카드 일때 
-
   return (
     <div className={`post-card ${className || ""}`}>
       {header}

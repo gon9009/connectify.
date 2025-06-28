@@ -1,14 +1,18 @@
 import { Loader } from "@/components/ui";
 import { useOutletContext } from "react-router-dom";
-import { GridPostList,EmptyState,PostListContainer} from "@/components/features/posts";
+import {
+  GridPostList,
+  EmptyState,
+  PostListContainer,
+} from "@/components/features/posts";
 import { ProfileOutletContext } from "@/types";
-
 
 const Saved = () => {
   // creator 를 반환하는 쿼리 찾기
-  const { save, isProfileOwner, isLoading } = useOutletContext<ProfileOutletContext>();
+  const { save, isProfileOwner, isLoading } =
+    useOutletContext<ProfileOutletContext>();
 
-  // 프로필 소유자가 아닌 경우에는 해당 페이지를 볼수 없도록 처리 
+  // 프로필 소유자가 아닌 경우에는 해당 페이지를 볼수 없도록 처리
   if (!isProfileOwner) {
     return (
       <PostListContainer>
@@ -28,7 +32,11 @@ const Saved = () => {
       </PostListContainer>
     );
   }
-  return <GridPostList posts={save?.map((saveItem) => saveItem.post)} />;
+  return (
+    <PostListContainer>
+      <GridPostList posts={save?.map((saveItem) => saveItem.post)} />
+    </PostListContainer>
+  );
 };
 
 export default Saved;

@@ -58,6 +58,7 @@ export const useSignOutAccount = (options = {}) => {
     ...options,
   });
 };
+
 // ====================================== 사용자(user) 쿼리 =================================================================================
 
 export const useGetCurrentUser = () => {
@@ -77,13 +78,15 @@ export const useGetUsers = () => {
 
 export const useGetUserById = (userId: string) => {
   return useQuery<ProfileUser>({
-    queryKey: [getUserById, userId],
+    queryKey: ["getUserById", userId],
     queryFn: () => getUserById(userId),
     enabled: !!userId,
   });
 };
 
 // ====================================== 게시물(post) 쿼리 ==============================================================================
+
+// 홈 (Home) 에서 최근 게시물을 불러오는 쿼리
 export const useGetRecentPosts = () => {
   return useQuery({
     queryKey: ["getRecentPosts"],
@@ -91,6 +94,7 @@ export const useGetRecentPosts = () => {
   });
 };
 
+// 좋아요
 export const useLikePost = () => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -118,6 +122,7 @@ export const useLikePost = () => {
   });
 };
 
+// 저장
 export const useSavePost = () => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -136,7 +141,7 @@ export const useSavePost = () => {
     },
   });
 };
-
+// 저장된 게시물을 삭제하는 쿼리
 export const useDeleteSavedPost = () => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -155,14 +160,16 @@ export const useDeleteSavedPost = () => {
   });
 };
 
+// 게시물에 대한 상세한 정보를 불러오는 쿼리
 export const useGetPostById = (postId?: string) => {
   return useQuery<Post>({
-    queryKey: ["getUserPosts", postId],
+    queryKey: ["getPostById", postId],
     queryFn: () => getPostById(postId),
     enabled: !!postId,
   });
 };
 
+// 게시물 삭제
 export const useDeletePost = () => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -179,6 +186,7 @@ export const useDeletePost = () => {
   });
 };
 
+// 사용자의 게시물을 불러오는 쿼리
 export const useGetUserPosts = (userId?: string) => {
   return useQuery<Post[]>({
     queryKey: ["getUserPosts", userId],
