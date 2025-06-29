@@ -21,7 +21,7 @@ interface ProfileInfo {
   name: string;
   username: string;
   postlength: number;
-  savelength: number;
+  savedlength: number;
   likedlength: number;
   bio: string;
 }

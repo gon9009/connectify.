@@ -38,17 +38,19 @@ const PostList = ({
 };
 
 const Home = () => {
-  const { data: postsData, isLoading: isPostLoading } = useGetRecentPosts();
+  const { data: posts = [], isLoading: isPostLoading } = useGetRecentPosts();
 
   if (isPostLoading) {
     return <Loader />;
   }
 
+  console.log(posts);
+
   return (
     <div className="home">
       <div className="home__container">
         <div className="home__posts">
-          <PostList posts={postsData?.documents} isLoading={isPostLoading} />
+          <PostList posts={posts} isLoading={isPostLoading} />
         </div>
       </div>
     </div>

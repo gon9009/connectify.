@@ -89,7 +89,7 @@ export const PostForm = ({
             variant="post"
             id="location"
             placeholder="위치를 입력하세요"
-            error={errors.location}
+            error={errors.location?.message}
             {...register("location")}
           />
           {errors.location && (
@@ -106,7 +106,7 @@ export const PostForm = ({
             id="tags"
             type="text"
             placeholder="여행,일상,공부"
-            error={errors.tags}
+            error={errors.tags?.message}
             {...register("tags")}
           />
           {errors.tags && (

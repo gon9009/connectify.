@@ -64,7 +64,7 @@ export const ProfileForm = ({
           type="text"
           placeholder="이름을 변경하세요"
           {...register("name")}
-          errors={errors.name}
+          error={errors.name?.message}
         />
         {errors.name && <p className="error-message">{errors.name.message}</p>}
       </div>

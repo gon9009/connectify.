@@ -27,15 +27,18 @@ const Signin = () => {
         setErrorMsg("인증 실패, 사용자 정보를 불러올 수 없습니다");
       }
     } catch (error) {
-      setErrorMsg("로그인 처리 중 에러 발생", error);
+      console.error(error);
+      setErrorMsg("로그인 처리 중 에러 발생");
     }
   };
 
   return (
     <>
       <SigninForm
-      errorMsg={errorMsg}
-      isPending={isPending} onSubmit={handleSubmit} />
+        errorMsg={errorMsg}
+        isPending={isPending}
+        onSubmit={handleSubmit}
+      />
     </>
   );
 };

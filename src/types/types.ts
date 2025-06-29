@@ -35,7 +35,7 @@ export type UpdatePost = {
   caption: string;
   imageId: string;
   imageUrl: URL;
-  file: File[];
+  file?: File[];
   location?: string;
   tags?: string;
 };
@@ -123,7 +123,6 @@ export type UpdatePostType = {
 };
 
 // =============================================================== 유저(User) 타입 =======================
-
 // 현재 유저
 export type CurrentUser = Models.Document & {
   accountId: string;

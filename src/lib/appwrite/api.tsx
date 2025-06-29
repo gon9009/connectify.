@@ -190,11 +190,22 @@ export async function getRecentPosts() {
       appwriteConfig.postCollectionId,
       [Query.orderDesc("$createdAt"), Query.limit(20)]
     );
-    console.log("getRecentPosts 반환값:", posts);
     if (!posts) throw Error;
-    return posts;
+    return posts.documents.map((doc) => ({
+      ...doc,
+      $id: doc.$id,
+      creator: doc.creator,
+      likes: doc.likes,
+      caption: doc.caption,
+      tags: doc.tags,
+      imageUrl: doc.imageUrl,
+      imageId: doc.imageId,
+      location: doc.location,
+      save: doc.save,
+    })) as Post[];
   } catch (error) {
     console.log(error);
+    return [];
   }
 }
 
@@ -236,14 +247,12 @@ export async function deletePost(postId?: string, imageId?: string) {
 
 export async function getUserPosts(userId?: string): Promise<Post[]> {
   if (!userId) return [];
-
   try {
     const post = await databases.listDocuments<Post>(
       appwriteConfig.databaseId,
       appwriteConfig.postCollectionId,
       [Query.equal("creator", userId), Query.orderAsc("$createdAt")]
     );
-
     if (!post) throw Error;
 
     return post.documents;
@@ -393,7 +402,8 @@ export async function createPost(post: CreatePostType) {
 
 // 게시물 수정 (Edit)
 export async function updatePost(post: UpdatePostType) {
-  const hasFileToUpdate = post.file?.length > 0;
+  // 자연스럽게 내로잉
+  const hasFileToUpdate = post.file && post.file.length > 0;
 
   try {
     let image = {
@@ -401,12 +411,11 @@ export async function updatePost(post: UpdatePostType) {
       imageId: post.imageId,
     };
 
-    if (hasFileToUpdate) {
-      // Upload new file to appwrite storage
+    if (post.file && post.file.length > 0) {
+      // TypeScript는 여기서 post.file의 타입이 여전히 File[] | undefined 라고 생각
       const uploadedFile = await uploadFile(post.file[0]);
       if (!uploadedFile) throw Error;
 
-      // Get new file url
       const fileUrl = getFilePreview(uploadedFile.$id);
       if (!fileUrl) {
         await deleteFile(uploadedFile.$id);

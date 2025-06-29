@@ -11,14 +11,14 @@ export type FileUploaderRenderProps = {
 // BaseFileUploader props 타입
 export type BaseFileUploaderProps = {
   children: (props: FileUploaderRenderProps) => React.ReactNode;
-  mediaUrl: string | undefined;
+  mediaUrl: string;
   fieldChange: (files: File[]) => void;
 };
 
 // 파일 업로더 props (PostFile, ProfileFile)
 export type FileUploaderProps = {
   fieldChange: (files: File[]) => void;
-  mediaUrl: string | undefined;
+  mediaUrl?: string;
 };
 
 export const BaseFileUploader = ({

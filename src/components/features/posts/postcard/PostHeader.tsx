@@ -1,15 +1,15 @@
 import { PostUserAvatar, PostUserAvatarProp } from "./PostUserAvatar"; // named 이므로
 import { PostInfo, PostInfoProp } from "./PostInfo";
-import { PostVariant } from "./PostCard";
+import { PostVariant } from "@/types";
 import PostActions from "./PostActions";
 
 type PostHeaderProp = PostUserAvatarProp &
-  PostInfoProp &
-  PostEditButtonProp & {
+  PostInfoProp & {
     isPostOwner: boolean;
     isDetail?: boolean; // 선택적 prop
     handleDeletePost?: () => void; // 선택적 prop
     variant?: PostVariant; // ✅ 명확한 타입 지정
+    postId: string;
   };
 export const PostHeader = ({
   creatorId,

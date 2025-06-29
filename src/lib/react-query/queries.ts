@@ -17,7 +17,6 @@ import {
   updateUser,
   searchInfinitePosts,
 } from "../appwrite/api";
-import { Post, CurrentUser, ProfileUser } from "../../types/types";
 import {
   useMutation,
   useQueryClient,
@@ -25,14 +24,16 @@ import {
   useInfiniteQuery,
 } from "@tanstack/react-query";
 import {
+  Post,
+  CurrentUser,
+  ProfileUser,
   UpdateUserType,
   CreatePostType,
   NewUser,
   UpdatePostType,
-} from "../../types/types";
+} from "@/types";
 
 // ============================================ 가입 / 인증 쿼리 ==================================================================
-
 // 회원가입 mutation
 export const useCreateUserAccount = () => {
   return useMutation({
@@ -84,7 +85,7 @@ export const useGetUserById = (userId: string) => {
   });
 };
 
-// ====================================== 게시물(post) 쿼리 ==============================================================================
+// ========================================== 게시물(post) 쿼리 ====================================================================
 
 // 홈 (Home) 에서 최근 게시물을 불러오는 쿼리
 export const useGetRecentPosts = () => {
