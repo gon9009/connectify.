@@ -73,7 +73,7 @@ export const PostForm = ({
           </Label>
           <PostFileUploader
             fieldChange={(files) => setValue("file", files)} // setValue 사용
-            mediaUrl={post?.imageUrl} // 수정 모드에서 기존 이미지 URL 전달
+            mediaUrl={post?.imageUrl ?? ""}  // 수정 모드에서 기존 이미지 URL 전달
           />
           {errors.file && (
             <p className="error-message">{errors.file.message}</p>
