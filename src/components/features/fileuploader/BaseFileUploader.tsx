@@ -18,7 +18,7 @@ export type BaseFileUploaderProps = {
 // 파일 업로더 props (PostFile, ProfileFile)
 export type FileUploaderProps = {
   fieldChange: (files: File[]) => void;
-  mediaUrl?: string;
+  mediaUrl: string;
 };
 
 export const BaseFileUploader = ({

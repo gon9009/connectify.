@@ -14,6 +14,6 @@ export const ProfileUploader = ({
           className="profile-uploader__img"
         />
       </div>
-    )}
+  )}
   </BaseFileUploader>
 );

@@ -24,7 +24,7 @@ export function PostCardDetail({
       right={
         <>
           <div className="post-card__content-wrapper">
-            <PostHeader {...headerProps} isDetail handleDelete={onDelete} />
+            <PostHeader {...headerProps} isDetail handleDeletePost={onDelete} />
             <Divider postType="detail" />
             <PostContent {...contentProps} />
           </div>
