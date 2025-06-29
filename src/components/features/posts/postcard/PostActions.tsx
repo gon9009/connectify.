@@ -17,12 +17,14 @@ const PostActions = ({
 
   return (
     <div className="post-card__actions">
-      <Link to={`/edit/${postId}`} className="post-card__edit-btn">
+      <Link to={`/edit/${postId}`} className="button button--edit">
         <img width={24} height={24} src="/assets/edit.svg" alt="Edit Post" />
       </Link>
       
       {isDetail && handleDeletePost && (
-        <Button onClick={handleDeletePost} className="post-card__delete-btn">
+        <Button 
+        variant="delete"
+        onClick={handleDeletePost}>
           <img src="/assets/delete.svg" alt="delete" width={24} height={24} />
         </Button>
       )}

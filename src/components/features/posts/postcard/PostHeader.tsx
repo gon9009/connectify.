@@ -11,6 +11,7 @@ type PostHeaderProp = PostUserAvatarProp &
     variant?: PostVariant; // ✅ 명확한 타입 지정
     postId: string;
   };
+  
 export const PostHeader = ({
   creatorId,
   creatorImageUrl,

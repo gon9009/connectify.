@@ -518,7 +518,11 @@ export async function searchInfinitePosts(
   searchTerm: string,
   pageParam?: string
 ) {
-  const queries = [Query.search("caption", searchTerm), Query.limit(10)];
+  const queries = [
+    Query.search("caption", searchTerm),
+    Query.orderDesc("$createdAt"), // 최신순 정렬 추가!
+    Query.limit(10),
+  ];
 
   if (pageParam) {
     queries.push(Query.cursorAfter(pageParam));
@@ -544,7 +548,7 @@ export async function searchInfinitePosts(
       hasNextPage: response.documents.length === 10,
     };
   } catch (error) {
-    console.error("검색 오류류", error);
+    console.error("검색 오류", error);
     throw error;
   }
 }

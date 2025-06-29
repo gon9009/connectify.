@@ -39,8 +39,31 @@
     background-color: white;
   }
 
+
   &--cancle {
     background-color: v.$dark-4;
     color: v.$light-2-5;
+  }
+
+  // 삭제 버튼 
+  &--delete {
+    padding: 0.5rem;
+    border: 1px solid v.$light-4;
+    background-color: v.$dark-4;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // 수정
+    &--edit {
+    padding: 0.5rem;
+    border: 1px solid v.$light-4;
+    background-color: v.$dark-4;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
