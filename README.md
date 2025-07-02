@@ -7,6 +7,9 @@
 Connectify는 사진과 글을 쉽고 빠르게 업로드하고, 다른 사용자의 게시물을 탐색·검색·저장할 수 있는 웹 커뮤니티입니다.  
 리액트와 Appwrite 백엔드를 활용해, 직관적인 UI와 소통 기능을 제공합니다.  
 
+배포 URL: [connectify-one-kappa.vercel.app](https://connectify-one-kappa.vercel.app)
+
+
 ## 주요 기능 정리 
 
 ```
