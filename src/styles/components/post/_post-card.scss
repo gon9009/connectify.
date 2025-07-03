@@ -2,6 +2,7 @@
 
 .post-card {
   // ============================= 기본 카드 ===========================================
+  width: 100%;
   max-width: 64rem;
   background-color: v.$dark-4;
   display: flex;
@@ -31,6 +32,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      a {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
       .post-card__img {
         width: 100%;
         height: 100%;
@@ -51,6 +57,14 @@
 
     .post-card__content {
       margin-top: 2rem;
+    }
+    @media (max-width: 1024px) {
+      flex-direction: column;
+
+      .post-card__left {
+        // 모바일에서 1:1 비율은 너무 큼 -> 16:9 비율로 변경하여 시각적 부담 줄이기 
+        aspect-ratio: 16 / 9;
+      }
     }
     .detail__divider {
       border-color: v.$dark-1;
@@ -142,7 +156,7 @@
   // =================== 이미지 (기본) ======================================
   &__img {
     width: 100%;
-    height:100%;
+    height: 100%;
     object-fit: cover;
     border-radius: 20px;
     height: 500px;
@@ -159,7 +173,7 @@
   }
 
   button--edit {
-    width:50%;
+    width: 50%;
     padding: 0.5rem;
     border: 1px solid v.$light-4;
     background-color: v.$dark-4;
@@ -168,7 +182,6 @@
     align-items: center;
     justify-content: center;
   }
-
 
   // ========================= 구분선 ================================
   .divider {

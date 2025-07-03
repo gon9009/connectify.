@@ -49,6 +49,10 @@ const Home = () => {
   return (
     <div className="home">
       <div className="home__container">
+        <div className="home__header">
+          <img src="/assets/home.svg" width={36} height={36} alt="home" />
+          <h2 className="home__title">홈</h2>
+        </div>
         <div className="home__posts">
           <PostList posts={posts} isLoading={isPostLoading} />
         </div>
